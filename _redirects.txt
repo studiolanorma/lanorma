@@ -1,2 +1,0 @@
-/security.txt /security.txt 200
-/*  /index.html 200
