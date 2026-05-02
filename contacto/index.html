@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — Lanorma</title>
+  <meta name="description" content="Contacta con Lanorma. Diseño de identidad visual y web para pymes y startups.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://studiolanorma.com/contacto">
+  <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/img/favicon.jpg">
+
+<style>
+    /* ── FUENTES ── */
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Book.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --ink: #0F0F0F;
+      --ink2: #606060;
+      --muted: #939393;
+      --fs: 14px;
+      --fs-small: 14px;
+      --nav-h: 64px;
+      --pad: clamp(40px, 5vw, 220px);
+      --pad-large: 427px;
+    }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      font-family: 'Suisse Intl', sans-serif;
+      font-size: var(--fs);
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; cursor: none; }
+
+    /* ── CURSOR ── */
+    .cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      top: 0; left: 0;
+    }
+
+    .cursor-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--ink);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+    }
+
+    .cursor-ring {
+      position: absolute;
+      top: 0; left: 0;
+      width: 40px; height: 40px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  opacity 0.45s ease;
+    }
+
+    body.cursor-hover .cursor-dot { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    body.cursor-hover .cursor-ring { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad);
+      background: transparent;
+      z-index: 100;
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: opacity;
+    }
+    nav.nav-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    @media (min-width: 1600px) { nav { padding: 0 var(--pad-large); } }
+    nav .logo svg { display: block; overflow: visible; }
+
+    /* ── LOGO ANIMADO ── */
+    nav .logo .logo-text {
+      transition: clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0);
+      clip-path: inset(0 0 0 0);
+    }
+
+    nav .logo .logo-n,
+    nav .logo .logo-paren-right {
+      transition: transform 0.50s cubic-bezier(0.25, 0, 0.25, 1);
+    }
+
+    nav .logo .logo-paren-right {
+      transition: transform 0.35s cubic-bezier(0.25, 0, 0.80, 1);
+    }
+
+    nav .logo svg path {
+      transition: fill 0.55s ease;
+    }
+
+    nav .links { display: flex; gap: 24px; }
+
+    nav .links a {
+      font-size: var(--fs);
+      font-weight: 500;
+      letter-spacing: 0em;
+      color: var(--ink2);
+    }
+
+    nav .links a:hover { opacity: 0.5; }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal[data-delay="1"] { transition-delay: 0.08s; }
+    .reveal[data-delay="2"] { transition-delay: 0.16s; }
+    .reveal[data-delay="3"] { transition-delay: 0.24s; }
+    .reveal[data-delay="4"] { transition-delay: 0.32s; }
+    .reveal[data-delay="5"] { transition-delay: 0.40s; }
+
+    /* ── PAGE ── */
+    .contact-page {
+      flex: 1;
+      padding-top: var(--nav-h);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── MAIN GRID ── */
+    .contact-main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: calc(50% - 8px) 1fr;
+      gap: 16px;
+      padding: 64px var(--pad);
+      align-items: start;
+    }
+    @media (min-width: 1600px) { .contact-main { padding-left: var(--pad-large); padding-right: var(--pad-large); } }
+
+    /* ── COLUMNA IZQUIERDA ── */
+    .contact-left {
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: calc(var(--nav-h) + 24px);
+      align-self: start;
+    }
+
+    .contact-photo {
+      width: 200px;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #f0f0f0;
+      margin-bottom: 12px;
+    }
+
+    .contact-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .contact-meta {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .contact-meta-label {
+      font-size: var(--fs-small);
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .contact-meta-link {
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.8;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+
+    .contact-meta-link:hover { opacity: 0.5; }
+
+    /* ── COLUMNA DERECHA ── */
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .contact-title {
+      font-size: clamp(20px, 3.5vw, 48px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: 0em;
+    }
+
+    /* ── FORMULARIO ── */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      border-top: 1px solid rgba(15,15,15,0.12);
+      padding: 16px 0;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .form-group:first-of-type {
+      border-top: none;
+    }
+
+    .form-group:last-of-type {
+      border-bottom: 1px solid rgba(15,15,15,0.12);
+    }
+
+    .form-label {
+      font-size: var(--fs-small);
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .form-input,
+    .form-textarea {
+      font-family: 'Suisse Intl', sans-serif;
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--ink);
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      resize: none;
+      line-height: 1.6;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: var(--muted); }
+
+    .form-textarea { min-height: 100px; }
+
+    .form-submit {
+      margin-top: 24px;
+      align-self: flex-start;
+      font-family: 'Suisse Intl', sans-serif;
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--bg);
+      background: var(--ink);
+      border: none;
+      padding: 12px 28px;
+      border-radius: 4px;
+      cursor: none;
+      letter-spacing: 0em;
+      transition: opacity 0.2s;
+    }
+
+    .form-submit:hover { opacity: 0.7; }
+
+    .form-success {
+      display: none;
+      margin-top: 24px;
+      font-size: var(--fs-small);
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    .footer-bottom {
+      padding: 32px var(--pad);
+      display: grid;
+      grid-template-columns: calc(50% - 8px) 1fr auto;
+      gap: 24px 16px;
+      align-items: end;
+    }
+    @media (min-width: 1600px) { .footer-bottom { padding-left: var(--pad-large); padding-right: var(--pad-large); } }
+
+    .footer-col a,
+    .footer-col p {
+      font-size: var(--fs-small);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.8;
+      display: block;
+      transition: opacity 0.2s;
+    }
+
+    .footer-col a:hover { opacity: 0.5; }
+
+    .footer-copyright {
+      font-size: var(--fs-small);
+      font-weight: 400;
+      color: var(--muted);
+      text-align: right;
+      white-space: nowrap;
+      align-self: end;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      :root { --pad: 16px; }
+
+      body { cursor: auto; }
+      .cursor { display: none; }
+
+      .contact-main {
+        grid-template-columns: 1fr;
+        padding: 48px var(--pad);
+        gap: 32px;
+      }
+
+      .contact-left {
+        position: static;
+      }
+
+      .contact-photo {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+      }
+
+      .footer-bottom { grid-template-columns: 1fr 1fr; }
+      .footer-copyright { text-align: left; grid-column: 1 / -1; }
+      .form-submit { cursor: auto; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="https://studiolanorma.com" class="logo" aria-label="Studio Lanorma" id="logo-animated">
+      <svg style="width:80px; overflow:visible;" viewBox="0 0 71.3 12.6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="logo-paren-left">
+          <path d="M0 6.3C0 4.05067 0.644 1.95067 1.932 0H3.696C2.55733 1.88533 1.988 3.98533 1.988 6.3C1.988 8.63333 2.55733 10.7333 3.696 12.6H1.932C1.40933 11.8253 0.956667 10.8967 0.574 9.814C0.191333 8.722 0 7.55067 0 6.3Z" fill="#606060"/>
+        </g>
+        <g class="logo-text">
+          <path d="M10.9276 1V9.526H15.8696V11.15H8.92556V1H10.9276Z" fill="#606060"/>
+          <path d="M20.9434 8.26588V7.70588C19.8048 7.82721 19.0161 7.97654 18.5774 8.15388C18.1388 8.33121 17.9194 8.62054 17.9194 9.02188C17.9194 9.31121 18.0314 9.54921 18.2554 9.73588C18.4794 9.92254 18.8014 10.0159 19.2214 10.0159C20.3694 10.0159 20.9434 9.43254 20.9434 8.26588ZM21.1114 10.2119C20.5888 10.9585 19.7674 11.3319 18.6474 11.3319C17.9008 11.3319 17.2614 11.1312 16.7294 10.7299C16.1974 10.3192 15.9314 9.78254 15.9314 9.11988C15.9314 8.69054 16.0434 8.32188 16.2674 8.01388C16.5008 7.70588 16.8508 7.45388 17.3174 7.25788C17.7841 7.05254 18.2928 6.89388 18.8434 6.78188C19.3941 6.66988 20.0754 6.56721 20.8874 6.47388V6.34788C20.8874 5.30254 20.4161 4.77988 19.4734 4.77988C19.0814 4.77988 18.7548 4.88254 18.4934 5.08788C18.2321 5.29321 18.0921 5.59654 18.0734 5.99788H16.2674C16.3421 5.23254 16.6734 4.61188 17.2614 4.13587C17.8494 3.65987 18.6194 3.42188 19.5714 3.42188C21.7368 3.42188 22.8194 4.52787 22.8194 6.73987C22.8194 6.77721 22.8148 7.04321 22.8054 7.53788C22.7961 8.02321 22.7914 8.39654 22.7914 8.65788C22.7914 9.71254 22.8661 10.5432 23.0154 11.1499H21.2374C21.2094 11.0285 21.1674 10.7159 21.1114 10.2119Z" fill="#606060"/>
+          <path d="M35.9415 5.60717C35.6148 5.17784 35.1762 4.96317 34.6255 4.96317C34.0748 4.96317 33.6315 5.17784 33.2955 5.60717C32.9688 6.02717 32.8055 6.62451 32.8055 7.39917C32.8055 8.17384 32.9688 8.77117 33.2955 9.19117C33.6315 9.61117 34.0748 9.82117 34.6255 9.82117C35.1762 9.82117 35.6148 9.61117 35.9415 9.19117C36.2775 8.77117 36.4455 8.17384 36.4455 7.39917C36.4455 6.62451 36.2775 6.02717 35.9415 5.60717ZM37.2855 10.2972C36.5388 10.9878 35.6522 11.3332 34.6255 11.3332C33.5988 11.3332 32.7122 10.9878 31.9655 10.2972C31.2188 9.60651 30.8455 8.64051 30.8455 7.39917C30.8455 6.14851 31.2188 5.17784 31.9655 4.48717C32.7122 3.79651 33.5988 3.45117 34.6255 3.45117C35.6522 3.45117 36.5388 3.79651 37.2855 4.48717C38.0322 5.17784 38.4055 6.14851 38.4055 7.39917C38.4055 8.64051 38.0322 9.60651 37.2855 10.2972Z" fill="#606060"/>
+          <path d="M41.398 5.83114C41.6687 5.56981 42.0653 5.43914 42.588 5.43914H44.0603L44.0496 3.61917H42.9552C42.0312 3.61917 41.3793 4.06714 40.978 4.93514V3.61914H39.074V11.1511H41.006V7.20314C41.006 6.54047 41.1367 6.08314 41.398 5.83114Z" fill="#606060"/>
+          <path d="M53.0861 11.1512V6.76917C53.0861 6.51717 53.0721 6.30717 53.0441 6.13917C53.0255 5.96184 52.9788 5.77984 52.9041 5.59317C52.8388 5.39717 52.7175 5.25251 52.5401 5.15917C52.3721 5.05651 52.1528 5.00517 51.8821 5.00517C51.2941 5.00517 50.8975 5.20584 50.6921 5.60717C50.4868 6.0085 50.3841 6.54984 50.3841 7.23117V11.1512H48.4521V6.76917C48.4521 6.51717 48.4381 6.30717 48.4101 6.13917C48.3915 5.96184 48.3448 5.77984 48.2701 5.59317C48.2048 5.39717 48.0835 5.25251 47.9061 5.15917C47.7381 5.05651 47.5188 5.00517 47.2481 5.00517C46.6601 5.00517 46.2635 5.20584 46.0581 5.60717C45.8528 6.0085 45.7501 6.54984 45.7501 7.23117V11.1512H43.8181V3.61917H45.7501V4.61317C46.2075 3.83851 46.9075 3.45117 47.8501 3.45117C48.8395 3.45117 49.5535 3.86184 49.9921 4.68317C50.5801 3.86184 51.4061 3.45117 52.4701 3.45117C54.1688 3.45117 55.0181 4.43584 55.0181 6.40517V11.1512H53.0861Z" fill="#606060"/>
+          <path d="M60.5333 8.26588V7.70588C59.3946 7.82721 58.6059 7.97654 58.1673 8.15388C57.7286 8.33121 57.5093 8.62054 57.5093 9.02188C57.5093 9.31121 57.6213 9.54921 57.8453 9.73588C58.0693 9.92254 58.3913 10.0159 58.8113 10.0159C59.9593 10.0159 60.5333 9.43254 60.5333 8.26588ZM60.7013 10.2119C60.1786 10.9585 59.3573 11.3319 58.2373 11.3319C57.4906 11.3319 56.8513 11.1312 56.3193 10.7299C55.7873 10.3192 55.5213 9.78254 55.5213 9.11988C55.5213 8.69054 55.6333 8.32188 55.8573 8.01388C56.0906 7.70588 56.4406 7.45388 56.9073 7.25788C57.3739 7.05254 57.8826 6.89388 58.4333 6.78188C58.9839 6.66988 59.6653 6.56721 60.4773 6.47388V6.34788C60.4773 5.30254 60.0059 4.77988 59.0633 4.77988C58.6713 4.77988 58.3446 4.88254 58.0833 5.08788C57.8219 5.29321 57.6819 5.59654 57.6633 5.99788H55.8573C55.9319 5.23254 56.2633 4.61188 56.8513 4.13587C57.4393 3.65987 58.2093 3.42188 59.1613 3.42188C61.3266 3.42188 62.4093 4.52787 62.4093 6.73987C62.4093 6.77721 62.4046 7.04321 62.3953 7.53788C62.3859 8.02321 62.3813 8.39654 62.3813 8.65788C62.3813 9.71254 62.4559 10.5432 62.6053 11.1499H60.8273C60.7993 11.0285 60.7573 10.7159 60.7013 10.2119Z" fill="#606060"/>
+        </g>
+        <g class="logo-paren-right">
+          <path d="M71.2954 6.3C71.2954 8.55867 70.6514 10.6587 69.3634 12.6H67.5994C68.7381 10.7333 69.3074 8.63333 69.3074 6.3C69.3074 3.98533 68.7381 1.88533 67.5994 0H69.3634C70.6514 1.92267 71.2954 4.02267 71.2954 6.3Z" fill="#606060"/>
+        </g>
+        <g class="logo-n">
+          <path d="M25.5021 3.61917V4.61317C25.9408 3.83851 26.6688 3.45117 27.6861 3.45117C29.4221 3.45117 30.2901 4.43584 30.2901 6.40517V11.1512H28.3581V6.82517C28.3581 6.26517 28.2648 5.82184 28.0781 5.49517C27.9008 5.16851 27.5601 5.00517 27.0561 5.00517C26.4681 5.00517 26.0621 5.20584 25.8381 5.60717C25.6141 6.0085 25.5021 6.54984 25.5021 7.23117V11.1512H23.5701V3.61917H25.5021Z" fill="#606060"/>
+        </g>
+      </svg>
+    </a>
+    <div class="links">
+      <a href="/nosotros">Nosotros</a>
+      <a href="/contacto">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO -->
+  <main class="contact-page">
+    <div class="contact-main">
+
+      <!-- Columna izquierda -->
+      <div class="contact-left">
+        <div class="contact-photo reveal" data-delay="1">
+          <img src="contacto-1.webp" alt="Studio Lanorma">
+        </div>
+      </div>
+
+      <!-- Columna derecha -->
+      <div class="contact-right">
+
+        <h1 class="contact-title reveal" data-delay="1">Tu proyecto<br>empieza aquí.</h1>
+
+        <form class="contact-form reveal" data-delay="2" id="contact-form">
+          <div class="form-group">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input class="form-input" id="nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" id="email" name="email" type="email" placeholder="tu@email.com" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="empresa">Empresa</label>
+            <input class="form-input" id="empresa" name="empresa" type="text" placeholder="Nombre de tu empresa" autocomplete="organization">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mensaje">Mensaje</label>
+            <textarea class="form-textarea" id="mensaje" name="mensaje" placeholder="Cuéntanos tu proyecto…" autocomplete="off" required></textarea>
+          </div>
+          <button class="form-submit" type="submit" id="form-btn">Enviar</button>
+          <p class="form-success" id="form-success">¡Mensaje enviado! Nos ponemos en contacto pronto.</p>
+        </form>
+
+        <div class="contact-meta reveal" data-delay="3">
+          <div>
+            <p class="contact-meta-label">Social</p>
+            <a href="https://www.instagram.com/studiolanorma" target="_blank" rel="noopener" class="contact-meta-link">Instagram</a><br>
+            <a href="https://www.linkedin.com/company/studiolanorma" target="_blank" rel="noopener" class="contact-meta-link">Linkedin</a><br>
+            <a href="https://www.behance.net/studiolanorma" target="_blank" rel="noopener" class="contact-meta-link">Behance</a>
+          </div>
+          <div>
+            <p class="contact-meta-label">Email</p>
+            <a href="mailto:contacto@studiolanorma.com" class="contact-meta-link">contacto@studiolanorma.com</a>
+            <br>
+            <p class="contact-meta-label" style="margin-top:6px;">Móvil</p>
+            <a href="tel:+34682408122" class="contact-meta-link">+34 682 408 122</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <div class="footer-bottom reveal" data-delay="4">
+    <div class="footer-col">
+      <p>Santander, Cantabria, España</p>
+    </div>
+    <div class="footer-col">
+      <a href="/legales">Aviso legal</a>
+      <a href="/privacidad">Política de privacidad</a>
+    </div>
+    <p class="footer-copyright">© Lanorma 2026</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+
+    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+    function animateCursor() {
+      curX += (mouseX - curX) * 0.18;
+      curY += (mouseY - curY) * 0.18;
+      cursor.style.transform = `translate(${curX}px, ${curY}px)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // ── Logo animado ──
+    const logoEl     = document.getElementById('logo-animated');
+    const logoParenR = logoEl.querySelector('.logo-paren-right');
+    const logoN      = logoEl.querySelector('.logo-n');
+    const logoText   = logoEl.querySelector('.logo-text');
+
+    logoEl.addEventListener('mouseenter', () => {
+      logoParenR.style.transform = 'translateX(-38px)';
+      logoN.style.transform      = 'translateX(-6px)';
+      logoText.style.clipPath    = 'inset(0 87% 0 0)';
+      logoText.style.transition  = 'clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0)';
+    });
+
+    logoEl.addEventListener('mouseleave', () => {
+      logoParenR.style.transform = 'translateX(0)';
+      logoN.style.transform      = 'translateX(0)';
+      logoText.style.clipPath    = 'inset(0 0 0 0)';
+      logoText.style.transition  = 'clip-path 0.40s cubic-bezier(0.65, 0, 0.35, 0)';
+    });
+
+    // ── Formulario Formspree ──
+    const form    = document.getElementById('contact-form');
+    const btn     = document.getElementById('form-btn');
+    const success = document.getElementById('form-success');
+
+    btn.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    btn.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+
+    // ── Cursor ring en links del menú ──
+    document.querySelectorAll('nav .links a, nav .logo').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.textContent = 'Enviando…';
+      btn.disabled = true;
+
+      const data = new FormData(form);
+      const res = await fetch('https://formspree.io/f/xnjoawyn', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        btn.style.display = 'none';
+        success.style.display = 'block';
+        form.reset();
+      } else {
+        btn.textContent = 'Error al enviar. Inténtalo de nuevo.';
+        btn.disabled = false;
+      }
+    });
+
+    // ── Hide/Show navbar on scroll (smooth) ──
+    const nav = document.querySelector('nav');
+    let lastScrollY = 0, navVisible = true, ticking = false;
+    lenis.on('scroll', ({ scroll }) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const delta = scroll - lastScrollY;
+        if (scroll > 80 && delta > 6 && navVisible) { nav.classList.add('nav-hidden'); navVisible = false; }
+        else if ((delta < -6 || scroll <= 80) && !navVisible) { nav.classList.remove('nav-hidden'); navVisible = true; }
+        lastScrollY = scroll;
+        ticking = false;
+      });
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

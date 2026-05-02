@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros — Lanorma</title>
+  <meta name="description" content="Estudio de diseño del norte de España. Identidad visual, diseño web y sistemas de diseño para pymes y startups que no quieren parecerse a nadie.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/img/favicon.jpg">
+  <style>
+    /* ── FUENTES ── */
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Book.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+  </style>
+
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKENS ── */
+    :root {
+      --bg:     #0f0f0f;
+      --ink:    #ffffff;
+      --ink2:   #606060;
+      --muted:  #939393;
+      --fs:     14px;
+      --nav-h:  64px;
+      --pad:    clamp(40px, 5vw, 220px);
+      --pad-large: 427px;
+    }
+
+    body.theme-light {
+      --bg:    #ffffff;
+      --ink:   #0f0f0f;
+      --ink2:  #606060;
+      --muted: #999999;
+    }
+
+    html { scroll-behavior: auto; } /* Lenis toma el control; si falla JS, smooth como fallback */
+    @media (prefers-reduced-motion: no-preference) {
+      html:not(.lenis-ready) { scroll-behavior: smooth; }
+    }
+
+    body {
+      font-family: 'Suisse Intl', sans-serif;
+      font-size: var(--fs);
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+      transition: background 0.8s ease, color 0.8s ease;
+    }
+
+    /* ── Transición global de tema: colores cambian suavemente en todos los elementos ── */
+    *, *::before, *::after {
+      transition-property: background-color, border-color, color, fill, stroke;
+      transition-duration: 0.8s;
+      transition-timing-function: ease;
+    }
+
+    a { color: inherit; text-decoration: none; cursor: none; }
+
+    /* ── CURSOR ── */
+    .cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      top: 0; left: 0;
+    }
+    .cursor-dot {
+      width: 5px; height: 5px;
+      background: var(--ink);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+    }
+    .cursor-ring {
+      position: absolute;
+      top: 0; left: 0;
+      width: 40px; height: 40px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.45s ease;
+    }
+    body.cursor-hover .cursor-dot  { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    body.cursor-hover .cursor-ring { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad);
+      background: transparent;
+      z-index: 100;
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: opacity;
+    }
+    nav.nav-hidden { opacity: 0; pointer-events: none; }
+    nav .logo svg { display: block; overflow: visible; }
+
+    /* Logo animado */
+    nav .logo .logo-text {
+      clip-path: inset(0 0 0 0);
+      transition: clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0);
+    }
+    nav .logo .logo-n {
+      transition: transform 0.50s cubic-bezier(0.25, 0, 0.25, 1);
+    }
+    nav .logo .logo-paren-right {
+      transition: transform 0.35s cubic-bezier(0.25, 0, 0.80, 1);
+    }
+    nav .logo svg path { transition: fill 0.55s ease; }
+
+    nav .links { display: flex; gap: 24px; }
+    nav .links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink2);
+      transition: opacity 0.2s;
+    }
+    nav .links a:hover { opacity: 0.5; }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── FOTO / VIDEO GRANDE ── */
+    .studio-photo {
+      padding: 0 var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .studio-photo img,
+    .studio-photo video {
+      width: 100%;
+      height: 88vh;
+      object-fit: cover;
+      display: block;
+      border-radius: 4px;
+    }
+
+    /* ── SECCIONES INFO ── */
+    .info-section {
+      padding: 80px var(--pad);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px 0;
+    }
+    .info-section-1 {
+      padding: 180px var(--pad) 120px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px 0;
+    }
+    .info-section-method {
+      padding: 0 var(--pad);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px 0;
+    }
+    .info-section-contact {
+      padding: 120px var(--pad);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px 0;
+    }
+
+    /* ── TABLET Y DESKTOP: columna derecha alineada con "Aviso legal" del footer ──
+       Footer: grid-template-columns: calc(50% - 8px) 1fr auto; gap column: 16px
+       → col 2 del footer arranca en calc(50% - 8px + 16px) = calc(50% + 8px)
+       → primera col del contenido = calc(50% + 8px), gap = 0
+    ── */
+    @media (min-width: 745px) {
+      .info-section {
+        grid-template-columns: calc(50% + 8px) 1fr;
+        gap: 0;
+      }
+      .info-section-1,
+      .info-section-method,
+      .info-section-contact {
+        grid-template-columns: calc(50% + 8px) 1fr;
+        gap: 0;
+      }
+      .info-label {
+        position: sticky;
+        top: 80px;
+        transition: top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      body.nav-is-hidden .info-label { top: 24px; }
+    }
+
+    .info-label {
+      font-size: var(--fs);
+      color: var(--muted);
+      position: static;
+      align-self: start;
+    }
+    .info-content {
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 20px;
+    }
+    .info-content p + p { margin-top: 12px; }
+
+    /* ── SERVICIOS ── */
+    .services-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 40px;
+      padding-bottom: 120px;
+    }
+    .services-col { display: flex; flex-direction: column; }
+    .service-item {
+      padding: 20px 0;
+      border-top: 1px solid rgba(155, 155, 155, 0.144);
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--ink);
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+      cursor: none;
+      position: relative;
+    }
+    .service-item:hover {
+      transform: translateX(6px);
+      opacity: 0.5;
+    }
+    .services-col .service-item:last-of-type {
+      border-bottom: 1px solid rgba(155, 155, 155, 0.144);
+    }
+
+    /* ── BARAJA DE SERVICIOS ── */
+    #service-card-deck {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 120;
+    }
+    .service-card {
+      position: fixed;
+      pointer-events: none;
+      z-index: 120;
+      top: 0;
+      left: 0;
+      width: clamp(92px, 11vw, 150px);
+      aspect-ratio: 4 / 5;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #f2f2f2;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+      opacity: 0;
+      transform: translate3d(-50%, -50%, 0) scale(0.88) rotate(0deg);
+      transition: opacity 0.18s ease;
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
+    .service-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.04);
+    }
+    .service-card.visible {
+      opacity: 1;
+    }
+
+    /* ── NOSOTROS ── */
+    .nosotros-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 40px;
+      padding-bottom: 120px;
+    }
+    .nosotros-col { display: flex; flex-direction: column; }
+    .nosotros-item {
+      padding: 16px 0 0;
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 20px;
+    }
+    .nosotros-role {
+      color: var(--muted);
+    }
+    .about-img {
+      width: 100%;
+      max-width: 280px;
+      height: 320px;
+      overflow: hidden;
+      background: #f0f0f0;
+      border-radius: 4px;
+    }
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── CLIENTES (LOGOS) ── */
+    .logos-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 40px;
+      padding-bottom: 120px;
+    }
+    .logos-col { display: flex; flex-direction: column; }
+    .logos-img {
+      width: 100%;
+      max-width: 280px;
+      aspect-ratio: 280 / 102;
+      overflow: hidden;
+      border-radius: 4px;
+      margin-bottom: 24px;
+    }
+    .logos-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── CONTACTO ── */
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 16px;
+    }
+    .contact-links a {
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--ink);
+      transition: opacity 0.2s;
+    }
+    .contact-links a:hover { opacity: 0.5; }
+
+    /* ── FOOTER ── */
+    footer { padding: 0 var(--pad); }
+    .footer-bottom {
+      padding: 32px 0;
+      display: grid;
+      grid-template-columns: calc(50% - 8px) 1fr auto;
+      gap: 24px 16px;
+      align-items: end;
+      border-top: 0px solid rgba(155, 155, 155, 0.1);
+    }
+    .footer-col a,
+    .footer-col p {
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.8;
+      display: block;
+      transition: opacity 0.2s;
+    }
+    .footer-col a:hover { opacity: 0.5; }
+    .footer-copyright {
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--muted);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER TABLET: evitar que la primera columna ocupe demasiado ── */
+    @media (min-width: 745px) and (max-width: 1023px) {
+      .footer-bottom {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+      }
+      .footer-copyright {
+        grid-column: 1 / -1;
+        text-align: left;
+      }
+      .about-img {
+        max-width: 100%;
+        height: 40vw;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nosotros-list { grid-template-columns: 1fr; gap: 24px; }
+      .nosotros-list .about-img { max-width: 100%; }
+    }
+    @media (min-width: 1640px) {
+      :root { --pad: var(--pad-large); }
+    }
+
+    /* ── RESPONSIVE MÓVIL ── */
+    @media (max-width: 744px) {
+      :root { --pad: 20px; }
+
+      body { cursor: auto; }
+      .cursor { display: none; }
+
+      nav .links { gap: 16px; }
+
+      .info-section-1 { padding: 120px var(--pad) 80px; }
+
+      .studio-photo img,
+      .studio-photo video {
+        height: 55vw;
+        min-height: 220px;
+      }
+
+
+
+      .service-item {
+        transition: none;
+        cursor: auto;
+      }
+      .service-item:hover {
+        transform: none;
+        opacity: 1;
+      }
+
+      .footer-bottom { grid-template-columns: 1fr 1fr; }
+      .footer-copyright {
+        grid-column: 1 / -1;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
+  <nav id="nav">
+    <a href="https://studiolanorma.com" class="logo" aria-label="Studio Lanorma" id="logo-animated">
+      <svg style="width:80px; overflow:visible;" viewBox="0 0 71.3 12.6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="logo-paren-left">
+          <path d="M0 6.3C0 4.05067 0.644 1.95067 1.932 0H3.696C2.55733 1.88533 1.988 3.98533 1.988 6.3C1.988 8.63333 2.55733 10.7333 3.696 12.6H1.932C1.40933 11.8253 0.956667 10.8967 0.574 9.814C0.191333 8.722 0 7.55067 0 6.3Z" fill="#606060"/>
+        </g>
+        <g class="logo-text">
+          <path d="M10.9276 1V9.526H15.8696V11.15H8.92556V1H10.9276Z" fill="#606060"/>
+          <path d="M20.9434 8.26588V7.70588C19.8048 7.82721 19.0161 7.97654 18.5774 8.15388C18.1388 8.33121 17.9194 8.62054 17.9194 9.02188C17.9194 9.31121 18.0314 9.54921 18.2554 9.73588C18.4794 9.92254 18.8014 10.0159 19.2214 10.0159C20.3694 10.0159 20.9434 9.43254 20.9434 8.26588ZM21.1114 10.2119C20.5888 10.9585 19.7674 11.3319 18.6474 11.3319C17.9008 11.3319 17.2614 11.1312 16.7294 10.7299C16.1974 10.3192 15.9314 9.78254 15.9314 9.11988C15.9314 8.69054 16.0434 8.32188 16.2674 8.01388C16.5008 7.70588 16.8508 7.45388 17.3174 7.25788C17.7841 7.05254 18.2928 6.89388 18.8434 6.78188C19.3941 6.66988 20.0754 6.56721 20.8874 6.47388V6.34788C20.8874 5.30254 20.4161 4.77988 19.4734 4.77988C19.0814 4.77988 18.7548 4.88254 18.4934 5.08788C18.2321 5.29321 18.0921 5.59654 18.0734 5.99788H16.2674C16.3421 5.23254 16.6734 4.61188 17.2614 4.13587C17.8494 3.65987 18.6194 3.42188 19.5714 3.42188C21.7368 3.42188 22.8194 4.52787 22.8194 6.73987C22.8194 6.77721 22.8148 7.04321 22.8054 7.53788C22.7961 8.02321 22.7914 8.39654 22.7914 8.65788C22.7914 9.71254 22.8661 10.5432 23.0154 11.1499H21.2374C21.2094 11.0285 21.1674 10.7159 21.1114 10.2119Z" fill="#606060"/>
+          <path d="M35.9415 5.60717C35.6148 5.17784 35.1762 4.96317 34.6255 4.96317C34.0748 4.96317 33.6315 5.17784 33.2955 5.60717C32.9688 6.02717 32.8055 6.62451 32.8055 7.39917C32.8055 8.17384 32.9688 8.77117 33.2955 9.19117C33.6315 9.61117 34.0748 9.82117 34.6255 9.82117C35.1762 9.82117 35.6148 9.61117 35.9415 9.19117C36.2775 8.77117 36.4455 8.17384 36.4455 7.39917C36.4455 6.62451 36.2775 6.02717 35.9415 5.60717ZM37.2855 10.2972C36.5388 10.9878 35.6522 11.3332 34.6255 11.3332C33.5988 11.3332 32.7122 10.9878 31.9655 10.2972C31.2188 9.60651 30.8455 8.64051 30.8455 7.39917C30.8455 6.14851 31.2188 5.17784 31.9655 4.48717C32.7122 3.79651 33.5988 3.45117 34.6255 3.45117C35.6522 3.45117 36.5388 3.79651 37.2855 4.48717C38.0322 5.17784 38.4055 6.14851 38.4055 7.39917C38.4055 8.64051 38.0322 9.60651 37.2855 10.2972Z" fill="#606060"/>
+          <path d="M41.398 5.83114C41.6687 5.56981 42.0653 5.43914 42.588 5.43914H44.0603L44.0496 3.61917H42.9552C42.0312 3.61917 41.3793 4.06714 40.978 4.93514V3.61914H39.074V11.1511H41.006V7.20314C41.006 6.54047 41.1367 6.08314 41.398 5.83114Z" fill="#606060"/>
+          <path d="M53.0861 11.1512V6.76917C53.0861 6.51717 53.0721 6.30717 53.0441 6.13917C53.0255 5.96184 52.9788 5.77984 52.9041 5.59317C52.8388 5.39717 52.7175 5.25251 52.5401 5.15917C52.3721 5.05651 52.1528 5.00517 51.8821 5.00517C51.2941 5.00517 50.8975 5.20584 50.6921 5.60717C50.4868 6.0085 50.3841 6.54984 50.3841 7.23117V11.1512H48.4521V6.76917C48.4521 6.51717 48.4381 6.30717 48.4101 6.13917C48.3915 5.96184 48.3448 5.77984 48.2701 5.59317C48.2048 5.39717 48.0835 5.25251 47.9061 5.15917C47.7381 5.05651 47.5188 5.00517 47.2481 5.00517C46.6601 5.00517 46.2635 5.20584 46.0581 5.60717C45.8528 6.0085 45.7501 6.54984 45.7501 7.23117V11.1512H43.8181V3.61917H45.7501V4.61317C46.2075 3.83851 46.9075 3.45117 47.8501 3.45117C48.8395 3.45117 49.5535 3.86184 49.9921 4.68317C50.5801 3.86184 51.4061 3.45117 52.4701 3.45117C54.1688 3.45117 55.0181 4.43584 55.0181 6.40517V11.1512H53.0861Z" fill="#606060"/>
+          <path d="M60.5333 8.26588V7.70588C59.3946 7.82721 58.6059 7.97654 58.1673 8.15388C57.7286 8.33121 57.5093 8.62054 57.5093 9.02188C57.5093 9.31121 57.6213 9.54921 57.8453 9.73588C58.0693 9.92254 58.3913 10.0159 58.8113 10.0159C59.9593 10.0159 60.5333 9.43254 60.5333 8.26588ZM60.7013 10.2119C60.1786 10.9585 59.3573 11.3319 58.2373 11.3319C57.4906 11.3319 56.8513 11.1312 56.3193 10.7299C55.7873 10.3192 55.5213 9.78254 55.5213 9.11988C55.5213 8.69054 55.6333 8.32188 55.8573 8.01388C56.0906 7.70588 56.4406 7.45388 56.9073 7.25788C57.3739 7.05254 57.8826 6.89388 58.4333 6.78188C58.9839 6.66988 59.6653 6.56721 60.4773 6.47388V6.34788C60.4773 5.30254 60.0059 4.77988 59.0633 4.77988C58.6713 4.77988 58.3446 4.88254 58.0833 5.08788C57.8219 5.29321 57.6819 5.59654 57.6633 5.99788H55.8573C55.9319 5.23254 56.2633 4.61188 56.8513 4.13587C57.4393 3.65987 58.2093 3.42188 59.1613 3.42188C61.3266 3.42188 62.4093 4.52787 62.4093 6.73987C62.4093 6.77721 62.4046 7.04321 62.3953 7.53788C62.3859 8.02321 62.3813 8.39654 62.3813 8.65788C62.3813 9.71254 62.4559 10.5432 62.6053 11.1499H60.8273C60.7993 11.0285 60.7573 10.7159 60.7013 10.2119Z" fill="#606060"/>
+        </g>
+        <g class="logo-paren-right">
+          <path d="M71.2954 6.3C71.2954 8.55867 70.6514 10.6587 69.3634 12.6H67.5994C68.7381 10.7333 69.3074 8.63333 69.3074 6.3C69.3074 3.98533 68.7381 1.88533 67.5994 0H69.3634C70.6514 1.92267 71.2954 4.02267 71.2954 6.3Z" fill="#606060"/>
+        </g>
+        <g class="logo-n">
+          <path d="M25.5021 3.61917V4.61317C25.9408 3.83851 26.6688 3.45117 27.6861 3.45117C29.4221 3.45117 30.2901 4.43584 30.2901 6.40517V11.1512H28.3581V6.82517C28.3581 6.26517 28.2648 5.82184 28.0781 5.49517C27.9008 5.16851 27.5601 5.00517 27.0561 5.00517C26.4681 5.00517 26.0621 5.20584 25.8381 5.60717C25.6141 6.0085 25.5021 6.54984 25.5021 7.23117V11.1512H23.5701V3.61917H25.5021Z" fill="#606060"/>
+        </g>
+      </svg>
+    </a>
+    <div class="links">
+      <a href="/nosotros">Nosotros</a>
+      <a href="/contacto">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- MÉTODO -->
+  <div class="info-section-1 reveal">
+    <p class="info-label">Nuestro método</p>
+    <div class="info-content">
+      <p>No somos los de siempre. Y lo hacemos a propósito. Lanorma nació con una idea clara: demasiadas marcas se parecen entre sí. Hablan igual, se ven igual y terminan siendo invisibles. Eso tiene solución.</p>
+      <p>Somos un estudio de diseño de identidad visual y webs con base en Cantabria. Trabajamos con marcas nuevas y con marcas consolidadas que necesitan un cambio real. En ambos casos, el proceso es el mismo: escuchar, cuestionar y construir algo que dure.</p>
+      <p>No seguimos tendencias. Diseñamos soluciones. Si buscas correcto, hay miles de estudios. Si buscas carácter, estás en el sitio adecuado.</p>
+
+    </div>
+  </div>
+
+  <!-- SERVICIOS -->
+  <div class="info-section-method reveal" id="section-servicios">
+    <p class="info-label">Servicios</p>
+    <div class="services-list">
+      <div class="services-col">
+        <p class="service-item">Identidad Visual</p>
+        <p class="service-item">Diseño Web</p>
+        <p class="service-item">Sistemas de Diseño</p>
+        <p class="service-item">Dirección de Arte</p>
+        <p class="service-item">Estrategia de Marca</p>
+      </div>
+      <div class="services-col">
+        <p class="service-item">Branding</p>
+        <p class="service-item">Naming</p>
+        <p class="service-item">Packaging</p>
+        <p class="service-item">Motion Design</p>
+        <p class="service-item">Fotografía</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIENTES -->
+  <div class="info-section-method reveal">
+    <p class="info-label">Clientes</p>
+    <div class="logos-list">
+      <div class="logos-col">
+        <div class="logos-img"><img src="logo-1.png" alt="YouTube" loading="lazy"></div>
+        <div class="logos-img"><img src="logo-2.png" alt="Microsoft" loading="lazy"></div>
+        <div class="logos-img"><img src="logo-3.png" alt="El Capricho de Gaudí" loading="lazy"></div>
+      </div>
+      <div class="logos-col">
+        <div class="logos-img"><img src="logo-4.png" alt="AVATR Automotive" loading="lazy"></div>
+        <div class="logos-img"><img src="logo-5.png" alt="Cliente 5" loading="lazy"></div>
+        <div class="logos-img"><img src="logo-6.png" alt="Cliente 6" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOSOTROS -->
+  <div class="info-section-method reveal">
+    <p class="info-label">Nosotros</p>
+    <div class="nosotros-list">
+      <div class="nosotros-col">
+        <div class="about-img"><img src="nosotros-luana.webp" alt="Luana Laso" loading="lazy"></div>
+        <p class="nosotros-item">Luana Laso<br><span class="nosotros-role">Founder of Lanorma</span></p>
+      </div>
+      <div class="nosotros-col">
+        <div class="about-img"><img src="nosotros-dani.webp" alt="Daniel Moraleja" loading="lazy"></div>
+        <p class="nosotros-item">Daniel Moraleja<br><span class="nosotros-role">Chief Business Officer</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VÍDEO -->
+  <div class="studio-photo reveal">
+    <video autoplay loop muted playsinline>
+      <source src="nosotros-1.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="info-section-contact reveal">
+    <p class="info-label">Contacto</p>
+    <div class="info-content">
+      <p>Santander, Cantabria, España</p>
+      <div class="contact-links">
+        <a href="mailto:contacto@studiolanorma.com">contacto@studiolanorma.com</a>
+        <a href="tel:+34682408122">+34 682 408 122</a>
+        <a href="https://www.instagram.com/studiolanorma" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/company/studiolanorma" target="_blank" rel="noopener">Linkedin</a>
+        <a href="https://www.behance.net/studiolanorma" target="_blank" rel="noopener">Behance</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-bottom reveal">
+      <div class="footer-col">
+        <p>Santander, Cantabria, España</p>
+      </div>
+      <div class="footer-col">
+        <a href="/legales">Aviso legal</a>
+        <a href="/privacidad">Política de privacidad</a>
+      </div>
+      <p class="footer-copyright">© Lanorma 2026</p>
+    </div>
+  </footer>
+
+  <!-- BARAJA SERVICIOS -->
+  <div id="service-card-deck" aria-hidden="true">
+    <div class="service-card"><img src="/assets/img/home-1.webp" alt=""></div>
+    <div class="service-card"><img src="/assets/img/home-2.webp" alt=""></div>
+    <div class="service-card"><img src="/assets/img/home-3.webp" alt=""></div>
+    <div class="service-card"><img src="/assets/img/home-4.webp" alt=""></div>
+    <div class="service-card"><img src="/assets/img/home-5.webp" alt=""></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+    // ── Smooth scroll ──
+    const lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    document.documentElement.classList.add('lenis-ready');
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    // ── Baraja de imágenes en servicios ──
+    const serviceNames = new Set([
+      'Identidad Visual',
+      'Diseño Web',
+      'Sistemas de Diseño',
+      'Dirección de Arte',
+      'Estrategia de Marca',
+      'Branding',
+      'Naming',
+      'Packaging',
+      'Motion Design',
+      'Fotografía',
+    ]);
+
+    const serviceCards = [...document.querySelectorAll('.service-card')];
+    const deckLayouts = [
+      { offsetX: 112, offsetY: -64, rotate: -10, scale: 0.92, lag: 0.16 },
+      { offsetX: 140, offsetY: -44, rotate:  -4, scale: 0.96, lag: 0.20 },
+      { offsetX: 168, offsetY: -22, rotate:   2, scale: 1.00, lag: 0.24 },
+      { offsetX: 196, offsetY:   0, rotate:   7, scale: 0.97, lag: 0.28 },
+      { offsetX: 224, offsetY:  22, rotate:  12, scale: 0.93, lag: 0.32 },
+    ];
+    const deckState = {
+      targetX: window.innerWidth / 2,
+      targetY: window.innerHeight / 2,
+      cards: deckLayouts.map(layout => ({
+        currentX: window.innerWidth / 2,
+        currentY: window.innerHeight / 2,
+        ...layout,
+        targetOffsetX: layout.offsetX,
+        targetOffsetY: layout.offsetY,
+        targetRotate: layout.rotate,
+        targetScale: layout.scale,
+      })),
+      active: false,
+      raf: null,
+    };
+    const servicesList = document.querySelector('.services-list');
+    let activeServiceItem = null;
+    let deckHitTestRaf = null;
+    let serviceDeckShowTimer = null;
+
+    serviceCards.forEach(card => {
+      const img = card.querySelector('img');
+      if (img?.decode) img.decode().catch(() => {});
+    });
+
+    function animateServiceDeck() {
+      deckState.cards.forEach((card, i) => {
+        card.currentX += (deckState.targetX - card.currentX) * card.lag;
+        card.currentY += (deckState.targetY - card.currentY) * card.lag;
+        card.offsetX += (card.targetOffsetX - card.offsetX) * 0.18;
+        card.offsetY += (card.targetOffsetY - card.offsetY) * 0.18;
+        card.rotate += (card.targetRotate - card.rotate) * 0.16;
+        card.scale += (card.targetScale - card.scale) * 0.16;
+        const el = serviceCards[i];
+        if (!el) return;
+        el.style.transform = `translate3d(${card.currentX + card.offsetX}px, ${card.currentY + card.offsetY}px, 0) translate(-50%, -50%) rotate(${card.rotate}deg) scale(${card.scale})`;
+      });
+
+      if (deckState.active) {
+        deckState.raf = requestAnimationFrame(animateServiceDeck);
+      } else {
+        deckState.raf = null;
+      }
+    }
+
+    function getServiceShuffle(text) {
+      const order = deckLayouts.map((_, i) => i);
+      let seed = [...text].reduce((acc, char) => acc + char.charCodeAt(0), 0);
+      for (let i = order.length - 1; i > 0; i--) {
+        seed = (seed * 9301 + 49297) % 233280;
+        const j = seed % (i + 1);
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      return order;
+    }
+
+    function reshuffleServiceDeck(item) {
+      const order = getServiceShuffle(item.textContent.trim());
+      deckState.cards.forEach((card, i) => {
+        const layout = deckLayouts[order[i]];
+        card.targetOffsetX = layout.offsetX;
+        card.targetOffsetY = layout.offsetY;
+        card.targetRotate = layout.rotate;
+        card.targetScale = layout.scale;
+        card.lag = layout.lag;
+        serviceCards[i].style.zIndex = 120 + order[i];
+      });
+    }
+
+    function showServiceDeck(item) {
+      if (!item || item === activeServiceItem) return;
+      if (!serviceNames.has(item.textContent.trim())) return;
+
+      const wasInactive = !deckState.active;
+      activeServiceItem = item;
+      clearTimeout(serviceDeckShowTimer);
+      reshuffleServiceDeck(item);
+      if (wasInactive) {
+        serviceDeckShowTimer = setTimeout(() => {
+          if (activeServiceItem !== item) return;
+          deckState.cards.forEach(card => {
+            card.currentX = deckState.targetX;
+            card.currentY = deckState.targetY;
+          });
+          deckState.active = true;
+          serviceCards.forEach(card => card.classList.add('visible'));
+          if (!deckState.raf) animateServiceDeck();
+        }, 180);
+      } else {
+        serviceCards.forEach(card => card.classList.add('visible'));
+        if (!deckState.raf) animateServiceDeck();
+      }
+    }
+
+    function hideServiceDeck() {
+      if (!activeServiceItem) return;
+      activeServiceItem = null;
+      clearTimeout(serviceDeckShowTimer);
+      deckState.active = false;
+      serviceCards.forEach(card => card.classList.remove('visible'));
+    }
+
+    function updateServiceDeckHover() {
+      deckHitTestRaf = null;
+      if (!servicesList || !serviceCards.length) return;
+
+      const rect = servicesList.getBoundingClientRect();
+      const isInsideServices =
+        deckState.targetX >= rect.left &&
+        deckState.targetX <= rect.right &&
+        deckState.targetY >= rect.top &&
+        deckState.targetY <= rect.bottom;
+
+      if (!isInsideServices) {
+        hideServiceDeck();
+        return;
+      }
+
+      showServiceDeck(document.elementFromPoint(deckState.targetX, deckState.targetY)?.closest('.service-item'));
+    }
+
+    function updateServiceDeckTarget(e) {
+      deckState.targetX = e.clientX;
+      deckState.targetY = e.clientY;
+      if (!deckHitTestRaf) deckHitTestRaf = requestAnimationFrame(updateServiceDeckHover);
+    }
+
+    if (window.innerWidth > 744) {
+      document.addEventListener('pointermove', updateServiceDeckTarget, { passive: true });
+      document.addEventListener('mousemove', updateServiceDeckTarget, { passive: true });
+    }
+
+    // ── Cursor: activar anillo en elementos interactivos ──
+    const interactivos = 'a, button, .service-item, video, .about-img';
+    document.addEventListener('mouseover', e => {
+      if (e.target.closest(interactivos)) {
+        document.body.classList.add('cursor-hover');
+      }
+    });
+    document.addEventListener('mouseout', e => {
+      if (e.target.closest(interactivos)) {
+        document.body.classList.remove('cursor-hover');
+      }
+    });
+
+    // ── Cursor personalizado ──
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+    function animateCursor() {
+      curX += (mouseX - curX) * 0.18;
+      curY += (mouseY - curY) * 0.18;
+      if (cursor) cursor.style.transform = `translate(${curX}px, ${curY}px)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // ── Logo animado ──
+    const logoEl     = document.getElementById('logo-animated');
+    const logoParenR = logoEl.querySelector('.logo-paren-right');
+    const logoN      = logoEl.querySelector('.logo-n');
+    const logoText   = logoEl.querySelector('.logo-text');
+
+    logoEl.addEventListener('mouseenter', () => {
+      logoParenR.style.transform = 'translateX(-38px)';
+      logoN.style.transform      = 'translateX(-6px)';
+      logoText.style.clipPath    = 'inset(0 87% 0 0)';
+      logoText.style.transition  = 'clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0)';
+    });
+    logoEl.addEventListener('mouseleave', () => {
+      logoParenR.style.transform = 'translateX(0)';
+      logoN.style.transform      = 'translateX(0)';
+      logoText.style.clipPath    = 'inset(0 0 0 0)';
+      logoText.style.transition  = 'clip-path 0.40s cubic-bezier(0.65, 0, 0.35, 0)';
+    });
+
+    // ── Nav: ocultar/mostrar con scroll ──
+    const nav = document.getElementById('nav');
+    let lastScrollY = 0, navVisible = true, ticking = false;
+    lenis.on('scroll', ({ scroll }) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const delta = scroll - lastScrollY;
+        if (scroll > 80 && delta > 6 && navVisible)        { nav.classList.add('nav-hidden');    document.body.classList.add('nav-is-hidden');    navVisible = false; }
+        else if ((delta < -6 || scroll <= 80) && !navVisible) { nav.classList.remove('nav-hidden'); document.body.classList.remove('nav-is-hidden'); navVisible = true;  }
+        lastScrollY = scroll;
+        ticking = false;
+      });
+    });
+
+    // ── Reveal al hacer scroll ──
+    const reveals  = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Cambio de tema al llegar a Servicios ──
+    const serviciosEl   = document.getElementById('section-servicios');
+    const themeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.body.classList.add('theme-light');
+        } else if (entry.boundingClientRect.top > 0) {
+          document.body.classList.remove('theme-light');
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -20% 0px' });
+    if (serviciosEl) themeObserver.observe(serviciosEl);
+  </script>
+
+</body>
+</html>

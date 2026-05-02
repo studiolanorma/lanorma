@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lanorma — Estudio de Diseño de Marca y Web en Cantabria</title>
+
+  <!-- SEO -->
+<meta name="description" content="Estudio de diseño en Cantabria. Identidad visual, diseño web y dirección creativa para marcas con carácter. Trabajamos con pymes y startups.">  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://studiolanorma.com">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/img/favicon.jpg">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Lanorma — Estudio de Diseño de Marca y Web en Cantabria">
+  <meta property="og:description" content="Estudio de diseño en Cantabria especializado en identidad visual, diseño web y sistemas de diseño para pymes y startups.">
+  <meta property="og:image" content="https://studiolanorma.com/og-image.jpg">
+  <meta property="og:url" content="https://studiolanorma.com">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lanorma — Estudio de Diseño de Marca y Web en Cantabria">  
+  <meta name="twitter:description" content="Estudio de diseño en Cantabria especializado en identidad visual, diseño web y sistemas de diseño para pymes y startups.">
+  <meta name="twitter:image" content="https://studiolanorma.com/og-image.jpg">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Lanorma",
+    "url": "https://studiolanorma.com",
+    "logo": "https://studiolanorma.com/favicon.jpg",
+    "description": "Estudio de diseño en Cantabria especializado en identidad visual, diseño web y sistemas de diseño para pymes y startups.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Santander",
+      "addressRegion": "Cantabria",
+      "addressCountry": "ES"
+    },
+    "email": "contacto@studiolanorma.com",
+    "telephone": "+34682408122",
+    "sameAs": [
+      "https://www.instagram.com/studiolanorma",
+      "https://www.linkedin.com/company/studiolanorma",
+      "https://www.behance.net/studiolanorma"
+    ],
+"serviceType": ["Identidad visual", "Diseño web", "Sistemas de diseño", "Dirección creativa"],
+"areaServed": ["Cantabria", "España"]  }
+
+  </script>
+
+<style>
+    /* ── FUENTES ── */
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Book.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('/assets/fonts/SuisseIntl-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── FOCUS VISIBLE (accesibilidad teclado) ── */
+    :focus { outline: none; }
+    :focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --ink: #606060;
+      --muted: #939393;
+      --fs: 14px;
+      --fs-small: 13px;
+      --nav-h: 64px;
+      --pad: clamp(40px, 5vw, 220px);
+      --pad-large: 427px;
+      --col-gap: 24px;
+    }
+
+    html { scroll-behavior: auto; } /* Lenis gestiona el scroll */
+
+    body {
+      font-family: 'Suisse Intl', sans-serif;
+      font-size: var(--fs);
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    body.dark {
+      --bg: #0f0f0f;
+      --ink: #FFFFFF;
+      --muted: #666;
+      background: #0f0f0f;
+      color: #FFFFFF;
+    }
+
+    /* Transición suave del fondo global + elementos clave */
+    body {
+      transition: background 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    nav, .about-wrapper, .footer-cta, .footer-bottom, .mobile-menu {
+      transition: background 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    nav svg path,
+    .cursor-dot,
+    .cursor-ring,
+    .hamburger span {
+      transition: fill 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  background 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  border-color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    body.dark .cursor-dot {
+      background: #FFFFFF;
+    }
+
+    body.dark .cursor-ring {
+      border-color: #FFFFFF;
+    }
+
+    body.dark .cursor-ring::after {
+      color: #FFFFFF;
+    }
+
+    body.cursor-light .cursor-dot {
+      background: #FFFFFF;
+    }
+
+    body.cursor-light .cursor-ring {
+      border-color: #FFFFFF;
+    }
+
+    body.dark nav svg path { fill: #FFFFFF; }
+    body.dark .about-img { background: #222; }
+
+    a { color: inherit; text-decoration: none; cursor: none; }
+
+    /* ── CURSOR ── */
+    .cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      top: 0; left: 0;
+      will-change: transform;
+    }
+
+    .cursor-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--ink);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  opacity 0.3s ease;
+    }
+
+    .cursor-ring {
+      position: absolute;
+      top: 0; left: 0;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  opacity 0.45s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cursor-ring::after {
+      font-family: 'Suisse Intl', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--ink);
+      opacity: 0;
+      transition: opacity 0.2s ease 0.1s;
+    }
+
+    body.cursor-hover .cursor-dot {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+
+    body.cursor-hover .cursor-ring {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    body.cursor-plus .cursor-dot {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+
+    body.cursor-plus .cursor-ring {
+      width: 80px;
+      height: 80px;
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    body.cursor-plus .cursor-ring::after {
+      opacity: 1;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad);
+      background: transparent;
+      z-index: 100;
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  padding 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: opacity, padding;
+    }
+
+    nav.nav-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    @media (min-width: 1600px) {
+      nav {
+        padding-left: calc(var(--nav-h) + 4px);
+        padding-right: calc(var(--nav-h) + 4px);
+      }
+
+      nav.nav-compact {
+        padding-left: var(--pad-large);
+        padding-right: var(--pad-large);
+      }
+    }
+
+    nav .logo svg { display: block; overflow: visible; }
+
+    /* ── LOGO ANIMADO ── */
+    nav .logo .logo-text {
+      transition: clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0);
+      clip-path: inset(0 0 0 0);
+    }
+
+    nav .logo .logo-n,
+    nav .logo .logo-paren-right {
+      transition: transform 0.50s cubic-bezier(0.25, 0, 0.25, 1);
+    }
+
+    nav .logo .logo-paren-right {
+      transition: transform 0.35s cubic-bezier(0.25, 0, 0.80, 1);
+    }
+
+    nav .logo svg path {
+      transition: fill 0.55s ease;
+    }
+
+    /* dark mode: paths en blanco */
+    body.dark nav .logo svg path { fill: #FFFFFF; }
+
+    nav .links {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav .links a {
+      font-size: var(--fs);
+      font-weight: 500;
+      letter-spacing: 0em;
+      opacity: 0;
+      animation: navLinkIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    nav .links a:nth-child(1) { animation-delay: 2.2s; }
+    nav .links a:nth-child(2) { animation-delay: 2.3s; }
+
+    body.no-loader-anim nav .links a:nth-child(1) { animation-delay: 0.2s; }
+    body.no-loader-anim nav .links a:nth-child(2) { animation-delay: 0.3s; }
+
+    @keyframes navLinkIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    nav .links a.done { opacity: 1; }
+    nav .links a.done:hover { opacity: 0.5; }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+      will-change: auto;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      display: block;
+      margin-top: calc(var(--nav-h) + 4px);
+      margin-left: var(--pad);
+      margin-right: var(--pad);
+      margin-bottom: 40px;
+      height: calc(100vh - var(--nav-h) - 4px - 40px);
+      height: calc(100dvh - var(--nav-h) - 4px - 40px);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      border-radius: 4px;
+      cursor: none;
+      transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    @media (min-width: 1600px) {
+      .hero {
+        margin-left: calc(var(--nav-h) + 4px);
+        margin-right: calc(var(--nav-h) + 4px);
+      }
+    }
+
+    .hero:hover {
+      border-radius: 16px;
+    }
+
+    .hero.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero .img-wrap {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: inherit;
+      transition: border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .hero img,
+    .hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.04);
+      transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+
+    .hero.animate img,
+    .hero.animate video {
+      transform: scale(1);
+    }
+
+    .hero:hover img,
+    .hero:hover video {
+      transform: scale(1.03);
+    }
+
+    /* ── HERO TEXT ── */
+    .hero-text {
+      padding: 120px var(--pad) 120px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 1600px) { .hero-text { padding-left: var(--pad-large); padding-right: var(--pad-large); } }
+
+    .hero-text .project-title {
+      font-size: var(--fs);
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+
+    .hero-text .project-sub {
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 19px;
+      max-width: 320px;
+    }
+
+    .hero-text .right { text-align: right; }
+
+    .hero-text .award {
+      font-size: var(--fs-small);
+      color: var(--muted);
+      line-height: 19px;
+    }
+
+    .hero-more {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      height: 40px;
+      margin-top: 16px;
+      padding: 0 24px;
+      border-radius: 4px;
+      background: #0F0F0F;
+      box-shadow: none;
+      font-size: 14px;
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 1;
+      cursor: none;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+
+    .hero-more:hover {
+      background: #606060;
+      box-shadow: inset 0 0 0 1px #606060;
+      color: #FFFFFF;
+    }
+    .section-label {
+      padding: 0 var(--pad) 16px;
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--muted);
+    }
+    @media (min-width: 1600px) { .section-label { padding-left: var(--pad-large); padding-right: var(--pad-large); } }
+
+    /* ── PORTFOLIO GRID ── */
+    .portfolio {
+      padding: 0 var(--pad) 180px;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+    }
+    @media (min-width: 1600px) { .portfolio { padding-left: var(--pad-large); padding-right: var(--pad-large); } }
+
+    .row-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--col-gap);
+    }
+
+    .row-3col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--col-gap);
+    }
+
+    .row-full { display: grid; grid-template-columns: 1fr; }
+
+    /* Project card */
+    .project-card {
+      display: block;
+      cursor: none;
+      align-self: start;
+      contain: layout style;
+    }
+
+    .project-card .img-wrap {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      border-radius: 4px;
+      transition: border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: border-radius;
+    }
+
+    .project-card:hover .img-wrap {
+      border-radius: 16px;
+    }
+
+    .project-card .img-wrap img,
+    .project-card .img-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    .project-card:hover .img-wrap img,
+    .project-card:hover .img-wrap video {
+      transform: scale(1.03);
+    }
+
+    /* card text slide on hover */
+    .project-card .card-info {
+      padding: 12px 0 20px;
+      overflow: hidden;
+    }
+
+    .card-title {
+      font-size: var(--fs);
+      font-weight: 400;
+      margin-bottom: 6px;
+      transform: translateY(0);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .card-num {
+      font-size: var(--fs-small);
+      font-weight: 400;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .card-desc {
+      font-size: var(--fs);
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 19px;
+      max-width: 320px;
+      opacity: 1;
+      transform: translateY(0);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.03s,
+                  opacity 0.4s ease 0.03s;
+    }
+
+    .project-card:hover .card-title {
+      transform: translateY(-2px);
+    }
+
+    .project-card:hover .card-desc {
+      transform: translateY(-2px);
+      opacity: 0.5;
+    }
+
+    /* Sizes */
+    .img-hero    { aspect-ratio: 1360 / 680; }
+    .img-medium  { aspect-ratio: 901 / 580; }
+    .img-large   { aspect-ratio: 443 / 680; }
+    .img-small   { aspect-ratio: 443 / 286; }
+
+    /* ── ABOUT ── */
+    .about-wrapper {
+      margin: 0 var(--pad);
+    }
+    @media (min-width: 1600px) { .about-wrapper { margin-left: var(--pad-large); margin-right: var(--pad-large); } }
+
+    .about {
+      padding: 16px 0 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .about-row-top {
+      display: grid;
+      grid-template-columns: calc(50% - 8px) 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .about-label {
+      font-size: var(--fs);
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .about-text {
+      font-size: var(--fs);
+      font-weight: 400;
+      line-height: 19px;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .about-row-bottom {
+      display: grid;
+      grid-template-columns: calc(50% - 8px) 1fr;
+      gap: 16px;
+      align-items: end;
+    }
+
+    /* Las clases del grid unificado anterior ya no se usan */
+    .about-grid, .about-col-left, .about-col-right { display: contents; }
+
+    .about-img {
+      width: 213px;
+      height: 260px;
+      overflow: hidden;
+      background: #f0f0f0;
+      flex-shrink: 0;
+      justify-self: start;
+      border-radius: 4px;
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 24px;
+    }
+
+    .about-contact a {
+      font-size: var(--fs-small);
+      font-weight: 400;
+      color: var(--ink);
+      transition: opacity 0.2s;
+      line-height: 20px;
+      display: block;
+    }
+
+    .about-contact a:hover { 
+      opacity: 0.5; 
+    }
+
+    .about-contact .col-label {
+      font-size: var(--fs-small);
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+
+    .footer-cta {
+      padding: 120px var(--pad);
+    }
+    @media (min-width: 1600px) { .footer-cta { padding-left: var(--pad-large); padding-right: var(--pad-large); } }
+
+    .footer-cta__inner {
+      width: 100%;
+      min-height: 420px;
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 80px;
+      border-radius: 4px;
+    }
+
+    .footer-cta__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 64px;
+    }
+
+    .footer-cta__copy {
+      max-width: 520px;
+      text-align: center;
+    }
+
+    .footer-cta__title,
+    .footer-cta__text {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: 0;
+      
+    }
+
+    .footer-cta__title {
+      color: #FFFFFF;
+    }
+
+    .footer-cta__text {
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.58);
+    }
+
+    .footer-cta__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      height: 40px;
+      padding: 0 24px;
+      border-radius: 4px;
+      background: #FFFFFF;
+      color: #0F0F0F;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1;
+      cursor: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .footer-cta__button:hover {
+      background: #606060;
+      color: #FFFFFF;
+    }
+
+    .footer-cta__image {
+      width: min(100%, 494px);
+      max-width: 494px;
+      height: 370px;
+      justify-self: end;
+      align-self: center;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .footer-cta__image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+
+    .footer-bottom {
+      padding: 32px var(--pad);
+      display: grid;
+      grid-template-columns: calc(50% - 8px) 1fr auto;
+      gap: 24px 16px;
+      align-items: end;
+    }
+    @media (min-width: 1600px) { .footer-bottom { padding-left: var(--pad-large); padding-right: var(--pad-large); } }
+
+
+    .footer-col a,
+    .footer-col p {
+      font-size: var(--fs-small);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.8;
+      display: block;
+      transition: opacity 0.2s;
+    }
+
+    .footer-col a:hover {opacity: 0.5; }
+
+    .footer-copyright {
+      font-size: var(--fs-small);
+      font-weight: 400;
+      color: var(--muted);
+      text-align: right;
+      white-space: nowrap;
+      align-self: end;
+    }
+
+    /* ── HAMBURGER (solo móvil) ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: var(--ink);
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 99;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--pad);
+      gap: 0;
+      transition: background 0.8s ease;
+      display: flex;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .mobile-menu.open {
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .mobile-menu a {
+      font-size: clamp(32px, 10vw, 52px);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.3;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .mobile-menu.open a {
+      animation: menuLinkIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .mobile-menu.open a:nth-child(1) { animation-delay: 0.06s; }
+    .mobile-menu.open a:nth-child(2) { animation-delay: 0.12s; }
+    .mobile-menu.open a:nth-child(3) { animation-delay: 0.18s; }
+    .mobile-menu.open a:nth-child(4) { animation-delay: 0.24s; }
+
+    @keyframes menuLinkIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .mobile-menu a:hover { opacity: 0.5; }
+
+    .mobile-menu .menu-social {
+      display: flex;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .mobile-menu .menu-social a {
+      font-size: var(--fs-small);
+      font-weight: 400;
+    }
+
+    /* ── BOTONES MÓVIL (inline pill) ── */
+    .btn-mobile {
+      display: none;
+      font-family: 'Suisse Intl', sans-serif;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      height: 40px;
+      padding: 0 24px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #FFFFFF;
+      background: #0F0F0F;
+      border: none;
+      border-radius: 4px;
+      box-shadow: none;
+      line-height: 1;
+      cursor: none;
+      text-decoration: none;
+      vertical-align: middle;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-mobile:hover {
+      background: #606060;
+      box-shadow: inset 0 0 0 1px #606060;
+      color: #FFFFFF;
+    }
+
+    .btn-mobile-light {
+      display: none;
+      font-family: 'Suisse Intl', sans-serif;
+      font-size: var(--fs);
+      font-weight: 500;
+      color: #0f0f0f;
+      background: #FFFFFF;
+      border: none;
+      border-radius: 0;
+      padding: 2px 8px 3px;
+      line-height: var(--fs);
+      cursor: pointer;
+      text-decoration: none;
+      vertical-align: middle;
+    }
+    /* ── PANTALLAS GRANDES (≥1920px, ej: monitor 27") ── */
+    @media (min-width: 1920px) {
+      .hero-text {
+        padding-top: 160px;
+        padding-bottom: 160px;
+      }
+
+      .card-desc {
+        max-width: 420px;
+      }
+
+      .about-img {
+        width: 280px;
+        height: 340px;
+      }
+    }
+
+    /* ── PANTALLAS MUY GRANDES (≥2560px, ej: 4K/5K) ── */
+    @media (min-width: 2560px) {
+      .card-desc {
+        max-width: 520px;
+      }
+
+      .about-img {
+        width: 360px;
+        height: 440px;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .footer-cta__inner {
+        gap: 48px;
+        padding: 40px;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .footer-cta__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-cta__image {
+        width: 100%;
+        max-width: none;
+        justify-self: stretch;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root { --pad: 16px; --col-gap: 8px; }
+
+      body { cursor: auto; }
+      .cursor { display: none; }
+
+      nav .links { display: flex; gap: 16px; }
+      .hamburger { display: none; }
+
+      .hero { height: calc(100dvh - var(--nav-h) - 4px - 40px); }
+      .hero-text { padding-top: 24px; grid-template-columns: 1fr; }
+      .hero-text .right { text-align: left; }
+
+      .hero-more { display: none; }
+      .btn-mobile { display: inline-flex; margin-top: 24px; width: fit-content; }
+      .btn-mobile-light { display: block; margin-top: 24px; width: fit-content; }
+
+      .row-2col,
+      .row-3col { grid-template-columns: 1fr; }
+
+      .portfolio { gap: 8px; }
+
+      .about { gap: 24px; }
+
+      .about-row-top {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+      }
+
+      .about-row-bottom {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 100%;
+      }
+
+      .about-img {
+        width: 100%;
+        height: 220px;
+        justify-self: unset;
+      }
+
+      .about-contact {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 16px;
+        width: 100%;
+      }
+
+      .footer-bottom { grid-template-columns: 1fr 1fr; }
+      .footer-copyright { text-align: left; grid-column: 1 / -1; }
+      .footer-cta { padding: 16px; }
+      .footer-cta__inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        min-height: auto;
+        padding: 80px 16px;
+      }
+      .footer-cta__content {
+        min-height: auto;
+      }
+      .footer-cta__image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 494 / 370;
+      }
+      body.dark .mobile-menu { background: #0f0f0f; }
+      body.dark .hamburger span { background: #FFFFFF; }
+    }
+    /* ── LOADER ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      z-index: 9999;
+      overflow: hidden;
+      /* persiana: sale hacia arriba */
+      transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    #loader.hide {
+      transform: translateY(-100%);
+    }
+
+    /* imágenes en mosaico — posiciones fijas y simétricas */
+    #loader-images {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .loader-img {
+      position: absolute;
+      overflow: hidden;
+      border-radius: 3px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Esquinas y centros — tamaños y posiciones base */
+    .loader-img--tl { width: 11vw; height: 14vw; top: 9%;    left: 7%; }
+    .loader-img--tc { width: 9vw;  height: 6vw;  top: 9%;    left: 50%; transform: translateX(-50%) translateY(18px); }
+    .loader-img--tr { width: 11vw; height: 14vw; top: 9%;    right: 7%; }
+    .loader-img--bl { width: 11vw; height: 14vw; bottom: 9%; left: 7%; }
+    .loader-img--bc { width: 9vw;  height: 6vw;  bottom: 9%; left: 50%; transform: translateX(-50%) translateY(18px); }
+    .loader-img--br { width: 11vw; height: 14vw; bottom: 9%; right: 7%; }
+
+    /* Estado visible — resetear transform manteniendo el translateX de los centrados */
+    .loader-img.show { opacity: 1; transform: translateY(0); }
+    .loader-img--tc.show,
+    .loader-img--bc.show { transform: translateX(-50%) translateY(0); }
+
+    /* Pantallas grandes ≥1440px: +20% de tamaño */
+    @media (min-width: 1440px) {
+      .loader-img--tl { width: 13.2vw; height: 16.8vw; }
+      .loader-img--tc { width: 10.8vw; height: 7.2vw;  }
+      .loader-img--tr { width: 13.2vw; height: 16.8vw; }
+      .loader-img--bl { width: 13.2vw; height: 16.8vw; }
+      .loader-img--bc { width: 10.8vw; height: 7.2vw;  }
+      .loader-img--br { width: 13.2vw; height: 16.8vw; }
+    }
+
+    .loader-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #loader-percent {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Suisse Intl', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #0f0f0f;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      z-index: 2;
+    }
+
+    #contenido {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Solo se oculta si el loader va a correr (clase añadida por JS) */
+    body.loader-running #contenido {
+      opacity: 0;
+      visibility: hidden;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  
+  </style>
+</head>
+<body>
+
+
+  <div id="loader">
+    <div id="loader-images">
+      <!-- layout fijo y simétrico: 3 arriba, 3 abajo, esquinas + centro -->
+      <div class="loader-img loader-img--tl"><img src="/assets/img/home-1.webp" alt=""></div>
+      <div class="loader-img loader-img--tc"><img src="/assets/img/home-3.webp" alt=""></div>
+      <div class="loader-img loader-img--tr"><img src="/assets/img/home-2.webp" alt=""></div>
+      <div class="loader-img loader-img--bl"><img src="/assets/img/home-5.webp" alt=""></div>
+      <div class="loader-img loader-img--bc"><img src="/assets/img/home-4.webp" alt=""></div>
+      <div class="loader-img loader-img--br"><img src="/assets/img/home-7.webp" alt=""></div>
+    </div>
+    <span id="loader-percent">0%</span>
+  </div>
+
+
+  <script>
+    (function () {
+      const loader    = document.getElementById('loader');
+      const percentEl = document.getElementById('loader-percent');
+      const imgs      = document.querySelectorAll('.loader-img');
+
+      // ── Posiciones fijas definidas en CSS ──
+
+      function revealContent() {
+        document.body.classList.remove('loader-running');
+        const hero = document.querySelector('.hero');
+        if (hero) {
+          // Pequeño delay para que el fade+desplazamiento arranque
+          // justo cuando el loader termina de subir (0.9s de transición)
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              hero.classList.add('animate');
+            });
+          });
+        }
+      }
+
+      // ── Una sola vez por sesión ──
+      if (sessionStorage.getItem('loaderShown')) {
+        // Ya se mostró: quitar loader y animar el hero igualmente
+        document.body.classList.add('no-loader-anim');
+        loader.remove();
+        // El hero aún no existe en el DOM, esperar a que cargue
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', revealContent, { once: true });
+        } else {
+          revealContent();
+        }
+        return;
+      }
+
+      // ── Primera visita: ocultar contenido y arrancar animación ──
+      document.body.classList.add('loader-running');
+
+      const countDuration = 1800;
+      let start = null;
+      const thresholds = [10, 25, 42, 58, 74, 88];
+
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+      // Fallback de seguridad: si algo falla, mostrar contenido a los 5s
+      const safetyTimer = setTimeout(() => {
+        loader.remove();
+        revealContent();
+      }, 5000);
+
+      function animateCount(ts) {
+        if (!start) start = ts;
+        const elapsed  = ts - start;
+        const progress = Math.min(elapsed / countDuration, 1);
+        const value    = Math.round(easeOut(progress) * 100);
+
+        percentEl.textContent = value + '%';
+
+        imgs.forEach((img, i) => {
+          if (value >= thresholds[i]) img.classList.add('show');
+        });
+
+        if (progress < 1) {
+          requestAnimationFrame(animateCount);
+        } else {
+          clearTimeout(safetyTimer);
+          sessionStorage.setItem('loaderShown', '1');
+
+          setTimeout(() => {
+            loader.classList.add('hide');
+
+            loader.addEventListener('transitionend', function onEnd(e) {
+              if (e.propertyName !== 'transform') return;
+              loader.removeEventListener('transitionend', onEnd);
+              loader.remove();
+              revealContent();
+            });
+
+            // Fallback por si transitionend no dispara
+            setTimeout(() => { loader.remove(); revealContent(); }, 1200);
+          }, 320);
+        }
+      }
+
+      requestAnimationFrame(animateCount);
+    })();
+  </script>
+
+
+  <!-- TU CONTENIDO VA AQUÍ -->
+<main id="contenido" role="main">
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="https://studiolanorma.com" class="logo" aria-label="Studio Lanorma" id="logo-animated">
+      <svg style="width:80px; overflow:visible;" viewBox="0 0 71.3 12.6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="logo-paren-left">
+          <path d="M0 6.3C0 4.05067 0.644 1.95067 1.932 0H3.696C2.55733 1.88533 1.988 3.98533 1.988 6.3C1.988 8.63333 2.55733 10.7333 3.696 12.6H1.932C1.40933 11.8253 0.956667 10.8967 0.574 9.814C0.191333 8.722 0 7.55067 0 6.3Z" fill="#606060"/>
+        </g>
+        <g class="logo-text">
+          <path d="M10.9276 1V9.526H15.8696V11.15H8.92556V1H10.9276Z" fill="#606060"/>
+          <path d="M20.9434 8.26588V7.70588C19.8048 7.82721 19.0161 7.97654 18.5774 8.15388C18.1388 8.33121 17.9194 8.62054 17.9194 9.02188C17.9194 9.31121 18.0314 9.54921 18.2554 9.73588C18.4794 9.92254 18.8014 10.0159 19.2214 10.0159C20.3694 10.0159 20.9434 9.43254 20.9434 8.26588ZM21.1114 10.2119C20.5888 10.9585 19.7674 11.3319 18.6474 11.3319C17.9008 11.3319 17.2614 11.1312 16.7294 10.7299C16.1974 10.3192 15.9314 9.78254 15.9314 9.11988C15.9314 8.69054 16.0434 8.32188 16.2674 8.01388C16.5008 7.70588 16.8508 7.45388 17.3174 7.25788C17.7841 7.05254 18.2928 6.89388 18.8434 6.78188C19.3941 6.66988 20.0754 6.56721 20.8874 6.47388V6.34788C20.8874 5.30254 20.4161 4.77988 19.4734 4.77988C19.0814 4.77988 18.7548 4.88254 18.4934 5.08788C18.2321 5.29321 18.0921 5.59654 18.0734 5.99788H16.2674C16.3421 5.23254 16.6734 4.61188 17.2614 4.13587C17.8494 3.65987 18.6194 3.42188 19.5714 3.42188C21.7368 3.42188 22.8194 4.52787 22.8194 6.73987C22.8194 6.77721 22.8148 7.04321 22.8054 7.53788C22.7961 8.02321 22.7914 8.39654 22.7914 8.65788C22.7914 9.71254 22.8661 10.5432 23.0154 11.1499H21.2374C21.2094 11.0285 21.1674 10.7159 21.1114 10.2119Z" fill="#606060"/>
+          <path d="M35.9415 5.60717C35.6148 5.17784 35.1762 4.96317 34.6255 4.96317C34.0748 4.96317 33.6315 5.17784 33.2955 5.60717C32.9688 6.02717 32.8055 6.62451 32.8055 7.39917C32.8055 8.17384 32.9688 8.77117 33.2955 9.19117C33.6315 9.61117 34.0748 9.82117 34.6255 9.82117C35.1762 9.82117 35.6148 9.61117 35.9415 9.19117C36.2775 8.77117 36.4455 8.17384 36.4455 7.39917C36.4455 6.62451 36.2775 6.02717 35.9415 5.60717ZM37.2855 10.2972C36.5388 10.9878 35.6522 11.3332 34.6255 11.3332C33.5988 11.3332 32.7122 10.9878 31.9655 10.2972C31.2188 9.60651 30.8455 8.64051 30.8455 7.39917C30.8455 6.14851 31.2188 5.17784 31.9655 4.48717C32.7122 3.79651 33.5988 3.45117 34.6255 3.45117C35.6522 3.45117 36.5388 3.79651 37.2855 4.48717C38.0322 5.17784 38.4055 6.14851 38.4055 7.39917C38.4055 8.64051 38.0322 9.60651 37.2855 10.2972Z" fill="#606060"/>
+          <path d="M41.398 5.83114C41.6687 5.56981 42.0653 5.43914 42.588 5.43914H44.0603L44.0496 3.61917H42.9552C42.0312 3.61917 41.3793 4.06714 40.978 4.93514V3.61914H39.074V11.1511H41.006V7.20314C41.006 6.54047 41.1367 6.08314 41.398 5.83114Z" fill="#606060"/>
+          <path d="M53.0861 11.1512V6.76917C53.0861 6.51717 53.0721 6.30717 53.0441 6.13917C53.0255 5.96184 52.9788 5.77984 52.9041 5.59317C52.8388 5.39717 52.7175 5.25251 52.5401 5.15917C52.3721 5.05651 52.1528 5.00517 51.8821 5.00517C51.2941 5.00517 50.8975 5.20584 50.6921 5.60717C50.4868 6.0085 50.3841 6.54984 50.3841 7.23117V11.1512H48.4521V6.76917C48.4521 6.51717 48.4381 6.30717 48.4101 6.13917C48.3915 5.96184 48.3448 5.77984 48.2701 5.59317C48.2048 5.39717 48.0835 5.25251 47.9061 5.15917C47.7381 5.05651 47.5188 5.00517 47.2481 5.00517C46.6601 5.00517 46.2635 5.20584 46.0581 5.60717C45.8528 6.0085 45.7501 6.54984 45.7501 7.23117V11.1512H43.8181V3.61917H45.7501V4.61317C46.2075 3.83851 46.9075 3.45117 47.8501 3.45117C48.8395 3.45117 49.5535 3.86184 49.9921 4.68317C50.5801 3.86184 51.4061 3.45117 52.4701 3.45117C54.1688 3.45117 55.0181 4.43584 55.0181 6.40517V11.1512H53.0861Z" fill="#606060"/>
+          <path d="M60.5333 8.26588V7.70588C59.3946 7.82721 58.6059 7.97654 58.1673 8.15388C57.7286 8.33121 57.5093 8.62054 57.5093 9.02188C57.5093 9.31121 57.6213 9.54921 57.8453 9.73588C58.0693 9.92254 58.3913 10.0159 58.8113 10.0159C59.9593 10.0159 60.5333 9.43254 60.5333 8.26588ZM60.7013 10.2119C60.1786 10.9585 59.3573 11.3319 58.2373 11.3319C57.4906 11.3319 56.8513 11.1312 56.3193 10.7299C55.7873 10.3192 55.5213 9.78254 55.5213 9.11988C55.5213 8.69054 55.6333 8.32188 55.8573 8.01388C56.0906 7.70588 56.4406 7.45388 56.9073 7.25788C57.3739 7.05254 57.8826 6.89388 58.4333 6.78188C58.9839 6.66988 59.6653 6.56721 60.4773 6.47388V6.34788C60.4773 5.30254 60.0059 4.77988 59.0633 4.77988C58.6713 4.77988 58.3446 4.88254 58.0833 5.08788C57.8219 5.29321 57.6819 5.59654 57.6633 5.99788H55.8573C55.9319 5.23254 56.2633 4.61188 56.8513 4.13587C57.4393 3.65987 58.2093 3.42188 59.1613 3.42188C61.3266 3.42188 62.4093 4.52787 62.4093 6.73987C62.4093 6.77721 62.4046 7.04321 62.3953 7.53788C62.3859 8.02321 62.3813 8.39654 62.3813 8.65788C62.3813 9.71254 62.4559 10.5432 62.6053 11.1499H60.8273C60.7993 11.0285 60.7573 10.7159 60.7013 10.2119Z" fill="#606060"/>
+        </g>
+        <g class="logo-paren-right">
+          <path d="M71.2954 6.3C71.2954 8.55867 70.6514 10.6587 69.3634 12.6H67.5994C68.7381 10.7333 69.3074 8.63333 69.3074 6.3C69.3074 3.98533 68.7381 1.88533 67.5994 0H69.3634C70.6514 1.92267 71.2954 4.02267 71.2954 6.3Z" fill="#606060"/>
+        </g>
+        <g class="logo-n">
+          <path d="M25.5021 3.61917V4.61317C25.9408 3.83851 26.6688 3.45117 27.6861 3.45117C29.4221 3.45117 30.2901 4.43584 30.2901 6.40517V11.1512H28.3581V6.82517C28.3581 6.26517 28.2648 5.82184 28.0781 5.49517C27.9008 5.16851 27.5601 5.00517 27.0561 5.00517C26.4681 5.00517 26.0621 5.20584 25.8381 5.60717C25.6141 6.0085 25.5021 6.54984 25.5021 7.23117V11.1512H23.5701V3.61917H25.5021Z" fill="#606060"/>
+        </g>
+      </svg>
+    </a>
+    <div class="links">
+      <a href="/nosotros">Nosotros</a>
+      <a href="/contacto">Contacto</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MENÚ MÓVIL -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/nosotros">Nosotros</a>
+    <a href="/contacto">Contacto</a>
+    <div class="menu-social">
+      <a href="https://www.instagram.com/studiolanorma" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/company/studiolanorma" target="_blank" rel="noopener">Linkedin</a>
+    </div>
+  </div>
+
+  <!-- H1 oculto visualmente para SEO -->
+  <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Lanorma — Estudio de diseño de identidad visual y diseño web en Cantabria, España</h1>
+  <!-- HERO -->
+  <a href="/proyecto1" class="hero" aria-label="Ver proyecto: Sans by Fontface">
+        <div class="img-wrap img-hero">
+          <img src="/assets/img/home-1.webp" alt="Proyecto Sans by Fontface — Identidad visual por Lanorma" loading="eager" fetchpriority="high" decoding="async">
+        </div>
+  </a>
+
+  <!-- HERO TEXT -->
+  <div class="hero-text reveal">
+    <div class="left">
+      <p class="project-title">Sans by Fontface</p>
+      <p class="project-sub">A sculptural breakthrough through a new visual identity system,<br>deploying and elevating Sans Johnson's spirit.</p>
+      <a href="/proyecto1" class="hero-more">Saber más</a>
+      <a href="/proyecto1" class="btn-mobile">Saber más</a>
+    </div>
+    <div class="right">
+      <p class="award">Red Dot Award 2023<br>Brand Design</p>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <p class="section-label reveal">Proyectos<br></p>
+
+  <section class="portfolio">
+
+    <div class="row-2col reveal">
+      <a href="/saifai" class="project-card" aria-label="Ver proyecto: Saifai Brand">
+        <div class="img-wrap img-medium">
+          <img src="/assets/img/home-2.webp" alt="Proyecto Saifai Brand — Identidad visual por Lanorma" loading="lazy">
+        </div>
+        <div class="card-info">
+          <p class="card-title"><span class="card-num" aria-hidden="true">02</span>Saifai Brand</p>
+          <p class="card-desc">Dirección creativa e identidad visual para Saifai, una marca de moda conceptual que redefine su lenguaje a través de precisión, innovación y carácter.</p>
+        </div>
+      </a>
+      <a href="/goodsmatcha" class="project-card" aria-label="Ver proyecto: Goods Matcha Brands">
+        <div class="img-wrap img-medium">
+          <img src="/assets/img/home-3.webp" alt="" loading="lazy">
+        </div>
+        <div class="card-info">
+          <p class="card-title"><span class="card-num" aria-hidden="true">03</span>Goods Matcha Brands</p>
+          <p class="card-desc"> La identidad corporativa se construye a través de códigos limpios, una dirección estética contenida y una narrativa que transmite equilibrio, bienestar y sensibilidad contemporánea.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="row-3col reveal">
+      <a href="/proyecto4" class="project-card" aria-label="Ver proyecto: Soon">
+        <div class="img-wrap img-small">
+          <img src="/assets/img/home-4.webp" alt="" loading="lazy">
+        </div>
+        <div class="card-info">
+          <p class="card-title"><span class="card-num" aria-hidden="true">04</span>Soon</p>
+          <p class="card-desc">Muy pronto este proyecto estará disponible para su visualización. Estamos ultimando los detalles para poder compartirlo, así que permanece atento a las próximas actualizaciones.</p>
+        </div>
+      </a>
+      <a href="/proyecto5" class="project-card" aria-label="Ver proyecto: Soon">
+        <div class="img-wrap img-small">
+          <img src="/assets/img/home-5.webp" alt="" loading="lazy">
+        </div>
+        <div class="card-info">
+          <p class="card-title"><span class="card-num" aria-hidden="true">05</span>Soon</p>
+          <p class="card-desc">Muy pronto este proyecto estará disponible para su visualización. Estamos ultimando los detalles para poder compartirlo, así que permanece atento a las próximas actualizaciones.</p>
+        </div>
+      </a>
+      <a href="/proyecto6" class="project-card" aria-label="Ver proyecto: Soon">
+        <div class="img-wrap img-large">
+          <img src="/assets/img/home-6.webp" alt="" loading="lazy">
+        </div>
+        <div class="card-info">
+          <p class="card-title"><span class="card-num" aria-hidden="true">06</span>Soon</p>
+          <p class="card-desc">Muy pronto este proyecto estará disponible para su visualización. Estamos ultimando los detalles para poder compartirlo, así que permanece atento a las próximas actualizaciones.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="row-full reveal">
+      <a href="/proyecto7" class="project-card" aria-label="Ver proyecto: Soon">
+        <div class="img-wrap img-hero">
+          <img src="/assets/img/home-7.webp" alt="" loading="lazy">
+        </div>
+        <div class="card-info">
+          <p class="card-title"><span class="card-num" aria-hidden="true">07</span>Soon</p>
+          <p class="card-desc">Muy pronto este proyecto estará disponible para su visualización. Estamos ultimando los detalles para poder compartirlo, así que permanece atento a las próximas actualizaciones.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="row-2col reveal">
+      <a href="/proyecto8" class="project-card" aria-label="Ver proyecto: Soon">
+        <div class="img-wrap img-small">
+          <img src="/assets/img/home-8.webp" alt="" loading="lazy">
+        </div>
+        <div class="card-info">
+          <p class="card-title"><span class="card-num" aria-hidden="true">08</span>Soon</p>
+          <p class="card-desc">Muy pronto este proyecto estará disponible para su visualización. Estamos ultimando los detalles para poder compartirlo, así que permanece atento a las próximas actualizaciones.</p>
+        </div>
+      </a>
+      <a href="/proyecto9" class="project-card" aria-label="Ver proyecto: Soon">
+        <div class="img-wrap img-small">
+          <img src="/assets/img/home-9.webp" alt="" loading="lazy">
+        </div>
+        <div class="card-info">
+          <p class="card-title"><span class="card-num" aria-hidden="true">09</span>Soon</p>
+          <p class="card-desc">Muy pronto este proyecto estará disponible para su visualización. Estamos ultimando los detalles para poder compartirlo, así que permanece atento a las próximas actualizaciones.</p>
+        </div>
+      </a>
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+  <div class="about-wrapper">
+    <section class="about" id="about">
+
+      <div class="about-row-top reveal">
+        <p class="about-label">About</p>
+        <p class="about-text">
+        Nacimos para hacer las cosas de otra manera. Creemos que demasiadas marcas se parecen entre sí, hablan igual y terminan siendo invisibles. Por eso trabajamos identidad visual, diseño web y dirección creativa con una idea clara: construir marcas con personalidad real y criterio propio.
+        <br><br>
+        No seguimos fórmulas. Cuestionamos, exploramos y construimos soluciones a medida. Somos cercanos, directos y exigentes con el detalle. Si buscas correcto, hay miles de opciones. Si buscas carácter, ya estás en el sitio adecuado.        </p>
+      </div>
+
+      <div class="about-row-bottom reveal">
+        <div class="about-img">
+          <img src="/assets/img/home-10.webp" alt="Sobre Lanorma" loading="lazy">
+        </div>
+        <div class="about-contact">
+          <div>
+            <p class="col-label">Social</p>
+            <a href="https://www.instagram.com/studiolanorma" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.linkedin.com/company/studiolanorma" target="_blank" rel="noopener">Linkedin</a>
+            <a href="https://www.behance.net/studiolanorma" target="_blank" rel="noopener">Behance</a>
+          </div>
+          <div>
+            <p class="col-label">Contacto</p>
+            <a href="mailto:contacto@studiolanorma.com">contacto@studiolanorma.com</a>
+            <a href="tel:+34682408122">+34 682 408 122</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer reveal">
+
+    <!-- CTA superior -->
+    <div class="footer-cta">
+      <section class="footer-cta__inner" aria-labelledby="footer-cta-title">
+        <div class="footer-cta__content">
+          <div class="footer-cta__copy">
+            <h2 class="footer-cta__title" id="footer-cta-title">Nuestra única regla es no seguirlas.</h2>
+            <p class="footer-cta__text">Si tu marca está lista para dejar de parecerse a las demás, empieza aquí.</p>
+          </div>
+          <a href="/contacto" class="footer-cta__button">Contactar</a>
+        </div>
+
+        <!-- <div class="footer-cta__image" aria-hidden="true">
+          <img src="assets/img/cta-1.webp" alt="CTA Lanorma">
+        </div> -->
+      </section>
+    </div>
+
+    <!-- Columnas inferiores -->
+    <div class="footer-bottom">
+      <div class="footer-col">
+        <p>Santander, Cantabria, España</p>
+      </div>
+      <div class="footer-col">
+        <a href="/legales">Aviso legal</a>
+        <a href="/privacidad">Política de privacidad</a>
+      </div>
+      <p class="footer-copyright">© Lanorma 2026</p>
+    </div>
+
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+    // ── Logo animado ──
+    const logoEl       = document.getElementById('logo-animated');
+    const logoParenR   = logoEl.querySelector('.logo-paren-right');
+    const logoN        = logoEl.querySelector('.logo-n');
+    const logoText     = logoEl.querySelector('.logo-text');
+
+    logoEl.addEventListener('mouseenter', () => {
+      logoParenR.style.transform  = 'translateX(-38px)';
+      logoN.style.transform       = 'translateX(-6px)';
+      logoText.style.clipPath     = 'inset(0 87% 0 0)';
+      logoText.style.transition   = 'clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0)';
+    });
+
+    logoEl.addEventListener('mouseleave', () => {
+      logoParenR.style.transform  = 'translateX(0)';
+      logoN.style.transform       = 'translateX(0)';
+      logoText.style.clipPath     = 'inset(0 0 0 0)';
+      logoText.style.transition   = 'clip-path 0.40s cubic-bezier(0.65, 0, 0.35, 0)';
+    });
+  </script>
+  <script>
+    // ── Smooth scroll con Lenis ──
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0;
+    let curX = 0, curY = 0;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      const overFooterCta = e.target.closest('.footer-cta__inner');
+      document.body.classList.toggle('cursor-light', !!overFooterCta);
+
+      // El anillo solo aparece sobre elementos interactivos concretos
+      const overHover =
+        e.target.closest('.img-wrap')           ||
+        e.target.closest('.card-info')          ||
+        e.target.closest('.hero-more')          ||
+        e.target.closest('.btn-mobile')         ||
+        e.target.closest('.footer-cta__button') ||
+        e.target.closest('nav .links a')        ||
+        e.target.closest('nav .logo')           ||
+        e.target.closest('.about-contact a')    ||
+        e.target.closest('.footer-bottom a');
+
+      if (overHover) {
+        document.body.classList.add('cursor-hover');
+      } else {
+        document.body.classList.remove('cursor-hover');
+      }
+    }, { passive: true });
+
+    function animateCursor() {
+      curX += (mouseX - curX) * 0.18;
+      curY += (mouseY - curY) * 0.18;
+      cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // ── Marcar nav links como listos tras la animación de entrada ──
+    const navLinks = document.querySelectorAll('nav .links a');
+    const navDoneDelay = document.body.classList.contains('no-loader-anim') ? 1000 : 2900;
+    setTimeout(() => {
+      navLinks.forEach(a => {
+        a.style.animation = 'none';
+        a.style.transform = '';
+        a.classList.add('done');
+      });
+    }, navDoneDelay);
+
+    // ── Menú hamburguesa ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ── Cambio de color al llegar al About (scroll-driven, smooth) ──
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      let isDark = false;
+
+      lenis.on('scroll', ({ scroll }) => {
+        const rect = aboutSection.getBoundingClientRect();
+        const windowH = window.innerHeight;
+        // Activa dark cuando el about entra en pantalla
+        const triggerEnter = rect.top < windowH * 0.8;
+        // Desactiva dark solo cuando el top del about vuelve a ser visible (scroll hacia arriba)
+        const triggerExit = rect.top > windowH * 0.8;
+
+        const shouldBeDark = triggerEnter;
+
+        if (shouldBeDark !== isDark) {
+          isDark = shouldBeDark;
+          document.body.classList.toggle('dark', isDark);
+        }
+      });
+    }
+
+    // ── Nav: hide/show al hacer scroll (Lenis) ──
+    const nav = document.getElementById('nav');
+    const heroSection = document.querySelector('.hero');
+    let lastScrollY = 0, navVisible = true, ticking = false;
+
+    function getHeroEnd() {
+      return heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 80;
+    }
+
+    function updateNavCompact(scroll) {
+      nav.classList.toggle('nav-compact', scroll > getHeroEnd() - 1);
+    }
+
+    updateNavCompact(window.scrollY || 0);
+    window.addEventListener('resize', () => updateNavCompact(window.scrollY || 0), { passive: true });
+
+    lenis.on('scroll', ({ scroll }) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const heroEnd = getHeroEnd();
+        updateNavCompact(scroll);
+
+        const delta = scroll - lastScrollY;
+        if (scroll > heroEnd + 80 && delta > 6 && navVisible) { nav.classList.add('nav-hidden'); navVisible = false; }
+        else if ((delta < -6 || scroll <= 80) && !navVisible) { nav.classList.remove('nav-hidden'); navVisible = true; }
+        lastScrollY = scroll;
+        ticking = false;
+      });
+    });
+
+    // ── Reveal al hacer scroll ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+  </main>
+
+
+</body>
+</html>
