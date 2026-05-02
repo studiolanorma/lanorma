@@ -1,2 +1,0 @@
-/well-known/security.txt
-  Content-Type: text/plain
