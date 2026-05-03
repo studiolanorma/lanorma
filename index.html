@@ -1046,55 +1046,26 @@
       background: #ffffff;
       z-index: 9999;
       overflow: hidden;
-      /* persiana: sale hacia arriba */
-      transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
     }
 
-    #loader.hide {
-      transform: translateY(-100%);
+    /* Imagen central con efecto cortina */
+    #loader-img-wrap {
+      position: absolute;
+      width: clamp(200px, 22vw, 340px);
+      height: clamp(140px, 15vw, 240px);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -58%);
+      overflow: hidden;
+      clip-path: inset(100% 0 0 0);
     }
 
-    /* imágenes en mosaico — posiciones fijas y simétricas */
-    #loader-images {
+    #loader-img-box {
       position: absolute;
       inset: 0;
-      pointer-events: none;
     }
 
-    .loader-img {
-      position: absolute;
-      overflow: hidden;
-      border-radius: 3px;
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Esquinas y centros — tamaños y posiciones base */
-    .loader-img--tl { width: 11vw; height: 14vw; top: 9%;    left: 7%; }
-    .loader-img--tc { width: 9vw;  height: 6vw;  top: 9%;    left: 50%; transform: translateX(-50%) translateY(18px); }
-    .loader-img--tr { width: 11vw; height: 14vw; top: 9%;    right: 7%; }
-    .loader-img--bl { width: 11vw; height: 14vw; bottom: 9%; left: 7%; }
-    .loader-img--bc { width: 9vw;  height: 6vw;  bottom: 9%; left: 50%; transform: translateX(-50%) translateY(18px); }
-    .loader-img--br { width: 11vw; height: 14vw; bottom: 9%; right: 7%; }
-
-    /* Estado visible — resetear transform manteniendo el translateX de los centrados */
-    .loader-img.show { opacity: 1; transform: translateY(0); }
-    .loader-img--tc.show,
-    .loader-img--bc.show { transform: translateX(-50%) translateY(0); }
-
-    /* Pantallas grandes ≥1440px: +20% de tamaño */
-    @media (min-width: 1440px) {
-      .loader-img--tl { width: 13.2vw; height: 16.8vw; }
-      .loader-img--tc { width: 10.8vw; height: 7.2vw;  }
-      .loader-img--tr { width: 13.2vw; height: 16.8vw; }
-      .loader-img--bl { width: 13.2vw; height: 16.8vw; }
-      .loader-img--bc { width: 10.8vw; height: 7.2vw;  }
-      .loader-img--br { width: 13.2vw; height: 16.8vw; }
-    }
-
-    .loader-img img {
+    #loader-img-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -1103,16 +1074,17 @@
 
     #loader-percent {
       position: absolute;
-      top: 50%;
+      bottom: clamp(40px, 6vh, 80px);
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       font-family: 'Suisse Intl', sans-serif;
-      font-size: 24px;
-      font-weight: 400;
-      color: #0f0f0f;
+      font-size: 13px;
+      font-weight: 300;
+      color: #606060;
       line-height: 1;
-      letter-spacing: -0.02em;
-      z-index: 2;
+      letter-spacing: 0.06em;
+      clip-path: inset(100% 0 0 0);
+      white-space: nowrap;
     }
 
     #contenido {
@@ -1136,14 +1108,10 @@
 
 
   <div id="loader">
-    <div id="loader-images">
-      <!-- layout fijo y simétrico: 3 arriba, 3 abajo, esquinas + centro -->
-      <div class="loader-img loader-img--tl"><img src="/assets/img/home-1.webp" alt=""></div>
-      <div class="loader-img loader-img--tc"><img src="/assets/img/home-3.webp" alt=""></div>
-      <div class="loader-img loader-img--tr"><img src="/assets/img/home-2.webp" alt=""></div>
-      <div class="loader-img loader-img--bl"><img src="/assets/img/home-5.webp" alt=""></div>
-      <div class="loader-img loader-img--bc"><img src="/assets/img/home-4.webp" alt=""></div>
-      <div class="loader-img loader-img--br"><img src="/assets/img/home-7.webp" alt=""></div>
+    <div id="loader-img-wrap">
+      <div id="loader-img-box">
+        <img id="loader-img-el" src="" alt="">
+      </div>
     </div>
     <span id="loader-percent">0%</span>
   </div>
@@ -1153,16 +1121,32 @@
     (function () {
       const loader    = document.getElementById('loader');
       const percentEl = document.getElementById('loader-percent');
-      const imgs      = document.querySelectorAll('.loader-img');
+      const imgWrap   = document.getElementById('loader-img-wrap');
+      const imgEl     = document.getElementById('loader-img-el');
 
-      // ── Posiciones fijas definidas en CSS ──
+      // Imágenes de la home — coge 3 aleatorias
+      const allImgs = [
+        '/assets/img/home-1.webp',
+        '/assets/img/home-2.webp',
+        '/assets/img/home-3.webp',
+        '/assets/img/home-4.webp',
+        '/assets/img/home-5.webp',
+        '/assets/img/home-7.webp',
+      ];
+      function shuffle(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+      const loaderImgs = shuffle(allImgs).slice(0, 3);
 
       function revealContent() {
         document.body.classList.remove('loader-running');
         const hero = document.querySelector('.hero');
         if (hero) {
-          // Pequeño delay para que el fade+desplazamiento arranque
-          // justo cuando el loader termina de subir (0.9s de transición)
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
               hero.classList.add('animate');
@@ -1173,10 +1157,8 @@
 
       // ── Una sola vez por sesión ──
       if (sessionStorage.getItem('loaderShown')) {
-        // Ya se mostró: quitar loader y animar el hero igualmente
         document.body.classList.add('no-loader-anim');
         loader.remove();
-        // El hero aún no existe en el DOM, esperar a que cargue
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', revealContent, { once: true });
         } else {
@@ -1185,56 +1167,82 @@
         return;
       }
 
-      // ── Primera visita: ocultar contenido y arrancar animación ──
+      // ── Primera visita ──
       document.body.classList.add('loader-running');
 
-      const countDuration = 1800;
-      let start = null;
-      const thresholds = [10, 25, 42, 58, 74, 88];
+      // Easing cúbico suave
+      function cubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
 
-      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+      function tween(from, to, dur, fn) {
+        return new Promise(resolve => {
+          const t0 = performance.now();
+          function frame(now) {
+            const raw = Math.min((now - t0) / dur, 1);
+            fn(from + (to - from) * cubic(raw));
+            if (raw < 1) requestAnimationFrame(frame);
+            else { fn(to); resolve(); }
+          }
+          requestAnimationFrame(frame);
+        });
+      }
 
-      // Fallback de seguridad: si algo falla, mostrar contenido a los 5s
+      function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+      function setClipImg(v)  { imgWrap.style.clipPath = `inset(${v}% 0 0 0)`; }
+      function setClipImgOut(v) { imgWrap.style.clipPath = `inset(0 0 ${v}% 0)`; }
+      function setClipPct(v)  { percentEl.style.clipPath = `inset(${v}% 0 0 0)`; }
+      function updatePct(v)   { percentEl.textContent = Math.round(v) + '%'; }
+
+      function setImg(src) {
+        imgEl.src = src;
+      }
+
+      async function runLoader() {
+        // Imagen 1 entra con cortina
+        setImg(loaderImgs[0]);
+        // Porcentaje aparece al mismo tiempo
+        tween(100, 0, 600, setClipPct);
+        await tween(100, 0, 750, setClipImg);
+        await tween(0, 33, 600, updatePct);
+
+        await delay(280);
+
+        // Imagen 2 — sin animación, aparece directamente
+        setImg(loaderImgs[1]);
+        await tween(33, 66, 600, updatePct);
+
+        await delay(280);
+
+        // Imagen 3 — sin animación, aparece directamente
+        setImg(loaderImgs[2]);
+        await tween(66, 100, 600, updatePct);
+
+        await delay(350);
+
+        // Imagen 3 sale con cortina hacia arriba
+        await tween(0, 100, 750, setClipImgOut);
+
+        await delay(180);
+
+        // Loader entero sale hacia arriba como persiana
+        sessionStorage.setItem('loaderShown', '1');
+        await tween(0, 100, 850, v => {
+          loader.style.clipPath = `inset(0 0 ${v}% 0)`;
+        });
+
+        loader.remove();
+        revealContent();
+      }
+
+      // Fallback de seguridad
       const safetyTimer = setTimeout(() => {
         loader.remove();
         revealContent();
-      }, 5000);
+      }, 6000);
 
-      function animateCount(ts) {
-        if (!start) start = ts;
-        const elapsed  = ts - start;
-        const progress = Math.min(elapsed / countDuration, 1);
-        const value    = Math.round(easeOut(progress) * 100);
-
-        percentEl.textContent = value + '%';
-
-        imgs.forEach((img, i) => {
-          if (value >= thresholds[i]) img.classList.add('show');
-        });
-
-        if (progress < 1) {
-          requestAnimationFrame(animateCount);
-        } else {
-          clearTimeout(safetyTimer);
-          sessionStorage.setItem('loaderShown', '1');
-
-          setTimeout(() => {
-            loader.classList.add('hide');
-
-            loader.addEventListener('transitionend', function onEnd(e) {
-              if (e.propertyName !== 'transform') return;
-              loader.removeEventListener('transitionend', onEnd);
-              loader.remove();
-              revealContent();
-            });
-
-            // Fallback por si transitionend no dispara
-            setTimeout(() => { loader.remove(); revealContent(); }, 1200);
-          }, 320);
-        }
-      }
-
-      requestAnimationFrame(animateCount);
+      runLoader().then(() => clearTimeout(safetyTimer));
     })();
   </script>
 
