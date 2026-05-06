@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Por qué tu web necesita un diseño profesional (y no basta con una plantilla) — Insights — Lanorma</title>
+
+  <!-- SEO -->
+  <meta name="description" content="¿Una plantilla o un diseño web profesional? Te explicamos las diferencias clave y por qué una web a medida puede multiplicar tus ventas en España.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://studiolanorma.com/insights/diseno-web-profesional-vs-plantilla">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/img/favicon.jpg">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Por qué tu web necesita un diseño profesional (y no basta con una plantilla) — Lanorma">
+  <meta property="og:description" content="¿Una plantilla o un diseño web profesional? Te explicamos las diferencias clave y por qué una web a medida puede multiplicar tus ventas en España.">
+  <meta property="og:image" content="https://studiolanorma.com/assets/img/insights-1.webp">
+  <meta property="og:url" content="https://studiolanorma.com/insights/diseno-web-profesional-vs-plantilla">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Schema.org Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Por qué tu web necesita un diseño profesional (y no basta con una plantilla)",
+    "description": "¿Una plantilla o un diseño web profesional? Te explicamos las diferencias clave y por qué una web a medida puede multiplicar tus ventas en España.",
+    "author": { "@type": "Organization", "name": "Lanorma" },
+    "publisher": { "@type": "Organization", "name": "Lanorma", "url": "https://studiolanorma.com" },
+    "datePublished": "2025-04-15",
+    "url": "https://studiolanorma.com/insights/diseno-web-profesional-vs-plantilla
+"
+  }
+  </script>
+
+<style>
+  /* ── FUENTES ── */
+  @font-face {
+    font-family: 'Suisse Intl';
+    src: url('/assets/fonts/SuisseIntl-Book.ttf') format('truetype');
+    font-weight: 300; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Suisse Intl';
+    src: url('/assets/fonts/SuisseIntl-Regular.ttf') format('truetype');
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Suisse Intl';
+    src: url('/assets/fonts/SuisseIntl-Medium.ttf') format('truetype');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Suisse Intl';
+    src: url('/assets/fonts/SuisseIntl-SemiBold.ttf') format('truetype');
+    font-weight: 600; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Suisse Intl';
+    src: url('/assets/fonts/SuisseIntl-Bold.ttf') format('truetype');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  :root {
+    --bg: #ffffff;
+    --ink: #606060;
+    --muted: #939393;
+    --fs: 14px;
+    --fs-small: 13px;
+    --nav-h: 64px;
+    --pad: clamp(40px, 5vw, 220px);
+    --pad-large: 427px;
+    --col-gap: 24px;
+  }
+
+  html { scroll-behavior: auto; }
+
+  body {
+    font-family: 'Suisse Intl', sans-serif;
+    font-size: var(--fs);
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+  }
+
+  body {
+    transition: background 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  nav, .footer-cta, .footer-bottom, .mobile-menu {
+    transition: background 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  nav svg path,
+  .cursor-dot,
+  .cursor-ring,
+  .hamburger span {
+    transition: fill 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                background 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                border-color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  body.dark .cursor-dot { background: #FFFFFF; }
+  body.dark .cursor-ring { border-color: #FFFFFF; }
+
+  body.dark nav svg path { fill: #FFFFFF; }
+
+  a { color: inherit; text-decoration: none; cursor: none; }
+
+  /* ── CURSOR ── */
+  .cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    top: 0; left: 0;
+    will-change: transform;
+  }
+
+  .cursor-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--ink);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.3s ease;
+  }
+
+  .cursor-ring {
+    position: absolute;
+    top: 0; left: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.45s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body.cursor-hover .cursor-dot { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  body.cursor-hover .cursor-ring { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--pad);
+    background: transparent;
+    z-index: 100;
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                padding 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, padding;
+  }
+
+  nav.nav-hidden { opacity: 0; pointer-events: none; }
+
+  @media (min-width: 1600px) {
+    nav { padding-left: calc(var(--nav-h) + 4px); padding-right: calc(var(--nav-h) + 4px); }
+    nav.nav-compact { padding-left: var(--pad-large); padding-right: var(--pad-large); }
+  }
+
+  nav .logo svg { display: block; overflow: visible; }
+
+  nav .logo .logo-text {
+    transition: clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0);
+    clip-path: inset(0 0 0 0);
+  }
+
+  nav .logo .logo-n,
+  nav .logo .logo-paren-right {
+    transition: transform 0.50s cubic-bezier(0.25, 0, 0.25, 1);
+  }
+
+  nav .logo .logo-paren-right {
+    transition: transform 0.35s cubic-bezier(0.25, 0, 0.80, 1);
+  }
+
+  nav .logo svg path { transition: fill 0.55s ease; }
+  body.dark nav .logo svg path { fill: #FFFFFF; }
+
+  nav .links { display: flex; gap: 24px; }
+
+  nav .links a {
+    font-size: var(--fs);
+    font-weight: 500;
+    opacity: 0;
+    animation: navLinkIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  nav .links a:nth-child(1) { animation-delay: 0.2s; }
+  nav .links a:nth-child(2) { animation-delay: 0.3s; }
+  nav .links a:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes navLinkIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  nav .links a.done { opacity: 1; }
+  nav .links a.done:hover { opacity: 0.5; }
+  nav .links a.active { opacity: 1; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    will-change: opacity, transform;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    will-change: auto;
+  }
+
+  /* ── COLUMNA CENTRAL (ancho máximo legible) ── */
+  .post-col {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
+
+  /* ── ARTICLE HEADER ── */
+  .post-header {
+    padding-top: calc(var(--nav-h));
+    padding-bottom: 60px;
+  }
+
+  .post-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+
+  .post-breadcrumb {
+    font-size: var(--fs);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .post-breadcrumb a { transition: opacity 0.2s; }
+  .post-breadcrumb a:hover { opacity: 0.5; }
+
+  .post-breadcrumb-sep {
+    color: var(--muted);
+    font-size: 10px;
+    opacity: 0.6;
+  }
+
+  .post-meta {
+    font-size: var(--fs-small);
+    color: var(--muted);
+    display: flex;
+    gap: 16px;
+  }
+
+  /* ── HERO IMAGE ── */
+  .post-hero {
+    margin: 0 var(--pad);
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 1360 / 640;
+    background: #f0f0f0;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    /* Aplicamos padding lateral igual que .post-col */
+    width: calc(100% - var(--pad) * 2);
+  }
+
+  .post-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── ARTICLE TITLE ── */
+  .post-title-section {
+    padding-top: 60px;
+    padding-bottom: 0;
+  }
+
+  .post-title {
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #0F0F0F;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .post-body {
+    padding-top: 24px;
+    padding-bottom: 0px;
+  }
+
+  .post-content {
+    font-size: var(--fs);
+    font-weight: 400;
+    line-height: 22px;
+    color: #0F0F0F;
+  }
+
+  .post-content p { margin-bottom: 24px; }
+  .post-content p:last-child { margin-bottom: 0; }
+
+  /* Separación antes de imagen inline */
+  .post-content + .post-image-inline {
+    margin-top: 24px;
+  }
+
+  .post-content h2 {
+    font-size: var(--fs);
+    font-weight: 500;
+    color: #0F0F0F;
+    margin-bottom: 12px;
+    margin-top: 40px;
+  }
+
+  .post-content h2:first-child { margin-top: 0; }
+
+  .post-content blockquote {
+    border-left: 1px solid var(--muted);
+    padding-left: 20px;
+    margin: 32px 0;
+    color: var(--muted);
+    font-size: var(--fs);
+    line-height: 22px;
+  }
+
+  /* ── LISTA EN ARTÍCULO ── */
+  .post-content ul {
+    margin: 24px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .post-content ul li {
+    margin-bottom: 16px;
+    padding-left: 20px;
+    position: relative;
+    font-size: var(--fs);
+    line-height: 22px;
+    color: #0F0F0F;
+  }
+
+  .post-content ul li:before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .post-content ul li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── INLINE IMAGE — mismo ancho que la columna de texto ── */
+  .post-image-inline {
+    width: 100%;
+    margin: 24px 0 24px 0;
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .post-image-inline img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #f0f0f0;
+    border-radius: 4px;
+  }
+
+  .post-image-inline figcaption {
+    margin-top: 12px;
+    font-size: var(--fs-small);
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .post-image-caption {
+    width: calc(100% - var(--pad) * 2);
+    max-width: 680px;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 60px;
+    font-size: var(--fs-small);
+    color: var(--muted);
+  }
+
+
+  /* Insight card reutilizada */
+  .insight-card {
+    display: block;
+    cursor: none;
+    align-self: start;
+    contain: layout style;
+  }
+
+  .insight-card .img-wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px;
+    transition: border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: border-radius;
+    aspect-ratio: 901 / 580;
+    background: #f0f0f0;
+  }
+
+  .insight-card:hover .img-wrap { border-radius: 16px; }
+
+  .insight-card .img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+
+  .insight-card:hover .img-wrap img { transform: scale(1.03); }
+
+  .insight-card .card-info {
+    padding: 12px 0 20px;
+    overflow: hidden;
+  }
+
+  .card-meta {
+    font-size: var(--fs-small);
+    color: var(--muted);
+    margin-bottom: 8px;
+    display: flex;
+    gap: 16px;
+  }
+
+
+  .insight-card:hover .card-title { transform: translateY(-2px); }
+  .insight-card:hover .card-desc  { transform: translateY(-2px); opacity: 0.5; }
+
+  /* ── FOOTER ── */
+    .footer-cta {
+      padding: 120px var(--pad) 88px;
+    }
+    @media (min-width: 1600px) { .footer-cta { padding-left: var(--pad-large); padding-right: var(--pad-large); } }
+
+    .footer-cta__inner {
+      width: 100%;
+      min-height: 420px;
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 80px;
+      border-radius: 4px;
+    }
+
+    .footer-cta__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 64px;
+    }
+
+    .footer-cta__copy {
+      max-width: 520px;
+      text-align: center;
+    }
+
+    .footer-cta__title,
+    .footer-cta__text {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: 0;
+      
+    }
+
+    .footer-cta__title {
+      color: #606060;
+    }
+
+    .footer-cta__text {
+      margin-top: 14px;
+      color: rgba(96, 96, 96, 0.58);
+    }
+
+    .footer-cta__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      height: 40px;
+      padding: 0 24px;
+      border-radius: 4px;
+      background: #0F0F0F;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1;
+      cursor: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+
+    .footer-cta__button:hover {
+      background: #606060;
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      padding: 32px var(--pad);
+      display: grid;
+      grid-template-columns: calc(50% - 8px) 1fr auto;
+      gap: 24px 16px;
+      align-items: end;
+  }
+
+  .footer-col a, .footer-col p {
+    font-size: var(--fs-small); font-weight: 400; color: var(--ink);
+    line-height: 1.8; display: block; transition: opacity 0.2s;
+  }
+  .footer-col a:hover { opacity: 0.5; }
+  .footer-copyright { font-size: var(--fs-small); font-weight: 400; color: var(--muted); text-align: right; white-space: nowrap; }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--ink);
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    transform-origin: center;
+  }
+
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 99;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--pad);
+    gap: 0;
+    transition: background 0.8s ease;
+    display: flex;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .mobile-menu.open { visibility: visible; pointer-events: auto; }
+
+  .mobile-menu a {
+    font-size: clamp(32px, 10vw, 52px);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.3;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .mobile-menu.open a { animation: menuLinkIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .mobile-menu.open a:nth-child(1) { animation-delay: 0.06s; }
+  .mobile-menu.open a:nth-child(2) { animation-delay: 0.12s; }
+  .mobile-menu.open a:nth-child(3) { animation-delay: 0.18s; }
+  .mobile-menu.open a:nth-child(4) { animation-delay: 0.24s; }
+
+  @keyframes menuLinkIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .mobile-menu a:hover { opacity: 0.5; }
+  .mobile-menu .menu-social { display: flex; gap: 24px; margin-top: 48px; }
+  .mobile-menu .menu-social a { font-size: var(--fs-small); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    :root { --pad: 16px; --col-gap: 8px; }
+    body { cursor: auto; }
+    .cursor { display: none; }
+    nav .links { display: flex; gap: 16px; }
+    .hamburger { display: none; }
+
+    .post-header-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .post-tags { justify-content: flex-start; }
+
+    .more-posts-grid { grid-template-columns: 1fr; gap: 8px; }
+
+    .footer-bottom { grid-template-columns: 1fr 1fr; }
+    .footer-copyright { text-align: left; grid-column: 1 / -1; }
+    .footer-cta { padding: 16px; }
+    .footer-cta__inner { padding: 80px 16px; min-height: auto; }
+    .footer-cta__content { min-height: auto; }
+    body.dark .mobile-menu { background: #0f0f0f; }
+    body.dark .hamburger span { background: #FFFFFF; }
+  }
+</style>
+</head>
+<body class="no-loader-anim">
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="https://studiolanorma.com" class="logo" aria-label="Lanorma" id="logo-animated">
+      <svg style="width:80px; overflow:visible;" viewBox="0 0 71.3 12.6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="logo-paren-left">
+          <path d="M0 6.3C0 4.05067 0.644 1.95067 1.932 0H3.696C2.55733 1.88533 1.988 3.98533 1.988 6.3C1.988 8.63333 2.55733 10.7333 3.696 12.6H1.932C1.40933 11.8253 0.956667 10.8967 0.574 9.814C0.191333 8.722 0 7.55067 0 6.3Z" fill="#606060"/>
+        </g>
+        <g class="logo-text">
+          <path d="M10.9276 1V9.526H15.8696V11.15H8.92556V1H10.9276Z" fill="#606060"/>
+          <path d="M20.9434 8.26588V7.70588C19.8048 7.82721 19.0161 7.97654 18.5774 8.15388C18.1388 8.33121 17.9194 8.62054 17.9194 9.02188C17.9194 9.31121 18.0314 9.54921 18.2554 9.73588C18.4794 9.92254 18.8014 10.0159 19.2214 10.0159C20.3694 10.0159 20.9434 9.43254 20.9434 8.26588ZM21.1114 10.2119C20.5888 10.9585 19.7674 11.3319 18.6474 11.3319C17.9008 11.3319 17.2614 11.1312 16.7294 10.7299C16.1974 10.3192 15.9314 9.78254 15.9314 9.11988C15.9314 8.69054 16.0434 8.32188 16.2674 8.01388C16.5008 7.70588 16.8508 7.45388 17.3174 7.25788C17.7841 7.05254 18.2928 6.89388 18.8434 6.78188C19.3941 6.66988 20.0754 6.56721 20.8874 6.47388V6.34788C20.8874 5.30254 20.4161 4.77988 19.4734 4.77988C19.0814 4.77988 18.7548 4.88254 18.4934 5.08788C18.2321 5.29321 18.0921 5.59654 18.0734 5.99788H16.2674C16.3421 5.23254 16.6734 4.61188 17.2614 4.13587C17.8494 3.65987 18.6194 3.42188 19.5714 3.42188C21.7368 3.42188 22.8194 4.52787 22.8194 6.73987C22.8194 6.77721 22.8148 7.04321 22.8054 7.53788C22.7961 8.02321 22.7914 8.39654 22.7914 8.65788C22.7914 9.71254 22.8661 10.5432 23.0154 11.1499H21.2374C21.2094 11.0285 21.1674 10.7159 21.1114 10.2119Z" fill="#606060"/>
+          <path d="M35.9415 5.60717C35.6148 5.17784 35.1762 4.96317 34.6255 4.96317C34.0748 4.96317 33.6315 5.17784 33.2955 5.60717C32.9688 6.02717 32.8055 6.62451 32.8055 7.39917C32.8055 8.17384 32.9688 8.77117 33.2955 9.19117C33.6315 9.61117 34.0748 9.82117 34.6255 9.82117C35.1762 9.82117 35.6148 9.61117 35.9415 9.19117C36.2775 8.77117 36.4455 8.17384 36.4455 7.39917C36.4455 6.62451 36.2775 6.02717 35.9415 5.60717ZM37.2855 10.2972C36.5388 10.9878 35.6522 11.3332 34.6255 11.3332C33.5988 11.3332 32.7122 10.9878 31.9655 10.2972C31.2188 9.60651 30.8455 8.64051 30.8455 7.39917C30.8455 6.14851 31.2188 5.17784 31.9655 4.48717C32.7122 3.79651 33.5988 3.45117 34.6255 3.45117C35.6522 3.45117 36.5388 3.79651 37.2855 4.48717C38.0322 5.17784 38.4055 6.14851 38.4055 7.39917C38.4055 8.64051 38.0322 9.60651 37.2855 10.2972Z" fill="#606060"/>
+          <path d="M41.398 5.83114C41.6687 5.56981 42.0653 5.43914 42.588 5.43914H44.0603L44.0496 3.61917H42.9552C42.0312 3.61917 41.3793 4.06714 40.978 4.93514V3.61914H39.074V11.1511H41.006V7.20314C41.006 6.54047 41.1367 6.08314 41.398 5.83114Z" fill="#606060"/>
+          <path d="M53.0861 11.1512V6.76917C53.0861 6.51717 53.0721 6.30717 53.0441 6.13917C53.0255 5.96184 52.9788 5.77984 52.9041 5.59317C52.8388 5.39717 52.7175 5.25251 52.5401 5.15917C52.3721 5.05651 52.1528 5.00517 51.8821 5.00517C51.2941 5.00517 50.8975 5.20584 50.6921 5.60717C50.4868 6.0085 50.3841 6.54984 50.3841 7.23117V11.1512H48.4521V6.76917C48.4521 6.51717 48.4381 6.30717 48.4101 6.13917C48.3915 5.96184 48.3448 5.77984 48.2701 5.59317C48.2048 5.39717 48.0835 5.25251 47.9061 5.15917C47.7381 5.05651 47.5188 5.00517 47.2481 5.00517C46.6601 5.00517 46.2635 5.20584 46.0581 5.60717C45.8528 6.0085 45.7501 6.54984 45.7501 7.23117V11.1512H43.8181V3.61917H45.7501V4.61317C46.2075 3.83851 46.9075 3.45117 47.8501 3.45117C48.8395 3.45117 49.5535 3.86184 49.9921 4.68317C50.5801 3.86184 51.4061 3.45117 52.4701 3.45117C54.1688 3.45117 55.0181 4.43584 55.0181 6.40517V11.1512H53.0861Z" fill="#606060"/>
+          <path d="M60.5333 8.26588V7.70588C59.3946 7.82721 58.6059 7.97654 58.1673 8.15388C57.7286 8.33121 57.5093 8.62054 57.5093 9.02188C57.5093 9.31121 57.6213 9.54921 57.8453 9.73588C58.0693 9.92254 58.3913 10.0159 58.8113 10.0159C59.9593 10.0159 60.5333 9.43254 60.5333 8.26588ZM60.7013 10.2119C60.1786 10.9585 59.3573 11.3319 58.2373 11.3319C57.4906 11.3319 56.8513 11.1312 56.3193 10.7299C55.7873 10.3192 55.5213 9.78254 55.5213 9.11988C55.5213 8.69054 55.6333 8.32188 55.8573 8.01388C56.0906 7.70588 56.4406 7.45388 56.9073 7.25788C57.3739 7.05254 57.8826 6.89388 58.4333 6.78188C58.9839 6.66988 59.6653 6.56721 60.4773 6.47388V6.34788C60.4773 5.30254 60.0059 4.77988 59.0633 4.77988C58.6713 4.77988 58.3446 4.88254 58.0833 5.08788C57.8219 5.29321 57.6819 5.59654 57.6633 5.99788H55.8573C55.9319 5.23254 56.2633 4.61188 56.8513 4.13587C57.4393 3.65987 58.2093 3.42188 59.1613 3.42188C61.3266 3.42188 62.4093 4.52787 62.4093 6.73987C62.4093 6.77721 62.4046 7.04321 62.3953 7.53788C62.3859 8.02321 62.3813 8.39654 62.3813 8.65788C62.3813 9.71254 62.4559 10.5432 62.6053 11.1499H60.8273C60.7993 11.0285 60.7573 10.7159 60.7013 10.2119Z" fill="#606060"/>
+        </g>
+        <g class="logo-paren-right">
+          <path d="M71.2954 6.3C71.2954 8.55867 70.6514 10.6587 69.3634 12.6H67.5994C68.7381 10.7333 69.3074 8.63333 69.3074 6.3C69.3074 3.98533 68.7381 1.88533 67.5994 0H69.3634C70.6514 1.92267 71.2954 4.02267 71.2954 6.3Z" fill="#606060"/>
+        </g>
+        <g class="logo-n">
+          <path d="M25.5021 3.61917V4.61317C25.9408 3.83851 26.6688 3.45117 27.6861 3.45117C29.4221 3.45117 30.2901 4.43584 30.2901 6.40517V11.1512H28.3581V6.82517C28.3581 6.26517 28.2648 5.82184 28.0781 5.49517C27.9008 5.16851 27.5601 5.00517 27.0561 5.00517C26.4681 5.00517 26.0621 5.20584 25.8381 5.60717C25.6141 6.0085 25.5021 6.54984 25.5021 7.23117V11.1512H23.5701V3.61917H25.5021Z" fill="#606060"/>
+        </g>
+      </svg>
+    </a>
+    <div class="links">
+      <a href="/nosotros">Nosotros</a>
+      <a href="/insights">Insights</a>
+      <a href="/contacto">Contacto</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MENÚ MÓVIL -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/nosotros">Nosotros</a>
+    <a href="/insights">Insights</a>
+    <a href="/contacto">Contacto</a>
+    <div class="menu-social">
+      <a href="https://www.instagram.com/studiolanorma" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/company/studiolanorma" target="_blank" rel="noopener">Linkedin</a>
+    </div>
+  </div>
+
+  <main id="contenido" role="main">
+
+    <!-- CABECERA DEL POST -->
+    <header class="post-header reveal">
+      <div class="post-col">
+      </div>
+    </header>
+
+
+    <!-- TÍTULO Y TAGS -->
+    <div class="post-title-section reveal">
+      <div class="post-col">
+        <h1 class="post-title">Por qué tu web necesita un diseño profesional (y no basta con una plantilla)</h1>
+      </div>
+    </div>
+
+    <!-- CUERPO DEL ARTÍCULO -->
+    <div class="post-body reveal">
+      <div class="post-col">
+      <article class="post-content" id="article-content">
+
+        <h2>La trampa de las plantillas</h2>
+
+        <p>
+          Las plantillas son tentadoras. Son baratas, rápidas y "suficientemente buenas". Pero hay algo que nadie te dice cuando empiezas con Wix, Squarespace o una plantilla de WordPress: tu competencia tiene exactamente la misma.
+        </p>
+
+        <p>
+          En un mercado donde los usuarios deciden en menos de 3 segundos si se quedan o se van de una web, la genericidad es el mayor enemigo de tu negocio.
+        </p>
+
+        <h2>Qué aporta un diseño web profesional que una plantilla no puede</h2>
+
+        <ul>
+          <li>Identidad única:</strong> tu web refleja exactamente quién eres tú, no quién es la empresa que vendió la plantilla.</li>
+          <li>Experiencia de usuario diseñada: </strong> cada elemento está pensado para guiar al visitante hacia la acción que tú quieres que realice.</li>
+          <li>Rendimiento técnico: </strong> webs profesionales están optimizadas para velocidad, SEO y dispositivos móviles desde la base.</li>
+          <li>Escalabilidad: </strong> crece con tu negocio sin tener que empezar de cero cada dos años.</li>
+        </ul>
+
+        <!-- IMAGEN 1 -->
+        <figure class="post-image-inline">
+          <img src="insights.webp" alt="Elementos del branding" loading="lazy">
+          <figcaption>Los pilares fundamentales del branding</figcaption>
+        </figure>
+
+        <h2>El impacto en las conversiones</h2>
+
+        <p>
+          Estudios de comportamiento de usuario demuestran de forma consistente que el diseño afecta directamente a la confianza. El 75% de los usuarios juzga la credibilidad de una empresa por su diseño web. No por sus productos. No por sus precios. Por cómo se ve.
+        </p>
+
+        <p>
+          Una web bien diseñada no solo atrae más visitas: convierte mejor las que ya tiene.
+        </p>
+
+        <h2>SEO y diseño: los dos van juntos</h2>    
+
+        <p>
+          Un buen diseño web profesional tiene en cuenta el SEO desde el principio. La arquitectura de información, los tiempos de carga, la experiencia en móvil y la estructura de contenidos son factores que Google valora y que una plantilla genérica raramente optimiza.
+        </p>
+
+        <p>
+          Si quieres posicionarte en Google en España para tus palabras clave, necesitas una web que esté técnicamente preparada para ello.
+        </p>
+
+        <h2>¿Cuándo tiene sentido una plantilla?</h2>
+
+        <p>
+          Siendo honestos: si estás comenzando, validando una idea de negocio o tienes un presupuesto muy limitado, una plantilla bien configurada puede ser un punto de partida válido. Pero con el tiempo, la inversión en diseño profesional siempre se recupera.
+        </p>
+
+        <h2>¿Tienes dudas sobre qué necesita tu web? Cuéntanos tu proyecto.</h2>
+
+      </article>
+      </div>
+    </div>
+
+
+
+
+    <!-- FOOTER -->
+    <footer class="footer reveal">
+      <div class="footer-cta">
+        <section class="footer-cta__inner" aria-labelledby="footer-cta-title">
+          <div class="footer-cta__content">
+            <div class="footer-cta__copy">
+              <h2 class="footer-cta__title" id="footer-cta-title">Nuestra única regla es no seguirlas.</h2>
+              <p class="footer-cta__text">Si tu marca está lista para dejar de parecerse a las demás, empieza aquí.</p>
+            </div>
+            <a href="/contacto" class="footer-cta__button">Contactar</a>
+          </div>
+        </section>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-col">
+          <p>Santander, Cantabria, España</p>
+        </div>
+        <div class="footer-col">
+          <a href="/legales">Aviso legal</a>
+          <a href="/privacidad">Política de privacidad</a>
+        </div>
+        <p class="footer-copyright">© Lanorma 2026</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+    // ── Logo animado ──
+    const logoEl     = document.getElementById('logo-animated');
+    const logoParenR = logoEl.querySelector('.logo-paren-right');
+    const logoN      = logoEl.querySelector('.logo-n');
+    const logoText   = logoEl.querySelector('.logo-text');
+
+    logoEl.addEventListener('mouseenter', () => {
+      logoParenR.style.transform = 'translateX(-38px)';
+      logoN.style.transform      = 'translateX(-6px)';
+      logoText.style.clipPath    = 'inset(0 87% 0 0)';
+      logoText.style.transition  = 'clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0)';
+    });
+    logoEl.addEventListener('mouseleave', () => {
+      logoParenR.style.transform = 'translateX(0)';
+      logoN.style.transform      = 'translateX(0)';
+      logoText.style.clipPath    = 'inset(0 0 0 0)';
+      logoText.style.transition  = 'clip-path 0.40s cubic-bezier(0.65, 0, 0.35, 0)';
+    });
+
+    // ── Smooth scroll con Lenis ──
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    // ── Cursor ──
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      const overHover =
+        e.target.closest('.insight-card')       ||
+        e.target.closest('.post-breadcrumb a')  ||
+        e.target.closest('.footer-cta__button') ||
+        e.target.closest('nav .links a')        ||
+        e.target.closest('nav .logo')           ||
+        e.target.closest('.footer-bottom a');
+      document.body.classList.toggle('cursor-hover', !!overHover);
+    }, { passive: true });
+
+    function animateCursor() {
+      curX += (mouseX - curX) * 0.18;
+      curY += (mouseY - curY) * 0.18;
+      cursor.style.transform = `translate3d(${curX}px, ${curY}px, 0)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // ── Nav links ──
+    const navLinks = document.querySelectorAll('nav .links a');
+    setTimeout(() => {
+      navLinks.forEach(a => {
+        a.style.animation = 'none';
+        a.style.transform = '';
+        a.classList.add('done');
+      });
+    }, 1000);
+
+    // ── Hamburguesa ──
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ── Nav hide/show ──
+    const nav = document.getElementById('nav');
+    let lastScrollY = 0, navVisible = true, ticking = false;
+
+    lenis.on('scroll', ({ scroll }) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        nav.classList.toggle('nav-compact', scroll > 80);
+        const delta = scroll - lastScrollY;
+        if (scroll > 160 && delta > 6 && navVisible)  { nav.classList.add('nav-hidden');    navVisible = false; }
+        else if ((delta < -6 || scroll <= 80) && !navVisible) { nav.classList.remove('nav-hidden'); navVisible = true; }
+        lastScrollY = scroll;
+        ticking = false;
+      });
+    });
+
+    // ── Reveal scroll ──
+    const reveals  = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
