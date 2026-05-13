@@ -646,7 +646,151 @@
         height: auto;
       }
     }
-  </style>
+  
+  /* ── MOBILE MENU SHARED ── */
+  nav { z-index: 130; }
+  html.menu-open,
+  body.menu-open {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  body.menu-open nav,
+  body.menu-open nav.nav-hidden {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--ink2, var(--ink));
+    cursor: pointer;
+    z-index: 131;
+  }
+  body:not(.theme-light):not(.dark) .hamburger {
+    color: var(--ink);
+  }
+  body.dark .hamburger {
+    color: #FFFFFF;
+  }
+  .hamburger span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    border-radius: 999px;
+    background: currentColor;
+    transform-origin: center;
+    transition: transform 0.35s ease, background 0.35s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(3.75px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { transform: translateY(-3.75px) rotate(-45deg); }
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 110;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0.6s ease;
+  }
+  .mobile-menu::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(22, 22, 22, 0);
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .mobile-menu-panel {
+    position: relative;
+    width: 100vw;
+    height: 100%;
+    height: 100dvh;
+    padding: calc(var(--nav-h) + 24px) 16px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 18px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transform: translate3d(100%, 0, 0);
+    opacity: 1;
+    transition: transform 0.72s cubic-bezier(0.19, 1, 0.22, 1),
+                opacity 0.45s ease,
+                background 0.35s ease;
+    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.08);
+  }
+  .mobile-menu.open {
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .mobile-menu.open::before {
+    background: rgba(22, 22, 22, 0.28);
+    opacity: 1;
+  }
+  .mobile-menu.open .mobile-menu-panel {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  .mobile-menu a {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  .mobile-menu.open a { animation: menuLinkIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .mobile-menu.open a:nth-child(1) { animation-delay: 0.06s; }
+  .mobile-menu.open a:nth-child(2) { animation-delay: 0.12s; }
+  .mobile-menu.open a:nth-child(3) { animation-delay: 0.18s; }
+  .mobile-menu.open a:nth-child(4) { animation-delay: 0.24s; }
+  .mobile-menu.open a:nth-child(5) { animation-delay: 0.3s; }
+  .mobile-menu .menu-social {
+    display: flex;
+    gap: 18px;
+    margin-top: auto;
+    padding-top: 32px;
+  }
+  .mobile-menu .menu-social a {
+    font-size: var(--fs-small, 13px);
+    font-weight: 400;
+  }
+  @keyframes menuLinkIn {
+    from { opacity: 0; transform: translateX(18px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @media (max-width: 768px) {
+    nav .links { display: none !important; }
+    .hamburger { display: inline-flex !important; }
+    body.dark .hamburger span,
+    body.menu-open[data-menu-dark="true"] .hamburger span { background: #FFFFFF; }
+    body.dark .mobile-menu::before,
+    body.menu-open[data-menu-dark="true"] .mobile-menu::before { background: rgba(0, 0, 0, 0); }
+    body.dark .mobile-menu.open::before,
+    body.menu-open[data-menu-dark="true"] .mobile-menu.open::before { background: rgba(0, 0, 0, 0.34); }
+    body.dark .mobile-menu-panel,
+    body:not(.theme-light):not(.dark) .mobile-menu-panel[data-dark-default="true"],
+    body.menu-open[data-menu-dark="true"] .mobile-menu-panel[data-dark-default="true"] {
+      background: rgba(15, 15, 15, 0.96);
+    }
+    body.dark .mobile-menu a,
+    body.menu-open[data-menu-dark="true"] .mobile-menu-panel[data-dark-default="true"] a { color: #FFFFFF; }
+  }
+
+</style>
 </head>
 <body>
 
@@ -685,8 +829,23 @@
       <a href="/insights">Insights</a>
       <a href="/contacto">Contacto</a>
       </div>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-controls="mobile-menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
     </div>
   </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-panel" data-dark-default="false">
+      <a href="/">Work</a>
+      <a href="/nosotros">Nosotros</a>
+      <a href="/insights">Insights</a>
+      <a href="/contacto">Contacto</a>
+      <div class="menu-social">
+        <a href="https://www.instagram.com/studiolanorma" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/company/studiolanorma" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
 
   <!-- CONTENIDO -->
   <main class="project-page">
@@ -905,6 +1064,86 @@
         ticking = false;
       });
     });
+  </script>
+
+
+  <script>
+    (function () {
+      const nav = document.getElementById('nav');
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (!nav || !hamburger || !mobileMenu) return;
+
+      const cleanHamburger = hamburger.cloneNode(true);
+      hamburger.replaceWith(cleanHamburger);
+      const cleanMobileMenu = mobileMenu.cloneNode(true);
+      mobileMenu.replaceWith(cleanMobileMenu);
+
+      const button = document.getElementById('hamburger');
+      const menu = document.getElementById('mobile-menu');
+      const panel = menu.querySelector('.mobile-menu-panel');
+      const menuIsDark = panel.dataset.darkDefault === 'true';
+      const root = document.documentElement;
+
+      function stopSmoothScroll() {
+        if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') lenis.stop();
+      }
+
+      function startSmoothScroll() {
+        if (typeof lenis !== 'undefined' && lenis && typeof lenis.start === 'function') lenis.start();
+      }
+
+      function openMenu() {
+        button.classList.add('open');
+        button.setAttribute('aria-expanded', 'true');
+        button.setAttribute('aria-label', 'Cerrar menú');
+        menu.classList.add('open');
+        document.body.classList.add('menu-open');
+        root.classList.add('menu-open');
+        document.body.dataset.menuDark = menuIsDark ? 'true' : 'false';
+        nav.classList.remove('nav-hidden');
+        document.body.classList.remove('nav-is-hidden');
+        stopSmoothScroll();
+      }
+
+      function closeMenu() {
+        button.classList.remove('open');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-label', 'Abrir menú');
+        menu.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        root.classList.remove('menu-open');
+        delete document.body.dataset.menuDark;
+        startSmoothScroll();
+      }
+
+      button.addEventListener('click', function () {
+        if (menu.classList.contains('open')) closeMenu();
+        else openMenu();
+      });
+
+      menu.addEventListener('click', function (event) {
+        if (!panel.contains(event.target)) closeMenu();
+      });
+
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+      });
+
+      ['wheel', 'touchmove'].forEach(function (eventName) {
+        menu.addEventListener(eventName, function (event) {
+          if (document.body.classList.contains('menu-open')) event.preventDefault();
+        }, { passive: false });
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768 && menu.classList.contains('open')) closeMenu();
+      });
+    })();
   </script>
 
 </body>
