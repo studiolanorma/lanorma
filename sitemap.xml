@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Páginas principales -->
+  <url>
+    <loc>https://www.studiolanorma.com/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.studiolanorma.com/nosotros/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.studiolanorma.com/contacto/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.studiolanorma.com/insights/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Proyectos -->
+  <url>
+    <loc>https://www.studiolanorma.com/saifai/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.studiolanorma.com/goodsmatcha/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Insights -->
+  <url>
+    <loc>https://www.studiolanorma.com/insights/que-es-el-branding-empresa/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.studiolanorma.com/insights/diseno-web-profesional-vs-plantilla/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Legales -->
+  <url>
+    <loc>https://www.studiolanorma.com/legales/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.studiolanorma.com/privacidad/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
