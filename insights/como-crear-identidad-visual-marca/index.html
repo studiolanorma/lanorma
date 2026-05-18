@@ -3,25 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insights — Lanorma Estudio de Diseño</title>
+  <title>Cómo crear una identidad visual de marca que conecte con tu público objetivo — Insights — Lanorma</title>
 
   <!-- SEO -->
-  <meta name="description" content="Reflexiones, recursos y criterio sobre diseño de marca, identidad visual y estrategia creativa. Blog de Lanorma, estudio de diseño en Cantabria.">
+  <meta name="description" content="Aprende paso a paso cómo crear una identidad visual sólida para tu marca: logotipo, colores, tipografía y mucho más. Guía para empresas en España.">
   <meta name="robots" content="index, follow">
   
-  <link rel="canonical" href="https://www.studiolanorma.com/insights">
+  <link rel="canonical" href="https://www.studiolanorma.com/insights/como-crear-identidad-visual-marca">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
   <link rel="apple-touch-icon" href="/assets/img/favicon.jpg">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Insights — Lanorma Estudio de Diseño">
-  <meta property="og:description" content="Reflexiones, recursos y criterio sobre diseño de marca, identidad visual y estrategia creativa.">
-  <meta property="og:image" content="https://www.studiolanorma.com/og-image.jpg">
-  <meta property="og:url" content="https://www.studiolanorma.com/insights">
-  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cómo crear una identidad visual de marca que conecte con tu público objetivo — Lanorma">
+  <meta property="og:description" content="Aprende paso a paso cómo crear una identidad visual sólida para tu marca: logotipo, colores, tipografía y mucho más. Guía para empresas en España.">
+  <meta property="og:image" content="https://www.studiolanorma.com/assets/img/insights-1.webp">
+  <meta property="og:url" content="https://www.studiolanorma.com/insights/como-crear-identidad-visual-marca">
+  <meta property="og:type" content="article">
   <meta property="og:locale" content="es_ES">
+
+  <!-- Schema.org Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Cómo crear una identidad visual de marca que conecte con tu público objetivo",
+    "description": "Aprende paso a paso cómo crear una identidad visual sólida para tu marca: logotipo, colores, tipografía y mucho más. Guía para empresas en España.",
+    "author": { "@type": "Organization", "name": "Lanorma" },
+    "publisher": { "@type": "Organization", "name": "Lanorma", "url": "https://www.studiolanorma.com" },
+    "datePublished": "2025-04-15",
+    "url": "https://www.studiolanorma.com/insights/como-crear-identidad-visual-marca
+"
+  }
+  </script>
 
 <style>
   /* ── FUENTES ── */
@@ -109,13 +124,9 @@
                 border-color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  nav .logo .logo-paren-left {
-    transition: transform 0.35s cubic-bezier(0.25, 0, 0.80, 1);
-  }
-
   body.dark .cursor-dot { background: #FFFFFF; }
   body.dark .cursor-ring { border-color: #FFFFFF; }
-  body.dark .cursor-ring::after { color: #FFFFFF; }
+
   body.dark nav svg path { fill: #FFFFFF; }
 
   a { color: inherit; text-decoration: none; cursor: none; }
@@ -157,24 +168,8 @@
     justify-content: center;
   }
 
-  .cursor-ring::after {
-    font-family: 'Suisse Intl', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--ink);
-    opacity: 0;
-    transition: opacity 0.2s ease 0.1s;
-  }
-
-  body.cursor-hover .cursor-dot {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-  }
-
-  body.cursor-hover .cursor-ring {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
+  body.cursor-hover .cursor-dot { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  body.cursor-hover .cursor-ring { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 
   /* ── NAV ── */
   nav {
@@ -187,18 +182,20 @@
     padding: 0 var(--pad);
     background: transparent;
     z-index: 100;
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                padding 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, padding;
   }
 
+  nav.nav-hidden { opacity: 0; pointer-events: none; }
+
   @media (min-width: 1600px) {
-    nav {
-      padding-left: var(--pad-large);
-      padding-right: var(--pad-large);
-    }
+    nav { padding-left: calc(var(--nav-h) + 4px); padding-right: calc(var(--nav-h) + 4px); }
+    nav.nav-compact { padding-left: var(--pad-large); padding-right: var(--pad-large); }
   }
 
   nav .logo svg { display: block; overflow: visible; }
 
-  /* ── LOGO ANIMADO ── */
   nav .logo .logo-text {
     transition: clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0);
     clip-path: inset(0 0 0 0);
@@ -213,21 +210,14 @@
     transition: transform 0.35s cubic-bezier(0.25, 0, 0.80, 1);
   }
 
-  nav .logo svg path {
-    transition: fill 0.55s ease;
-  }
-
+  nav .logo svg path { transition: fill 0.55s ease; }
   body.dark nav .logo svg path { fill: #FFFFFF; }
 
-  nav .links {
-    display: flex;
-    gap: 24px;
-  }
+  nav .links { display: flex; gap: 24px; }
 
   nav .links a {
     font-size: var(--fs);
     font-weight: 500;
-    letter-spacing: 0em;
     opacity: 0;
     animation: navLinkIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
@@ -245,55 +235,208 @@
   nav .links a.done:hover { opacity: 0.5; }
   nav .links a.active { opacity: 1; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
 
-  /* ── INSIGHTS PAGE HEADER ── */
-  .insights-header {
-    padding: calc(var(--nav-h) + 120px) var(--pad) 64px;
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    will-change: opacity, transform;
   }
 
-  @media (min-width: 1600px) {
-    .insights-header {
-      padding-left: var(--pad-large); }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    will-change: auto;
   }
 
-  .insights-header-inner {
-    display: grid;
-    grid-template-columns: calc(50% - 8px);
+  /* ── COLUMNA CENTRAL (ancho máximo legible) ── */
+  .post-col {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
+
+  /* ── ARTICLE HEADER ── */
+  .post-header {
+    padding-top: calc(var(--nav-h));
+    padding-bottom: 60px;
+  }
+
+  .post-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     gap: 16px;
-    align-items: start;
   }
 
-  .insights-label {
+  .post-breadcrumb {
     font-size: var(--fs);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .post-breadcrumb a { transition: opacity 0.2s; }
+  .post-breadcrumb a:hover { opacity: 0.5; }
+
+  .post-breadcrumb-sep {
+    color: var(--muted);
+    font-size: 10px;
+    opacity: 0.6;
+  }
+
+  .post-meta {
+    font-size: var(--fs-small);
+    color: var(--muted);
+    display: flex;
+    gap: 16px;
+  }
+
+  /* ── HERO IMAGE ── */
+  .post-hero {
+    margin: 0 var(--pad);
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 1360 / 640;
+    background: #f0f0f0;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    /* Aplicamos padding lateral igual que .post-col */
+    width: calc(100% - var(--pad) * 2);
+  }
+
+  .post-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── ARTICLE TITLE ── */
+  .post-title-section {
+    padding-top: 60px;
+    padding-bottom: 0;
+  }
+
+  .post-title {
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #0F0F0F;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .post-body {
+    padding-top: 24px;
+    padding-bottom: 0px;
+  }
+
+  .post-content {
+    font-size: var(--fs);
+    font-weight: 400;
+    line-height: 22px;
+    color: #0F0F0F;
+  }
+
+  .post-content p { margin-bottom: 24px; }
+  .post-content p:last-child { margin-bottom: 0; }
+
+  /* Separación antes de imagen inline */
+  .post-content + .post-image-inline {
+    margin-top: 24px;
+  }
+
+  .post-content h2 {
+    font-size: var(--fs);
+    font-weight: 500;
+    color: #0F0F0F;
+    margin-bottom: 12px;
+    margin-top: 40px;
+  }
+
+  .post-content h2:first-child { margin-top: 0; }
+
+  .post-content blockquote {
+    border-left: 1px solid var(--muted);
+    padding-left: 20px;
+    margin: 32px 0;
+    color: var(--muted);
+    font-size: var(--fs);
+    line-height: 22px;
+  }
+
+  /* ── LISTA EN ARTÍCULO ── */
+  .post-content ul {
+    margin: 24px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .post-content ul li {
+    margin-bottom: 16px;
+    padding-left: 20px;
+    position: relative;
+    font-size: var(--fs);
+    line-height: 22px;
+    color: #0F0F0F;
+  }
+
+  .post-content ul li:before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .post-content ul li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── INLINE IMAGE — mismo ancho que la columna de texto ── */
+  .post-image-inline {
+    width: 100%;
+    margin: 24px 0 24px 0;
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .post-image-inline img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #f0f0f0;
+    border-radius: 4px;
+  }
+
+  .post-image-inline figcaption {
+    margin-top: 12px;
+    font-size: var(--fs-small);
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .post-image-caption {
+    width: calc(100% - var(--pad) * 2);
+    max-width: 680px;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 60px;
+    font-size: var(--fs-small);
     color: var(--muted);
   }
 
-  .insights-intro {
-    font-size: var(--fs);
-    font-weight: 400;
-    line-height: 19px;
-    color: var(--ink);
-    max-width: 480px;
-  }
 
-  /* ── INSIGHTS GRID ── */
-  .insights-section {
-    padding: 0 var(--pad) 80px;
-  }
-
-  @media (min-width: 1600px) {
-    .insights-section {
-      padding-left: var(--pad-large);
-      padding-right: var(--pad-large);
-    }
-  }
-
-  .insights-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 64px var(--col-gap);
-  }
-
-  /* Insight card — igual que los project-card de la home */
+  /* Insight card reutilizada */
   .insight-card {
     display: block;
     cursor: none;
@@ -308,13 +451,11 @@
     border-radius: 4px;
     transition: border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: border-radius;
-    aspect-ratio: 443 / 580;
+    aspect-ratio: 901 / 580;
     background: #f0f0f0;
   }
 
-  .insight-card:hover .img-wrap {
-    border-radius: 16px;
-  }
+  .insight-card:hover .img-wrap { border-radius: 16px; }
 
   .insight-card .img-wrap img {
     width: 100%;
@@ -325,9 +466,7 @@
     will-change: transform;
   }
 
-  .insight-card:hover .img-wrap img {
-    transform: scale(1.03);
-  }
+  .insight-card:hover .img-wrap img { transform: scale(1.03); }
 
   .insight-card .card-info {
     padding: 12px 0 20px;
@@ -337,60 +476,14 @@
   .card-meta {
     font-size: var(--fs-small);
     color: var(--muted);
-    margin-bottom: 14px;
+    margin-bottom: 8px;
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    gap: 16px;
   }
 
-  .card-meta span:first-child {
-    background: #f0f0f0;
-    color: var(--ink);
-    padding: 3px 10px;
-    border-radius: 100px;
-    font-size: 12px;
-  }
 
-  .card-meta span:last-child {
-    display: flex;
-    align-items: center;
-    font-size: var(--fs-small);
-  }
-
-  .card-title {
-    font-size: var(--fs);
-    font-weight: 400;
-    margin-top: 6px;
-    margin-bottom: 0;
-    transform: translateY(0);
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-  }
-
-  .card-num {
-    font-size: var(--fs-small);
-    font-weight: 400;
-    color: var(--muted);
-    flex-shrink: 0;
-  }
-
-  .card-desc {
-    font-size: var(--fs);
-    font-weight: 400;
-    color: var(--muted);
-    line-height: 19px;
-    max-width: 420px;
-    opacity: 1;
-    transform: translateY(0);
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.03s,
-                opacity 0.4s ease 0.03s;
-  }
-
-  .insight-card:hover .card-title {
-    transform: translateY(-2px);
-  }
+  .insight-card:hover .card-title { transform: translateY(-2px); }
+  .insight-card:hover .card-desc  { transform: translateY(-2px); opacity: 0.5; }
 
   /* ── FOOTER ── */
     .footer-cta {
@@ -479,6 +572,7 @@
   .footer-copyright { font-size: var(--fs-small); font-weight: 400; color: var(--muted); text-align: right; white-space: nowrap; }
 
   /* ── HAMBURGER ── */
+
   .mobile-menu {
     position: fixed;
     inset: 0;
@@ -494,10 +588,7 @@
     pointer-events: none;
   }
 
-  .mobile-menu.open {
-    visibility: visible;
-    pointer-events: auto;
-  }
+  .mobile-menu.open { visibility: visible; pointer-events: auto; }
 
   .mobile-menu a {
     font-size: clamp(32px, 10vw, 52px);
@@ -508,10 +599,7 @@
     transform: translateY(30px);
   }
 
-  .mobile-menu.open a {
-    animation: menuLinkIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
+  .mobile-menu.open a { animation: menuLinkIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   .mobile-menu.open a:nth-child(1) { animation-delay: 0.06s; }
   .mobile-menu.open a:nth-child(2) { animation-delay: 0.12s; }
   .mobile-menu.open a:nth-child(3) { animation-delay: 0.18s; }
@@ -523,17 +611,8 @@
   }
 
   .mobile-menu a:hover { opacity: 0.5; }
-
-  .mobile-menu .menu-social {
-    display: flex;
-    gap: 24px;
-    margin-top: 48px;
-  }
-
-  .mobile-menu .menu-social a {
-    font-size: var(--fs-small);
-    font-weight: 400;
-  }
+  .mobile-menu .menu-social { display: flex; gap: 24px; margin-top: 48px; }
+  .mobile-menu .menu-social a { font-size: var(--fs-small); }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
@@ -543,45 +622,36 @@
     nav .links { display: flex; gap: 16px; }
     .hamburger { display: none; }
 
-    .insights-header-inner {
-      display: flex;
+    .post-header-inner {
       flex-direction: column;
-      gap: 16px;
-    }
-
-    .insights-grid {
-      grid-template-columns: 1fr;
+      align-items: flex-start;
       gap: 8px;
     }
+
+    .post-tags { justify-content: flex-start; }
+
+    .more-posts-grid { grid-template-columns: 1fr; gap: 8px; }
 
     .footer-bottom { grid-template-columns: 1fr 1fr; }
     .footer-copyright { text-align: left; grid-column: 1 / -1; }
     .footer-cta { padding: 16px; }
-    .footer-cta__inner {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      min-height: auto;
-      padding: 80px 16px;
-    }
+    .footer-cta__inner { padding: 80px 16px; min-height: auto; }
     .footer-cta__content { min-height: auto; }
     body.dark .mobile-menu { background: #0f0f0f; }
     body.dark .hamburger span { background: #FFFFFF; }
   }
 
-  /* ── REVEAL ON SCROLL ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: opacity, transform;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-    will-change: auto;
+  @media (min-width: 1600px) {
+  :root {
+    --pad: 120px;
   }
 
+  .post-col,
+  .post-hero,
+  .post-image-caption {
+    max-width: 912px;
+  }
+}
 
   /* ── MOBILE MENU SHARED ── */
   nav { z-index: 130; }
@@ -594,9 +664,6 @@
   body.menu-open nav.nav-hidden {
     opacity: 1 !important;
     pointer-events: auto !important;
-  }
-  body.menu-open nav .logo {
-    margin-left: 6px;
   }
   .hamburger {
     display: none;
@@ -708,9 +775,6 @@
   @media (max-width: 768px) {
     nav .links { display: none !important; }
     .hamburger { display: inline-flex !important; }
-    body:not(.menu-open) nav .logo {
-      margin-left: 0;
-    }
     body.dark .hamburger span,
     body.menu-open[data-menu-dark="true"] .hamburger span { background: #FFFFFF; }
     body.dark .mobile-menu::before,
@@ -768,6 +832,8 @@
       <span></span><span></span>
     </button>
   </nav>
+
+  <!-- MENÚ MÓVIL -->
   <div class="mobile-menu" id="mobile-menu">
     <div class="mobile-menu-panel" data-dark-default="false">
       <a href="/">Work</a>
@@ -781,61 +847,90 @@
     </div>
   </div>
 
-  <main id="contenido" role="main">
+<main id="contenido" role="main">
 
-    <!-- CABECERA INSIGHTS -->
-    <header class="insights-header reveal">
-      <div class="insights-header-inner">
-        <p class="insights-label">Insights</p>
-        <p class="insights-intro">Reflexiones, recursos y criterio sobre diseño de marca, identidad visual y estrategia creativa. Sin relleno.</p>
+    <!-- CABECERA DEL POST -->
+    <header class="post-header reveal">
+      <div class="post-col">
       </div>
     </header>
 
-    <!-- GRID DE ENTRADAS -->
-    <section class="insights-section" aria-label="Entradas del blog">
 
-      <div class="insights-grid">
-
-        <a href="/insights/que-es-el-branding-empresa" class="insight-card reveal" data-reveal-delay="0" aria-label="Leer: Por qué tu logo no es tu marca">
-          <div class="img-wrap">
-            <img src="/assets/img/insights-1.webp" alt="Por qué tu logo no es tu marca" loading="lazy">
-          </div>
-          <div class="card-info">
-            <p class="card-meta"><span>Identidad visual</span></p>
-            <p class="card-title">Qué es el branding y por qué tu empresa lo necesita desde el primer día</p>
-          </div>
-        </a>
-
-        <a href="/insights/diseno-web-profesional-vs-plantilla" class="insight-card reveal" data-reveal-delay="1" aria-label="Leer: Diseño web que convierte">
-          <div class="img-wrap">
-            <img src="/assets/img/insights-2.webp" alt="Diseño web que convierte" loading="lazy">
-          </div>
-          <div class="card-info">
-            <p class="card-meta"><span>Diseño web</span></p>
-            <p class="card-title">Por qué tu web necesita un diseño profesional (y no basta con una plantilla)</p>
-          </div>
-        </a>
-
-        <a href="/insights/como-crear-identidad-visual-marca/" class="insight-card reveal" data-reveal-delay="2" aria-label="Leer: Tipografía como voz de marca">
-          <div class="img-wrap">
-            <img src="/assets/img/insights-3.webp" alt="Tipografía como voz de marca" loading="lazy">
-          </div>
-          <div class="card-info">
-            <p class="card-meta"><span>Identidad visual</span></p>
-            <p class="card-title">Cómo crear una identidad visual de marca que conecte con tu público objetivo</p>
-          </div>
-        </a>
-
-
-
+    <!-- TÍTULO Y TAGS -->
+    <div class="post-title-section reveal">
+      <div class="post-col">
+        <h1 class="post-title">Cómo crear una identidad visual de marca que conecte con tu público objetivo</h1>
       </div>
+    </div>
 
-    </section>
+    <!-- CUERPO DEL ARTÍCULO -->
+    <div class="post-body reveal">
+      <div class="post-col">
+      <article class="post-content" id="article-content">
+
+        <h2>Qué es la identidad visual y por qué es la base de todo</h2>
+
+        <p>
+          La identidad visual es el sistema de elementos gráficos que representa a tu marca de forma coherente en todos los soportes: tu web, redes sociales, tarjetas de visita, packaging, presentaciones y cualquier punto de contacto con el cliente.
+        </p>
+
+        <p>
+          No se trata solo de que "quede bonito". Una identidad visual bien construida comunica quién eres, a quién te diriges y qué te hace diferente, incluso antes de que alguien lea una sola palabra.
+        </p>
+
+        <h2>Los pilares de una identidad visual efectiva</h2>
+
+        <ul>
+          <li>El logotipo:</strong> el logotipo es el elemento más reconocible, pero no el más importante. Un buen logo debe ser simple, memorable, versátil (funcionar en blanco y negro, pequeño y grande) y atemporal. Huye de las tendencias pasajeras.</li>
+          <li>La paleta de colores: </strong> los colores no son decoración: son comunicación. Cada color evoca emociones y asociaciones culturales específicas. Una paleta bien elegida puede transmitir confianza, energía, exclusividad o cercanía. Y debe funcionar tanto en digital como en impreso.</li>
+          <li>La tipografía: </strong> las fuentes que usas dicen mucho de tu marca. Una tipografía serif comunica tradición y autoridad. Una sans-serif moderna transmite claridad y contemporaneidad. Una combinación bien elegida puede definir completamente el carácter visual de una marca.</li>
+          <li>El universo visual: </strong> iconos, patrones, texturas, formas y recursos fotográficos que complementan y enriquecen el sistema visual. Son los que dan personalidad y versatilidad a la identidad.</li>
+        </ul>
+
+        <!-- IMAGEN 1 -->
+        <figure class="post-image-inline">
+          <img src="insights.webp" alt="Elementos del branding" loading="lazy">
+        </figure>
+
+        <h2>El proceso de creación: más estrategia que creatividad</h2>
+
+        <p>
+          Crear una identidad visual no empieza con el ordenador abierto y Illustrator listo. Empieza con preguntas: ¿Quién es tu cliente ideal? ¿Qué valores definen tu empresa? ¿Cómo quieres que te perciban? ¿Quiénes son tus competidores y cómo te diferencias de ellos?        
+        </p>
+
+        <p>
+          Sin estrategia de marca previa, el resultado es diseño bonito sin dirección. Con estrategia, el resultado es una identidad que trabaja para tu negocio.
+        </p>
+
+        <h2>Errores comunes al crear una identidad visual</h2>    
+
+        <p>
+          Uno de los errores más frecuentes al crear una identidad visual de marca es dejarse llevar por tendencias pasajeras sin valorar si realmente representan la esencia y personalidad del negocio. También es habitual modificar constantemente colores, tipografías o estilos gráficos porque “ya no gustan”, lo que termina debilitando el reconocimiento y la coherencia de la marca ante el público. 
+        </p>
+        
+        <p>
+          A esto se suma la falta de documentación en un manual de marca o brand guidelines, un recurso clave para mantener criterios visuales claros y consistentes. Cuando además la identidad se aplica de forma diferente en la web, redes sociales, presentaciones o materiales impresos, la percepción de profesionalidad disminuye y la conexión con el público objetivo se vuelve mucho más difícil.        
+        </p>
+
+        <h2>Manual de marca: la pieza que lo une todo</h2>
+
+        <p>
+          Una identidad visual sin manual de marca es como una receta sin instrucciones. El manual de marca recoge todas las normas de uso de los elementos visuales para garantizar coherencia en todas las aplicaciones, ya seas tú quien lo aplique o un equipo entero.        
+        </p>
+
+        <h2>Una identidad visual sólida es una de las inversiones más rentables que puedes hacer para tu negocio. Genera confianza, diferenciación y reconocimiento. ¿Listo para construir la tuya? Trabajemos juntos.</h2>
+
+      </article>
+      </div>
+    </div>
+
+
+
 
     <!-- FOOTER -->
-    <footer class="footer">
+    <footer class="footer reveal">
       <div class="footer-cta">
-        <section class="footer-cta__inner reveal" aria-labelledby="footer-cta-title">
+        <section class="footer-cta__inner" aria-labelledby="footer-cta-title">
           <div class="footer-cta__content">
             <div class="footer-cta__copy">
               <h2 class="footer-cta__title" id="footer-cta-title">Nuestra única regla es no seguirlas.</h2>
@@ -845,7 +940,7 @@
           </div>
         </section>
       </div>
-      <div class="footer-bottom reveal">
+      <div class="footer-bottom">
         <div class="footer-col">
           <p>Santander, Cantabria, España</p>
         </div>
@@ -859,6 +954,7 @@
 
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script>
     // ── Logo animado ──
     const logoEl     = document.getElementById('logo-animated');
@@ -879,6 +975,14 @@
       logoText.style.transition  = 'clip-path 0.40s cubic-bezier(0.65, 0, 0.35, 0)';
     });
 
+    // ── Smooth scroll con Lenis ──
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
     // ── Cursor ──
     const cursor = document.getElementById('cursor');
     let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
@@ -886,9 +990,10 @@
     document.addEventListener('mousemove', e => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      document.body.classList.remove('cursor-light');
+
       const overHover =
         e.target.closest('.insight-card')       ||
+        e.target.closest('.post-breadcrumb a')  ||
         e.target.closest('.footer-cta__button') ||
         e.target.closest('nav .links a')        ||
         e.target.closest('nav .logo')           ||
@@ -904,7 +1009,7 @@
     }
     animateCursor();
 
-    // ── Nav links listos tras animación ──
+    // ── Nav links ──
     const navLinks = document.querySelectorAll('nav .links a');
     setTimeout(() => {
       navLinks.forEach(a => {
@@ -914,38 +1019,50 @@
       });
     }, 1000);
 
-    // ── Reveal on scroll ──
-    const revealEls = document.querySelectorAll('.reveal');
-
-    // Aplicar transition-delay a las cards según su data-reveal-delay
-    // Las cards se agrupan de 3 en 3 (filas del grid) para el stagger
-    revealEls.forEach(el => {
-      const delay = el.dataset.revealDelay;
-      if (delay !== undefined) {
-        // Stagger dentro de cada fila: posición en columna = índice % 3
-        const col = parseInt(delay) % 3;
-        el.style.transitionDelay = `${col * 0.1}s`;
-      }
+    // ── Hamburguesa ──
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
     });
 
-    const revealObserver = new IntersectionObserver(entries => {
+    // ── Nav hide/show ──
+    const nav = document.getElementById('nav');
+    let lastScrollY = 0, navVisible = true, ticking = false;
+
+    lenis.on('scroll', ({ scroll }) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        nav.classList.toggle('nav-compact', scroll > 80);
+        const delta = scroll - lastScrollY;
+        if (scroll > 160 && delta > 6 && navVisible)  { nav.classList.add('nav-hidden');    navVisible = false; }
+        else if ((delta < -6 || scroll <= 80) && !navVisible) { nav.classList.remove('nav-hidden'); navVisible = true; }
+        lastScrollY = scroll;
+        ticking = false;
+      });
+    });
+
+    // ── Reveal scroll ──
+    const reveals  = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          // Limpiar el delay una vez animado para no afectar hover
-          entry.target.addEventListener('transitionend', () => {
-            entry.target.style.transitionDelay = '0s';
-          }, { once: true });
-          revealObserver.unobserve(entry.target);
+          observer.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.08,
-      rootMargin: '0px 0px -40px 0px'
-    });
-
-    revealEls.forEach(el => revealObserver.observe(el));
-
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
   </script>
 
 
