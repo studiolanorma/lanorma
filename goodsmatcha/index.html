@@ -341,7 +341,7 @@
 
     .gallery-img:hover img,
     .gallery-img:hover video {
-      transform: scale(1.04);
+      /* Efecto de zoom removido */
     }
 
     /* Fila de dos cuadradas */
@@ -1021,7 +1021,7 @@
     document.addEventListener('mousemove', e => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      const over = e.target.closest('.img-full, .img-block, .project-hero, .project-nav-link, .footer-cta__button, .gallery-img, nav .links a');
+      const over = e.target.closest('.img-full, .img-block, .project-hero, .project-nav-link, .footer-cta__button, nav .links a, nav .logo');
       document.body.classList.toggle('cursor-hover', !!over);
     });
 
