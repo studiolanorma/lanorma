@@ -3,8 +3,9 @@
   const transitionKey = 'lanorma-page-transition';
   const colorKey = 'lanorma-page-transition-color';
   const colorIndexKey = 'lanorma-page-transition-color-index';
-  const duration = 420;
-  const exitDuration = 520;
+  const duration = 560;
+  const exitDuration = 680;
+  const exitHold = 110;
   const colors = [
     '#FFE44B',
     '#A3A9FF',
@@ -25,9 +26,15 @@
   }
 
   function clearPendingCover() {
+    document.documentElement.classList.add('page-transition-no-bg-transition');
     document.documentElement.classList.remove('page-transition-pending', 'page-transition-revealing');
     document.documentElement.style.removeProperty('--page-transition-color');
     document.getElementById('page-transition-pending-style')?.remove();
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.documentElement.classList.remove('page-transition-no-bg-transition');
+      });
+    });
   }
 
   function revealPendingCover() {
@@ -49,17 +56,11 @@
   }
 
   function afterPageSettles(callback) {
-    const run = function () {
+    requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        requestAnimationFrame(callback);
+        window.setTimeout(callback, exitHold);
       });
-    };
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', run, { once: true });
-    } else {
-      run();
-    }
+    });
   }
 
   function getNextTransitionColor() {
@@ -103,22 +104,21 @@
 
     event.preventDefault();
     isTransitioning = true;
+    const targetHref = link.href;
     setTransitionColor(getNextTransitionColor());
     sessionStorage.setItem(transitionKey, 'active');
     overlay.classList.remove('is-leaving');
     overlay.classList.add('is-active');
 
     let navigationStarted = false;
-    let fallbackTimer;
     const goToNextPage = function () {
       if (navigationStarted) return;
       navigationStarted = true;
-      window.clearTimeout(fallbackTimer);
-      window.location.href = link.href;
+      window.location.href = targetHref;
     };
 
     overlay.addEventListener('animationend', goToNextPage, { once: true });
-    fallbackTimer = window.setTimeout(goToNextPage, duration + 120);
+    window.setTimeout(goToNextPage, duration + 120);
   });
 
   window.addEventListener('pageshow', function (event) {

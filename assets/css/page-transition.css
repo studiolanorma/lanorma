@@ -13,15 +13,15 @@ html.page-transition-pending::before {
 
 html.page-transition-pending,
 html.page-transition-pending body {
-  background: var(--page-transition-color, #0f0f0f) !important;
+  background: #ffffff !important;
 }
 
-html.page-transition-pending:not(.page-transition-revealing) body > * {
+html.page-transition-pending body > * {
   visibility: hidden !important;
 }
 
 html.page-transition-pending.page-transition-revealing::before {
-  animation: pageTransitionOut 0.52s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: pageTransitionOut 0.68s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .page-transition {
@@ -40,14 +40,14 @@ html.page-transition-pending.page-transition-revealing::before {
 
 .page-transition.is-active {
   visibility: visible;
-  animation: pageTransitionIn 0.42s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: pageTransitionIn 0.56s cubic-bezier(0.83, 0, 0.17, 1) forwards;
 }
 
 .page-transition.is-leaving {
   visibility: visible;
   transform: translate3d(0, 0, 0) scaleY(1);
   transform-origin: top;
-  animation: pageTransitionOut 0.52s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: pageTransitionOut 0.68s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .page-transition.is-visible-hold {
