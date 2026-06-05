@@ -4,6 +4,7 @@
   const colorKey = 'lanorma-page-transition-color';
   const colorIndexKey = 'lanorma-page-transition-color-index';
   const duration = 420;
+  const exitDuration = 520;
   const colors = [
     '#FFE44B',
     '#A3A9FF',
@@ -23,6 +24,44 @@
     overlay.style.setProperty('--page-transition-color', color);
   }
 
+  function clearPendingCover() {
+    document.documentElement.classList.remove('page-transition-pending', 'page-transition-revealing');
+    document.documentElement.style.removeProperty('--page-transition-color');
+    document.getElementById('page-transition-pending-style')?.remove();
+  }
+
+  function revealPendingCover() {
+    let revealDone = false;
+    let fallbackTimer;
+
+    const finishReveal = function () {
+      if (revealDone) return;
+      revealDone = true;
+      window.clearTimeout(fallbackTimer);
+      clearPendingCover();
+    };
+
+    document.documentElement.addEventListener('animationend', finishReveal, { once: true });
+    fallbackTimer = window.setTimeout(finishReveal, exitDuration + 120);
+    requestAnimationFrame(function () {
+      document.documentElement.classList.add('page-transition-revealing');
+    });
+  }
+
+  function afterPageSettles(callback) {
+    const run = function () {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(callback);
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+      run();
+    }
+  }
+
   function getNextTransitionColor() {
     const currentIndex = Number(sessionStorage.getItem(colorIndexKey) || 0);
     const safeIndex = Number.isFinite(currentIndex) ? currentIndex : 0;
@@ -32,19 +71,14 @@
     return color;
   }
 
-if (!prefersReducedMotion && sessionStorage.getItem(transitionKey) === 'active') {
+  if (!prefersReducedMotion && sessionStorage.getItem(transitionKey) === 'active') {
     setTransitionColor(sessionStorage.getItem(colorKey) || colors[0]);
     sessionStorage.removeItem(transitionKey);
     sessionStorage.removeItem(colorKey);
-    overlay.classList.add('is-visible-hold');
 
-    document.fonts.ready.then(function () {
-      overlay.classList.remove('is-visible-hold');
-      overlay.classList.add('is-leaving');
-      overlay.addEventListener('animationend', function () {
-        overlay.classList.remove('is-leaving');
-      }, { once: true });
-    });
+    afterPageSettles(revealPendingCover);
+  } else {
+    clearPendingCover();
   }
 
   function isInternalPageLink(link) {
@@ -74,15 +108,24 @@ if (!prefersReducedMotion && sessionStorage.getItem(transitionKey) === 'active')
     overlay.classList.remove('is-leaving');
     overlay.classList.add('is-active');
 
-    window.setTimeout(function () {
+    let navigationStarted = false;
+    let fallbackTimer;
+    const goToNextPage = function () {
+      if (navigationStarted) return;
+      navigationStarted = true;
+      window.clearTimeout(fallbackTimer);
       window.location.href = link.href;
-    }, duration);
+    };
+
+    overlay.addEventListener('animationend', goToNextPage, { once: true });
+    fallbackTimer = window.setTimeout(goToNextPage, duration + 120);
   });
 
   window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
       isTransitioning = false;
       overlay.classList.remove('is-active', 'is-leaving');
+      clearPendingCover();
       sessionStorage.removeItem(transitionKey);
       sessionStorage.removeItem(colorKey);
     }

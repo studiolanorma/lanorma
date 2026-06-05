@@ -1,12 +1,40 @@
+html.page-transition-pending::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  pointer-events: none;
+  background: var(--page-transition-color, #0f0f0f);
+  transform: translate3d(0, 0, 0) scaleY(1);
+  transform-origin: top;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+html.page-transition-pending,
+html.page-transition-pending body {
+  background: var(--page-transition-color, #0f0f0f) !important;
+}
+
+html.page-transition-pending:not(.page-transition-revealing) body > * {
+  visibility: hidden !important;
+}
+
+html.page-transition-pending.page-transition-revealing::before {
+  animation: pageTransitionOut 0.52s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
 .page-transition {
   position: fixed;
   inset: 0;
   z-index: 10000;
   pointer-events: none;
   background: var(--page-transition-color, #0f0f0f);
-  transform: scaleY(0);
+  contain: layout paint;
+  transform: translate3d(0, 0, 0) scaleY(0);
   transform-origin: bottom;
   visibility: hidden;
+  backface-visibility: hidden;
   will-change: transform;
 }
 
@@ -17,35 +45,37 @@
 
 .page-transition.is-leaving {
   visibility: visible;
-  transform: scaleY(1);
+  transform: translate3d(0, 0, 0) scaleY(1);
   transform-origin: top;
   animation: pageTransitionOut 0.52s cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 .page-transition.is-visible-hold {
   visibility: visible;
-  transform: scaleY(1);
+  transform: translate3d(0, 0, 0) scaleY(1);
 }
 
 @keyframes pageTransitionIn {
   from {
-    transform: scaleY(0);
+    transform: translate3d(0, 0, 0) scaleY(0);
   }
   to {
-    transform: scaleY(1);
+    transform: translate3d(0, 0, 0) scaleY(1);
   }
 }
 
 @keyframes pageTransitionOut {
   from {
-    transform: scaleY(1);
+    transform: translate3d(0, 0, 0) scaleY(1);
   }
   to {
-    transform: scaleY(0);
+    transform: translate3d(0, 0, 0) scaleY(0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html.page-transition-pending::before,
+  html.page-transition-pending.page-transition-revealing::before,
   .page-transition,
   .page-transition.is-active,
   .page-transition.is-leaving {
