@@ -22,6 +22,11 @@
   animation: pageTransitionOut 0.52s cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
+.page-transition.is-visible-hold {
+  visibility: visible;
+  transform: scaleY(1);
+}
+
 @keyframes pageTransitionIn {
   from {
     transform: scaleY(0);

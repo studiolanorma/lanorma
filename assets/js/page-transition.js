@@ -32,14 +32,19 @@
     return color;
   }
 
-  if (!prefersReducedMotion && sessionStorage.getItem(transitionKey) === 'active') {
+if (!prefersReducedMotion && sessionStorage.getItem(transitionKey) === 'active') {
     setTransitionColor(sessionStorage.getItem(colorKey) || colors[0]);
     sessionStorage.removeItem(transitionKey);
     sessionStorage.removeItem(colorKey);
-    overlay.classList.add('is-leaving');
-    overlay.addEventListener('animationend', function () {
-      overlay.classList.remove('is-leaving');
-    }, { once: true });
+    overlay.classList.add('is-visible-hold');
+
+    document.fonts.ready.then(function () {
+      overlay.classList.remove('is-visible-hold');
+      overlay.classList.add('is-leaving');
+      overlay.addEventListener('animationend', function () {
+        overlay.classList.remove('is-leaving');
+      }, { once: true });
+    });
   }
 
   function isInternalPageLink(link) {
