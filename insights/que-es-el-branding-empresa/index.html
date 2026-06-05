@@ -790,6 +790,7 @@
   }
 
 </style>
+  <link rel="stylesheet" href="/assets/css/page-transition.css">
 </head>
 <body class="no-loader-anim">
 
@@ -967,7 +968,7 @@
 
     // ── Smooth scroll con Lenis ──
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.05,
       easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
@@ -1135,5 +1136,6 @@
     })();
   </script>
 
+  <script src="/assets/js/page-transition.js"></script>
 </body>
 </html>

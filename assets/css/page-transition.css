@@ -1,0 +1,50 @@
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  background: var(--page-transition-color, #0f0f0f);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  visibility: hidden;
+  will-change: transform;
+}
+
+.page-transition.is-active {
+  visibility: visible;
+  animation: pageTransitionIn 0.42s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.page-transition.is-leaving {
+  visibility: visible;
+  transform: scaleY(1);
+  transform-origin: top;
+  animation: pageTransitionOut 0.52s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes pageTransitionIn {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes pageTransitionOut {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition,
+  .page-transition.is-active,
+  .page-transition.is-leaving {
+    animation: none;
+    visibility: hidden;
+  }
+}

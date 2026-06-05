@@ -381,6 +381,7 @@
   }
 
 </style>
+  <link rel="stylesheet" href="/assets/css/page-transition.css">
 </head>
 <body>
 
@@ -517,7 +518,7 @@
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script>
-    const lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    const lenis = new Lenis({ duration: 1.05, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
 
@@ -676,5 +677,6 @@
     })();
   </script>
 
+  <script src="/assets/js/page-transition.js"></script>
 </body>
 </html>
