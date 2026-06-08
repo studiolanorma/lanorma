@@ -1,3 +1,5 @@
+/* ── Cover de entrada (html::before) ─────────────────────────────────────── */
+
 html.page-transition-pending::before {
   content: "";
   position: fixed;
@@ -11,18 +13,31 @@ html.page-transition-pending::before {
   will-change: transform;
 }
 
-html.page-transition-pending,
-html.page-transition-pending body {
-  background: #ffffff !important;
+html.page-transition-pending:not(.page-transition-revealing),
+html.page-transition-pending:not(.page-transition-revealing) body {
+  background: var(--page-transition-color, #0f0f0f) !important;
 }
 
 html.page-transition-pending body > * {
   visibility: hidden !important;
 }
 
-html.page-transition-pending.page-transition-revealing::before {
-  animation: pageTransitionOut 0.68s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+html.page-transition-pending.page-transition-revealing body > * {
+  visibility: visible !important;
 }
+
+/* Suprimir transición de background al quitar el cover */
+html.page-transition-pending body,
+html.page-transition-no-bg-transition body {
+  transition: none !important;
+}
+
+/* Animación de reveal: el cover sube hacia arriba */
+html.page-transition-pending.page-transition-revealing::before {
+  animation: pageTransitionOut 0.60s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+}
+
+/* ── Overlay de salida (.page-transition div) ─────────────────────────────── */
 
 .page-transition {
   position: fixed;
@@ -40,45 +55,28 @@ html.page-transition-pending.page-transition-revealing::before {
 
 .page-transition.is-active {
   visibility: visible;
-  animation: pageTransitionIn 0.56s cubic-bezier(0.83, 0, 0.17, 1) forwards;
+  animation: pageTransitionIn 0.42s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
 
-.page-transition.is-leaving {
-  visibility: visible;
-  transform: translate3d(0, 0, 0) scaleY(1);
-  transform-origin: top;
-  animation: pageTransitionOut 0.68s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.page-transition.is-visible-hold {
-  visibility: visible;
-  transform: translate3d(0, 0, 0) scaleY(1);
-}
+/* ── Keyframes ────────────────────────────────────────────────────────────── */
 
 @keyframes pageTransitionIn {
-  from {
-    transform: translate3d(0, 0, 0) scaleY(0);
-  }
-  to {
-    transform: translate3d(0, 0, 0) scaleY(1);
-  }
+  from { transform: translate3d(0, 0, 0) scaleY(0); }
+  to   { transform: translate3d(0, 0, 0) scaleY(1); }
 }
 
 @keyframes pageTransitionOut {
-  from {
-    transform: translate3d(0, 0, 0) scaleY(1);
-  }
-  to {
-    transform: translate3d(0, 0, 0) scaleY(0);
-  }
+  from { transform: translate3d(0, 0, 0) scaleY(1); }
+  to   { transform: translate3d(0, 0, 0) scaleY(0); }
 }
+
+/* ── Accesibilidad ────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   html.page-transition-pending::before,
   html.page-transition-pending.page-transition-revealing::before,
   .page-transition,
-  .page-transition.is-active,
-  .page-transition.is-leaving {
+  .page-transition.is-active {
     animation: none;
     visibility: hidden;
   }

@@ -569,18 +569,6 @@
   }
 
   /* ── REVEAL ON SCROLL ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: opacity, transform;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-    will-change: auto;
-  }
 
 
   /* ── MOBILE MENU SHARED ── */
@@ -733,16 +721,13 @@
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         if (sessionStorage.getItem('lanorma-page-transition') !== 'active') return;
         var color = sessionStorage.getItem('lanorma-page-transition-color') || '#FFE44B';
-        var style = document.createElement('style');
-        style.id = 'page-transition-pending-style';
-        style.textContent = '@keyframes pageTransitionPendingOut{from{transform:translate3d(0,0,0) scaleY(1);}to{transform:translate3d(0,0,0) scaleY(0);}}html.page-transition-pending,html.page-transition-pending body{background:#fff!important;}html.page-transition-pending body,html.page-transition-no-bg-transition body{transition:none!important;}html.page-transition-pending body>*{visibility:hidden!important;}html.page-transition-pending::before{content:"";position:fixed;inset:0;z-index:10001;pointer-events:none;background:var(--page-transition-color,' + color + ');transform:translate3d(0,0,0) scaleY(1);transform-origin:top;backface-visibility:hidden;will-change:transform;}html.page-transition-pending.page-transition-revealing::before{animation:pageTransitionPendingOut 0.68s cubic-bezier(0.22,1,0.36,1) forwards;}';
-        document.head.appendChild(style);
         document.documentElement.style.setProperty('--page-transition-color', color);
         document.documentElement.classList.add('page-transition-pending');
-      } catch (error) {}
+      } catch (e) {}
     })();
   </script>
   <link rel="stylesheet" href="/assets/css/page-transition.css">
+  <link rel="stylesheet" href="/assets/css/reveal.css">
 </head>
 <body class="no-loader-anim">
   <script src="/assets/js/page-transition.js"></script>
@@ -801,10 +786,10 @@
   <main id="contenido" role="main">
 
     <!-- CABECERA INSIGHTS -->
-    <header class="insights-header reveal">
+    <header class="insights-header">
       <div class="insights-header-inner">
-        <p class="insights-label">Insights</p>
-        <p class="insights-intro">Reflexiones, recursos y criterio sobre diseño de marca, identidad visual y estrategia creativa. Sin relleno.</p>
+        <p class="insights-label reveal" data-reveal-group="header" data-reveal-delay="0">Insights</p>
+        <p class="insights-intro reveal" data-reveal-group="header" data-reveal-delay="1">Reflexiones, recursos y criterio sobre diseño de marca, identidad visual y estrategia creativa. Sin relleno.</p>
       </div>
     </header>
 
@@ -813,7 +798,7 @@
 
       <div class="insights-grid">
 
-        <a href="/insights/que-es-el-branding-empresa" class="insight-card reveal" data-reveal-delay="0" aria-label="Leer: Por qué tu logo no es tu marca">
+        <a href="/insights/que-es-el-branding-empresa" class="insight-card reveal" data-reveal-group="cards" data-reveal-delay="0" aria-label="Leer: Por qué tu logo no es tu marca">
           <div class="img-wrap">
             <img src="/assets/img/insights-1.webp" alt="Por qué tu logo no es tu marca" loading="lazy">
           </div>
@@ -823,7 +808,7 @@
           </div>
         </a>
 
-        <a href="/insights/diseno-web-profesional-vs-plantilla" class="insight-card reveal" data-reveal-delay="1" aria-label="Leer: Diseño web que convierte">
+        <a href="/insights/diseno-web-profesional-vs-plantilla" class="insight-card reveal" data-reveal-group="cards" data-reveal-delay="1" aria-label="Leer: Diseño web que convierte">
           <div class="img-wrap">
             <img src="/assets/img/insights-2.webp" alt="Diseño web que convierte" loading="lazy">
           </div>
@@ -833,7 +818,7 @@
           </div>
         </a>
 
-        <a href="/insights/como-crear-identidad-visual-marca/" class="insight-card reveal" data-reveal-delay="2" aria-label="Leer: Tipografía como voz de marca">
+        <a href="/insights/como-crear-identidad-visual-marca/" class="insight-card reveal" data-reveal-group="cards" data-reveal-delay="2" aria-label="Leer: Tipografía como voz de marca">
           <div class="img-wrap">
             <img src="/assets/img/insights-3.webp" alt="Tipografía como voz de marca" loading="lazy">
           </div>
@@ -944,38 +929,6 @@
       });
     }, 1000);
 
-    // ── Reveal on scroll ──
-    const revealEls = document.querySelectorAll('.reveal');
-
-    // Aplicar transition-delay a las cards según su data-reveal-delay
-    // Las cards se agrupan de 3 en 3 (filas del grid) para el stagger
-    revealEls.forEach(el => {
-      const delay = el.dataset.revealDelay;
-      if (delay !== undefined) {
-        // Stagger dentro de cada fila: posición en columna = índice % 3
-        const col = parseInt(delay) % 3;
-        el.style.transitionDelay = `${col * 0.1}s`;
-      }
-    });
-
-    const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          // Limpiar el delay una vez animado para no afectar hover
-          entry.target.addEventListener('transitionend', () => {
-            entry.target.style.transitionDelay = '0s';
-          }, { once: true });
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.08,
-      rootMargin: '0px 0px -40px 0px'
-    });
-
-    revealEls.forEach(el => revealObserver.observe(el));
-
   </script>
 
 
@@ -1057,5 +1010,6 @@
       });
     })();
   </script>
+  <script src="/assets/js/reveal.js" defer></script>
 </body>
 </html>

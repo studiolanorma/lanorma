@@ -168,14 +168,6 @@
     }
     nav .links a:hover { opacity: 0.5; }
 
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
     /* ── FOTO / VIDEO GRANDE ── */
     .studio-photo {
       padding: 0 var(--pad);
@@ -630,16 +622,13 @@
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         if (sessionStorage.getItem('lanorma-page-transition') !== 'active') return;
         var color = sessionStorage.getItem('lanorma-page-transition-color') || '#FFE44B';
-        var style = document.createElement('style');
-        style.id = 'page-transition-pending-style';
-        style.textContent = '@keyframes pageTransitionPendingOut{from{transform:translate3d(0,0,0) scaleY(1);}to{transform:translate3d(0,0,0) scaleY(0);}}html.page-transition-pending,html.page-transition-pending body{background:#fff!important;}html.page-transition-pending body,html.page-transition-no-bg-transition body{transition:none!important;}html.page-transition-pending body>*{visibility:hidden!important;}html.page-transition-pending::before{content:"";position:fixed;inset:0;z-index:10001;pointer-events:none;background:var(--page-transition-color,' + color + ');transform:translate3d(0,0,0) scaleY(1);transform-origin:top;backface-visibility:hidden;will-change:transform;}html.page-transition-pending.page-transition-revealing::before{animation:pageTransitionPendingOut 0.68s cubic-bezier(0.22,1,0.36,1) forwards;}';
-        document.head.appendChild(style);
         document.documentElement.style.setProperty('--page-transition-color', color);
         document.documentElement.classList.add('page-transition-pending');
-      } catch (error) {}
+      } catch (e) {}
     })();
   </script>
   <link rel="stylesheet" href="/assets/css/page-transition.css">
+  <link rel="stylesheet" href="/assets/css/reveal.css">
 </head>
 <body>
   <script src="/assets/js/page-transition.js"></script>
@@ -1025,18 +1014,6 @@
       });
     });
 
-    // ── Reveal al hacer scroll ──
-    const reveals  = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => observer.observe(el));
-
     // ── Cambio de tema al llegar a Servicios ──
     const serviciosEl   = document.getElementById('section-servicios');
     const themeObserver = new IntersectionObserver((entries) => {
@@ -1130,5 +1107,6 @@
       });
     })();
   </script>
+  <script src="/assets/js/reveal.js" defer></script>
 </body>
 </html>
