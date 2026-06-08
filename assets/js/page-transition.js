@@ -125,23 +125,39 @@
 
     // Navegar cuando la animación de salida termina completamente.
     // Fallback a 540ms por si animationend no llega.
+    // En móvil real se garantiza un mínimo de 80ms desde is-active para
+    // que el overlay tenga tiempo de pintar antes de cualquier navegación.
     let navigated = false;
+    let minDelayPassed = false;
+    let animEndFired = false;
 
-    function onExitEnd(event) {
-      if (event.animationName !== 'pageTransitionIn') return;
+    function doNavigate() {
       if (navigated) return;
       navigated = true;
       overlay.removeEventListener('animationend', onExitEnd);
       window.location.href = targetHref;
     }
 
+    function onExitEnd(event) {
+      if (event.animationName !== 'pageTransitionIn') return;
+      if (minDelayPassed) {
+        doNavigate();
+      } else {
+        animEndFired = true;
+      }
+    }
+
     overlay.addEventListener('animationend', onExitEnd);
 
+    requestAnimationFrame(function () {
+      window.setTimeout(function () {
+        minDelayPassed = true;
+        if (animEndFired) doNavigate();
+      }, 80);
+    });
+
     window.setTimeout(function () {
-      if (navigated) return;
-      navigated = true;
-      overlay.removeEventListener('animationend', onExitEnd);
-      window.location.href = targetHref;
+      doNavigate();
     }, 420 + 120);
   });
 
