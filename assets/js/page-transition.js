@@ -123,13 +123,7 @@
     overlay.classList.remove('is-leaving');
     overlay.classList.add('is-active');
 
-    // Navegar cuando la animación de salida termina completamente.
-    // Fallback a 540ms por si animationend no llega.
-    // En móvil real se garantiza un mínimo de 80ms desde is-active para
-    // que el overlay tenga tiempo de pintar antes de cualquier navegación.
     let navigated = false;
-    let minDelayPassed = false;
-    let animEndFired = false;
 
     function doNavigate() {
       if (navigated) return;
@@ -138,24 +132,21 @@
       window.location.href = targetHref;
     }
 
+    // fallback: si animationend llega antes del timeout principal, navegar también
     function onExitEnd(event) {
       if (event.animationName !== 'pageTransitionIn') return;
-      if (minDelayPassed) {
-        doNavigate();
-      } else {
-        animEndFired = true;
-      }
+      doNavigate();
     }
 
     overlay.addEventListener('animationend', onExitEnd);
 
-    requestAnimationFrame(function () {
-      window.setTimeout(function () {
-        minDelayPassed = true;
-        if (animEndFired) doNavigate();
-      }, 80);
-    });
+    // Navegar a los 420ms — la cortina ya cubre la pantalla aunque la animación
+    // no haya disparado animationend todavía. Evita el gap en Safari iOS.
+    window.setTimeout(function () {
+      doNavigate();
+    }, 420);
 
+    // fallback absoluto de seguridad
     window.setTimeout(function () {
       doNavigate();
     }, 500 + 80);
