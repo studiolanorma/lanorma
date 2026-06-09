@@ -34,7 +34,7 @@ html.page-transition-no-bg-transition body {
 
 /* Animación de reveal: el cover sube hacia arriba */
 html.page-transition-pending.page-transition-revealing::before {
-  animation: pageTransitionOut 0.60s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+  animation: pageTransitionOut 0.50s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
 
 /* ── Overlay de salida (.page-transition div) ─────────────────────────────── */
@@ -55,7 +55,7 @@ html.page-transition-pending.page-transition-revealing::before {
 
 .page-transition.is-active {
   visibility: visible;
-  animation: pageTransitionIn 0.42s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+  animation: pageTransitionIn 0.50s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
 
 /* ── Keyframes ────────────────────────────────────────────────────────────── */

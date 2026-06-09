@@ -8,8 +8,8 @@
   const transitionKey  = 'lanorma-page-transition';
   const colorKey       = 'lanorma-page-transition-color';
   const colorIndexKey  = 'lanorma-page-transition-color-index';
-  const exitDuration   = 520; // duración de la animación de reveal (entrada)
-  const exitHold       = 140; // pausa antes de iniciar el reveal
+  const exitDuration   = 500; // duración de la animación de reveal (entrada)
+  const exitHold       = 60;  // pausa antes de iniciar el reveal
   const colors = ['#FFE44B', '#A3A9FF', '#C31351', '#F98FF1', '#333DEC', '#FF311F'];
 
   let isTransitioning = false;
@@ -158,7 +158,7 @@
 
     window.setTimeout(function () {
       doNavigate();
-    }, 420 + 120);
+    }, 500 + 80);
   });
 
   // ─────────────────────────────────────────────────────────────────────────
