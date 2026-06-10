@@ -1,0 +1,80 @@
+/* ═══════════════════════════════════════════════════════════════════
+   VARIABLES.CSS — Studio Lanorma
+
+   Aquí están TODAS las variables que controlan el diseño de la web.
+   Cambiar un valor aquí lo actualiza en todas las páginas a la vez.
+
+   CÓMO USARLAS: busca el nombre entre var(--) en el CSS y cámbialo
+   solo aquí. No toques los valores en otros archivos CSS.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+
+  /* ── COLORES ────────────────────────────────────────────────────── */
+
+  --bg: #ffffff;
+  /* Color de fondo de toda la página. Blanco por defecto.
+     En modo oscuro (home) se convierte en #0f0f0f via body.dark. */
+
+  --ink: #606060;
+  /* Color principal del texto. Gris oscuro en la mayoría de páginas.
+     ⚠️ CUIDADO: Nosotros, Contacto, Legales y Privacidad usan #0f0f0f.
+     Esas páginas tienen su propio override en su archivo CSS de página. */
+
+  --muted: #939393;
+  /* Color del texto secundario: etiquetas, fechas, subtítulos.
+     Más claro que --ink para crear jerarquía visual. */
+
+
+  /* ── TIPOGRAFÍA ─────────────────────────────────────────────────── */
+
+  --fs: 14px;
+  /* Tamaño de fuente base usado en toda la web.
+     ⚠️ CUIDADO: cambiar esto afecta el espaciado de toda la web.
+     La fuente es Suisse Intl (cargada en base.css). */
+
+  --fs-small: 13px;
+  /* Tamaño para textos pequeños: etiquetas, fechas, copyright, redes.
+     Algunas páginas lo sobreescriben a 14px (ver cada archivo de página). */
+
+
+  /* ── NAVEGACIÓN ─────────────────────────────────────────────────── */
+
+  --nav-h: 64px;
+  /* Altura de la barra de navegación fija en la parte superior.
+     ⚠️ CUIDADO: si cambias este valor, también tienes que ajustar
+     el padding-top del contenido de cada página (que usa var(--nav-h)
+     como referencia). */
+
+
+  /* ── ESPACIADO Y MÁRGENES ───────────────────────────────────────── */
+
+  --pad: clamp(40px, 5vw, 220px);
+  /* Padding lateral principal de todo el contenido.
+     Es responsivo: empieza en 40px (móvil) y llega a 220px (pantallas
+     grandes). Controla los márgenes laterales de toda la web. */
+
+  --pad-large: 427px;
+  /* Padding lateral para pantallas muy grandes (≥1600px o ≥1640px).
+     Entra en acción solo en monitores muy anchos vía @media. */
+
+  --col-gap: 24px;
+  /* Separación entre columnas en los grids de proyectos e insights.
+     También se usa como gap en filas del portfolio. */
+
+}
+
+/* ── NOTA PARA EL EDITOR ────────────────────────────────────────────
+   Algunas páginas tienen valores distintos para ciertas variables:
+
+   Páginas con --ink: #0f0f0f (texto casi negro):
+   → nosotros, contacto, legales, privacidad
+
+   Páginas con --ink2: #606060 (color secundario del texto):
+   → nosotros, contacto, legales, privacidad
+
+   Páginas con --fs-small: 14px (etiquetas ligeramente más grandes):
+   → contacto, goodsmatcha, saifai, legales, privacidad
+
+   Todos estos overrides están en assets/css/pages/[pagina].css
+   ─────────────────────────────────────────────────────────────────── */

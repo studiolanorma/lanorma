@@ -1,0 +1,317 @@
+/* ═══════════════════════════════════════════════════════════════════
+   BASE.CSS — Studio Lanorma
+
+   Estilos fundamentales compartidos por TODAS las páginas:
+   - Fuentes tipográficas (@font-face)
+   - Reset de estilos del navegador
+   - Body, html, links
+   - Cursor personalizado
+   - Modo oscuro (body.dark)
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ── FUENTES TIPOGRÁFICAS ───────────────────────────────────────────
+   Suisse Intl en 5 pesos. Los archivos están en /assets/fonts/
+   font-display: swap = muestra texto de sistema mientras carga la fuente
+   ─────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/assets/fonts/SuisseIntl-Book.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/assets/fonts/SuisseIntl-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/assets/fonts/SuisseIntl-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/assets/fonts/SuisseIntl-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/assets/fonts/SuisseIntl-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ── RESET DEL NAVEGADOR ────────────────────────────────────────────
+   Elimina márgenes, paddings y el box-sizing raro del navegador.
+   Garantiza que todos los elementos se comporten igual en todos los
+   navegadores.
+   ─────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ── ACCESIBILIDAD DE TECLADO (focus) ───────────────────────────────
+   :focus oculta el contorno por defecto del navegador (azul feo).
+   :focus-visible lo muestra solo cuando navegas con teclado,
+   que es cuando sí es necesario por accesibilidad.
+   ─────────────────────────────────────────────────────────────────── */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+
+/* ── HTML ───────────────────────────────────────────────────────────
+   scroll-behavior: auto → desactiva el scroll suave nativo del navegador
+   porque Lenis (la librería de scroll) lo gestiona con más control.
+   ─────────────────────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: auto;
+}
+
+
+/* ── BODY BASE ──────────────────────────────────────────────────────
+   Fuente, tamaño, color de texto y fondo por defecto.
+   cursor: none → se usa el cursor personalizado (definido más abajo).
+   ─────────────────────────────────────────────────────────────────── */
+
+body {
+  font-family: 'Suisse Intl', sans-serif;
+  font-size: var(--fs);
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+
+/* ── TRANSICIÓN SUAVE DEL TEMA (modo claro ↔ oscuro) ───────────────
+   Hace que el cambio de color al llegar al About (home) y en
+   los artículos de Insights sea suave y gradual, no brusco.
+   ─────────────────────────────────────────────────────────────────── */
+
+body {
+  transition: background 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+nav, .footer-cta, .footer-bottom, .mobile-menu {
+  transition: background 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+/* ── MODO OSCURO (body.dark) ────────────────────────────────────────
+   Se activa en la home al hacer scroll hasta la sección About.
+   El JavaScript en pages/home.js añade/quita la clase .dark al body.
+   También se usa en artículos de Insights.
+   ⚠️ CUIDADO: no cambiar estos colores sin revisar el diseño en dark.
+   ─────────────────────────────────────────────────────────────────── */
+
+body.dark {
+  --bg: #0f0f0f;
+  --ink: #FFFFFF;
+  --muted: #666;
+  background: #0f0f0f;
+  color: #FFFFFF;
+}
+
+/* En modo oscuro el cursor también cambia a blanco */
+body.dark .cursor-dot {
+  background: #FFFFFF;
+}
+
+body.dark .cursor-ring {
+  border-color: #FFFFFF;
+}
+
+body.dark .cursor-ring::after {
+  color: #FFFFFF;
+}
+
+/* El cursor también se hace blanco sobre la sección footer-cta en home */
+body.cursor-light .cursor-dot {
+  background: #FFFFFF;
+}
+
+body.cursor-light .cursor-ring {
+  border-color: #FFFFFF;
+}
+
+/* Transición del color del icono hamburger y del svg paths */
+nav svg path,
+.cursor-dot,
+.cursor-ring,
+body:not(.theme-light):not(.dark) .hamburger {
+  color: var(--ink);
+}
+
+body.dark .hamburger {
+  color: #FFFFFF;
+}
+
+.hamburger span {
+  transition: fill 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              background 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+body.dark .hamburger span {
+  background: #FFFFFF;
+}
+
+body.dark nav svg path {
+  fill: #FFFFFF;
+}
+
+body.dark nav .logo svg path {
+  fill: #FFFFFF;
+}
+
+
+/* ── LINKS ──────────────────────────────────────────────────────────
+   Por defecto todos los links heredan el color del texto y no tienen
+   subrayado. El cursor es none porque usamos el cursor personalizado.
+   ─────────────────────────────────────────────────────────────────── */
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: none;
+}
+
+
+/* ── CURSOR PERSONALIZADO ───────────────────────────────────────────
+   El cursor real del sistema operativo está oculto (cursor: none).
+   En su lugar usamos un div #cursor que sigue al ratón con JS.
+   Tiene dos partes:
+   - .cursor-dot: punto pequeño que está exactamente donde está el ratón
+   - .cursor-ring: círculo que sigue con un poco de retraso (suavizado)
+
+   El JavaScript en navbar.js mueve el cursor y añade clases:
+   - body.cursor-hover → el punto se oculta y el anillo aparece
+   - body.cursor-plus  → el anillo se hace grande (como en la home)
+   ─────────────────────────────────────────────────────────────────── */
+
+.cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--ink);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.3s ease;
+}
+
+.cursor-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.45s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-ring::after {
+  font-family: 'Suisse Intl', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+/* Estado hover: el punto desaparece y aparece el anillo */
+body.cursor-hover .cursor-dot {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+body.cursor-hover .cursor-ring {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* Estado plus: anillo grande con texto interior (home) */
+body.cursor-plus .cursor-dot {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+body.cursor-plus .cursor-ring {
+  width: 80px;
+  height: 80px;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+body.cursor-plus .cursor-ring::after {
+  opacity: 1;
+}
+
+
+/* ── RESPONSIVE MÓVIL ───────────────────────────────────────────────
+   En pantallas pequeñas se desactiva el cursor personalizado y se
+   muestra el cursor normal del sistema.
+   ─────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  :root {
+    --pad: 16px;
+    --col-gap: 8px;
+  }
+
+  body {
+    cursor: auto;
+  }
+
+  .cursor {
+    display: none;
+  }
+}

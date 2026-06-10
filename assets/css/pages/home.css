@@ -1,0 +1,564 @@
+/* ═══════════════════════════════════════════════════════════════════
+   HOME.CSS — Studio Lanorma
+
+   Estilos exclusivos de la página de inicio (index.html).
+   Incluye: hero, portfolio, about, y overrides del footer CTA
+   para la versión oscura (texto blanco, botón blanco).
+
+   ARCHIVOS RELACIONADOS:
+   - assets/js/loader.js      → animación del loader
+   - assets/js/pages/home.js  → lenis, dark mode, cursor hover
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ── VARIABLES ESPECÍFICAS DE HOME ──────────────────────────────────
+   La home tiene --ink: #606060 (igual al base) y --fs-small: 13px
+   (también igual al base), así que no se necesitan overrides de :root.
+
+   SÍ se necesita override para el modo oscuro body.dark
+   (que convierte todo a negro con texto blanco).
+   ─────────────────────────────────────────────────────────────────── */
+
+/* El about-wrapper transiciona suavemente al cambiar de tema */
+.about-wrapper {
+  transition: background 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              color 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* En modo oscuro la imagen del about cambia a fondo oscuro */
+body.dark .about-img {
+  background: #222;
+}
+
+
+/* ── DELAYS DE LOS LINKS DEL NAV EN PRIMERA VISITA ─────────────────
+   En la primera visita (con loader), los links del nav aparecen
+   más tarde (2.2s, 2.3s) para no competir con la animación del loader.
+   Cuando no hay loader (body.no-loader-anim), usan el delay estándar.
+   ─────────────────────────────────────────────────────────────────── */
+
+nav .links a:nth-child(1) { animation-delay: 2.2s; }
+nav .links a:nth-child(2) { animation-delay: 2.3s; }
+
+body.no-loader-anim nav .links a:nth-child(1) { animation-delay: 0.2s; }
+body.no-loader-anim nav .links a:nth-child(2) { animation-delay: 0.3s; }
+
+
+/* ── HERO ────────────────────────────────────────────────────────────
+   Sección principal de la home: imagen a pantalla completa.
+   Empieza invisible (opacity: 0) y el JS la hace visible con .animate
+   cuando termina el loader.
+   border-radius cambia al hacer hover para efecto de "apertura".
+   ─────────────────────────────────────────────────────────────────── */
+
+.hero {
+  display: block;
+  margin-top: calc(var(--nav-h) + 4px);
+  margin-left: var(--pad);
+  margin-right: var(--pad);
+  margin-bottom: 40px;
+  height: calc(100vh - var(--nav-h) - 4px - 40px);
+  height: calc(100dvh - var(--nav-h) - 4px - 40px);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(24px);
+  border-radius: 4px;
+  cursor: none;
+  transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (min-width: 1600px) {
+  .hero {
+    margin-left: calc(var(--nav-h) + 4px);
+    margin-right: calc(var(--nav-h) + 4px);
+  }
+}
+
+.hero:hover {
+  border-radius: 16px;
+}
+
+/* .animate → el JS añade esta clase cuando termina el loader */
+.hero.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero .img-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  transition: border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero img,
+.hero video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.04);
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.hero.animate img,
+.hero.animate video {
+  transform: scale(1);
+}
+
+.hero:hover img,
+.hero:hover video {
+  transform: scale(1.03);
+}
+
+
+/* ── HERO TEXT ───────────────────────────────────────────────────────
+   Texto bajo el hero: nombre del proyecto a la izquierda,
+   premio o info a la derecha.
+   ─────────────────────────────────────────────────────────────────── */
+
+.hero-text {
+  padding: 120px var(--pad) 120px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 1600px) {
+  .hero-text {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+.hero-text .project-title {
+  font-size: var(--fs);
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.hero-text .project-sub {
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 19px;
+  max-width: 320px;
+}
+
+.hero-text .right {
+  text-align: right;
+}
+
+.hero-text .award {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  line-height: 19px;
+}
+
+
+/* ── ETIQUETA DE SECCIÓN ────────────────────────────────────────────
+   Texto gris pequeño sobre el portfolio ("Proyectos").
+   ─────────────────────────────────────────────────────────────────── */
+
+.section-label {
+  padding: 0 var(--pad) 16px;
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--muted);
+}
+
+@media (min-width: 1600px) {
+  .section-label {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+
+/* ── PORTFOLIO GRID ──────────────────────────────────────────────────
+   Contenedor principal de todas las tarjetas de proyectos.
+   Usa filas de 2, 3 columnas o ancho completo según la clase.
+   ─────────────────────────────────────────────────────────────────── */
+
+.portfolio {
+  padding: 0 var(--pad) 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+@media (min-width: 1600px) {
+  .portfolio {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+.row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--col-gap);
+}
+
+.row-3col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--col-gap);
+}
+
+.row-full {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+
+/* ── TARJETA DE PROYECTO ─────────────────────────────────────────────
+   Al hacer hover, la imagen se escala ligeramente y el texto se mueve.
+   .img-wrap controla el overflow del efecto de zoom.
+   ─────────────────────────────────────────────────────────────────── */
+
+.project-card {
+  display: block;
+  cursor: none;
+  align-self: start;
+  contain: layout style;
+}
+
+.project-card .img-wrap {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px;
+  transition: border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: border-radius;
+}
+
+.project-card:hover .img-wrap {
+  border-radius: 16px;
+}
+
+.project-card .img-wrap img,
+.project-card .img-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.project-card:hover .img-wrap img,
+.project-card:hover .img-wrap video {
+  transform: scale(1.03);
+}
+
+/* Info de la tarjeta: título y descripción */
+.project-card .card-info {
+  padding: 12px 0 20px;
+  overflow: hidden;
+}
+
+.card-title {
+  font-size: var(--fs);
+  font-weight: 400;
+  margin-bottom: 6px;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+/* Número del proyecto (02, 03...) */
+.card-num {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.card-desc {
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 19px;
+  max-width: 320px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.03s,
+              opacity 0.4s ease 0.03s;
+}
+
+/* Al hacer hover, el texto se mueve ligeramente hacia arriba */
+.project-card:hover .card-title {
+  transform: translateY(-2px);
+}
+
+.project-card:hover .card-desc {
+  transform: translateY(-2px);
+  opacity: 0.5;
+}
+
+/* Proporciones de las imágenes según el tamaño de la tarjeta */
+.img-hero   { aspect-ratio: 1360 / 680; }
+.img-medium { aspect-ratio: 901 / 580; }
+.img-large  { aspect-ratio: 443 / 580; }
+.img-small  { aspect-ratio: 443 / 286; }
+
+
+/* ── SECCIÓN ABOUT ───────────────────────────────────────────────────
+   Sección inferior de la home que activa el modo oscuro al aparecer.
+   Layout en 2 columnas: texto izquierda, imagen y contacto derecha.
+   ─────────────────────────────────────────────────────────────────── */
+
+.about-wrapper {
+  margin: 0 var(--pad);
+}
+
+@media (min-width: 1600px) {
+  .about-wrapper {
+    margin-left: var(--pad-large);
+    margin-right: var(--pad-large);
+  }
+}
+
+.about {
+  padding: 16px 0 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.about-row-top {
+  display: grid;
+  grid-template-columns: calc(50% - 8px) 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.about-label {
+  font-size: var(--fs);
+  color: var(--muted);
+  margin: 0;
+}
+
+.about-text {
+  font-size: var(--fs);
+  font-weight: 400;
+  line-height: 19px;
+  color: var(--ink);
+  margin: 0;
+}
+
+.about-row-bottom {
+  display: grid;
+  grid-template-columns: calc(50% - 8px) 1fr;
+  gap: 16px;
+  align-items: end;
+}
+
+/* Classes del grid unificado anterior — ya no se usan activamente */
+.about-grid, .about-col-left, .about-col-right { display: contents; }
+
+/* Imagen del about section */
+.about-img {
+  width: 213px;
+  height: 260px;
+  overflow: hidden;
+  background: #f0f0f0;
+  flex-shrink: 0;
+  justify-self: start;
+  border-radius: 4px;
+}
+
+.about-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Grid de links de contacto (social + email/teléfono) */
+.about-contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 24px;
+}
+
+.about-contact a {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--ink);
+  transition: opacity 0.2s;
+  line-height: 20px;
+  display: block;
+}
+
+.about-contact a:hover {
+  opacity: 0.5;
+}
+
+.about-contact .col-label {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+
+/* ── FOOTER CTA — VERSIÓN OSCURA (HOME) ─────────────────────────────
+   En la home el footer CTA aparece con el body en modo oscuro.
+   Texto blanco, botón blanco con texto oscuro.
+   Esto sobreescribe los valores de footer.css.
+   ─────────────────────────────────────────────────────────────────── */
+
+.footer-cta {
+  padding: 120px var(--pad);
+}
+
+/* Título blanco (sobre fondo oscuro) */
+.footer-cta__title {
+  color: #FFFFFF;
+}
+
+/* Texto blanco semitransparente */
+.footer-cta__text {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+/* Botón blanco con texto oscuro */
+.footer-cta__button {
+  background: #FFFFFF;
+  color: #0F0F0F;
+}
+
+.footer-cta__button:hover {
+  background: #606060;
+  color: #FFFFFF;
+}
+
+
+/* ── RESPONSIVE PANTALLAS GRANDES ───────────────────────────────────
+   Ajustes específicos para monitores muy anchos.
+   ─────────────────────────────────────────────────────────────────── */
+
+@media (min-width: 1920px) {
+  .hero-text {
+    padding-top: 160px;
+    padding-bottom: 160px;
+  }
+
+  .card-desc {
+    max-width: 420px;
+  }
+
+  .about-img {
+    width: 280px;
+    height: 340px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .card-desc {
+    max-width: 520px;
+  }
+
+  .about-img {
+    width: 360px;
+    height: 440px;
+  }
+}
+
+
+/* ── RESPONSIVE MÓVIL ────────────────────────────────────────────────
+   Adaptaciones para pantallas ≤768px.
+   ─────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .hero {
+    height: calc(100dvh - var(--nav-h) - 4px - 40px);
+  }
+
+  .hero-text {
+    padding-top: 24px;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-text .right {
+    text-align: left;
+  }
+
+  /* En móvil se oculta hero-more y se muestran los botones móvil */
+  .hero-more {
+    display: none;
+  }
+
+  .btn-mobile {
+    display: inline-flex;
+    margin-top: 24px;
+    width: fit-content;
+  }
+
+  .btn-mobile-light {
+    display: block;
+    margin-top: 24px;
+    width: fit-content;
+  }
+
+  /* Portfolio en una sola columna */
+  .row-2col,
+  .row-3col {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio {
+    gap: 8px;
+  }
+
+  /* About se reorganiza en columna */
+  .about {
+    gap: 24px;
+  }
+
+  .about-row-top {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .about-row-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .about-img {
+    width: 100%;
+    height: 220px;
+    justify-self: unset;
+  }
+
+  .about-contact {
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 16px;
+    width: 100%;
+  }
+
+  /* Dark mode mobile menu */
+  body.dark .mobile-menu::before {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  body.dark .mobile-menu.open::before {
+    background: rgba(0, 0, 0, 0.34);
+  }
+
+  body.dark .mobile-menu-panel {
+    background: rgba(15, 15, 15, 0.96);
+  }
+}

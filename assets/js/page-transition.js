@@ -48,6 +48,7 @@
     document.documentElement.classList.add('page-transition-no-bg-transition');
     document.documentElement.classList.remove('page-transition-pending', 'page-transition-revealing');
     document.documentElement.style.removeProperty('--page-transition-color');
+    document.documentElement.style.backgroundColor = '';
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         document.documentElement.classList.remove('page-transition-no-bg-transition');

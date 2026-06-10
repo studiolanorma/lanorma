@@ -1,0 +1,503 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PROYECTO.CSS — Studio Lanorma
+
+   Estilos exclusivos de las páginas de proyectos.
+   Compartido entre: goodsmatcha y saifai.
+
+   Características únicas de estas páginas:
+   - --fs-small: 14px (más grande que el estándar)
+   - Layout sticky: panel de info fijo a la izquierda + imágenes a la derecha
+   - .nav-inner como wrapper interno del nav (en lugar de padding directo)
+   - body.cursor-light → cursor blanco (sobre imágenes oscuras)
+   - Breakpoint en 940px (no 768px como otras páginas)
+   - Footer CTA con font-size: 17px (más pequeño que el estándar)
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ── VARIABLES ESPECÍFICAS DE PROYECTOS ─────────────────────────────
+   Estas páginas usan --fs-small: 14px.
+   El resto de variables son iguales al base.
+   ─────────────────────────────────────────────────────────────────── */
+
+:root {
+  --fs-small: 14px;
+}
+
+@media (max-width: 940px) {
+  :root {
+    --pad: 20px;
+  }
+}
+
+
+/* ── CURSOR BLANCO (sobre imágenes oscuras) ─────────────────────────
+   En las páginas de proyecto, el cursor se hace blanco cuando
+   el ratón pasa sobre las imágenes de la galería.
+   El JavaScript de la página añade body.cursor-light.
+   ─────────────────────────────────────────────────────────────────── */
+
+body.cursor-light .cursor-dot {
+  background: #FFFFFF;
+}
+
+body.cursor-light .cursor-ring {
+  border-color: #FFFFFF;
+}
+
+
+/* ── NAV SIN PADDING (usa .nav-inner) ───────────────────────────────
+   En los proyectos, el nav no tiene padding propio.
+   En su lugar, el div .nav-inner (dentro del nav) tiene el padding.
+   Esto está definido en navbar.css con la clase .nav-inner.
+   ─────────────────────────────────────────────────────────────────── */
+
+nav {
+  padding: 0;
+}
+
+
+/* ── LINKS DEL NAV EN PROYECTOS ─────────────────────────────────────
+   Sin animación de entrada — aparecen directamente.
+   ─────────────────────────────────────────────────────────────────── */
+
+nav .links a {
+  font-weight: 400;
+  letter-spacing: 0em;
+  color: var(--ink);
+  opacity: 1;
+  animation: none;
+}
+
+nav .links a:hover {
+  opacity: 0.5;
+}
+
+
+/* ── PADDING LATERAL DEL CONTENIDO ──────────────────────────────────
+   .page-inner envuelve el contenido con el padding estándar.
+   ─────────────────────────────────────────────────────────────────── */
+
+.page-inner {
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+
+@media (min-width: 1600px) {
+  .page-inner {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+
+/* ── PÁGINA DEL PROYECTO ─────────────────────────────────────────────
+   Compensa la altura del nav fijo.
+   ─────────────────────────────────────────────────────────────────── */
+
+.project-page {
+  padding-top: var(--nav-h);
+}
+
+
+/* ── GALERÍA STICKY ──────────────────────────────────────────────────
+   Layout principal del proyecto: panel info sticky a la izquierda,
+   columna de imágenes que hace scroll a la derecha.
+   ─────────────────────────────────────────────────────────────────── */
+
+.project-gallery {
+  padding-top: 0;
+  padding-bottom: 120px;
+}
+
+/* Grid de 2 columnas: 1fr info + 2fr imágenes */
+.gallery-sticky-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--col-gap);
+  align-items: start;
+}
+
+@media (min-width: 1300px) {
+  .gallery-sticky-wrap {
+    grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr);
+  }
+}
+
+@media (max-width: 940px) {
+  .gallery-sticky-wrap {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Panel izquierdo — se queda fijo al hacer scroll */
+.gallery-sticky-info {
+  position: sticky;
+  top: calc(var(--nav-h) + 40px);
+  padding-right: 40px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 940px) {
+  .gallery-sticky-info {
+    position: static;
+    padding-right: 0;
+    max-width: 100%;
+  }
+}
+
+/* Título del proyecto en el panel izquierdo */
+.gallery-sticky-title {
+  font-size: var(--fs);
+  font-weight: 400;
+  line-height: 1.27;
+  letter-spacing: normal;
+  margin-bottom: 16px;
+  margin-top: 40px;
+}
+
+/* Descripción del proyecto */
+.gallery-sticky-desc {
+  font-size: var(--fs);
+  font-weight: 400;
+  line-height: 1.27;
+  color: var(--ink);
+  opacity: 0.5;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  -webkit-hyphens: none;
+  width: 100%;
+}
+
+.gallery-sticky-desc + .gallery-sticky-desc {
+  margin-top: 12px;
+}
+
+/* Metadatos del proyecto (año, cliente, servicios, etc.) */
+.gallery-sticky-meta {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 24px;
+}
+
+@media (max-width: 480px) {
+  .gallery-sticky-meta {
+    grid-template-columns: 1fr;
+  }
+}
+
+.meta-label {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.meta-value {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Columna derecha de imágenes */
+.gallery-sticky-images {
+  display: flex;
+  flex-direction: column;
+  gap: var(--col-gap);
+  min-width: 0;
+}
+
+
+/* ── IMÁGENES DE LA GALERÍA ──────────────────────────────────────────
+   .gallery-img        → imagen individual (proporción 3:2 por defecto)
+   .gallery-img-duo    → fila de dos cuadradas (proporción 1:1)
+   .img-full           → imagen a ancho completo (fuera del sticky)
+   ─────────────────────────────────────────────────────────────────── */
+
+.gallery-img {
+  overflow: hidden;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.gallery-img img,
+.gallery-img video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Fila de dos imágenes cuadradas */
+.gallery-img-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--col-gap);
+  width: 100%;
+}
+
+.gallery-img-duo .gallery-img img,
+.gallery-img-duo .gallery-img video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (max-width: 480px) {
+  .gallery-img-duo {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Imagen a ancho completo (80% de la altura de la ventana) */
+.img-full {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.img-full img,
+.img-full video {
+  width: 100%;
+  display: block;
+  height: 80vh;
+  object-fit: cover;
+}
+
+
+/* ── SEPARADOR ────────────────────────────────────────────────────── */
+
+.sep {
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.12;
+}
+
+
+/* ── VÍDEO EMBED ─────────────────────────────────────────────────── */
+
+.video-embed {
+  overflow: hidden;
+  border-radius: 4px;
+  position: relative;
+  width: 100%;
+}
+
+.video-embed iframe {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  border: none;
+}
+
+
+/* ── NAVEGACIÓN ENTRE PROYECTOS ──────────────────────────────────────
+   Sección inferior con enlaces al proyecto anterior y siguiente.
+   ─────────────────────────────────────────────────────────────────── */
+
+.project-nav {
+  padding: 48px 0;
+  display: grid;
+  grid-template-columns: calc(50% - 8px) 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 940px) {
+  .project-nav {
+    grid-template-columns: 1fr;
+    padding: 40px 0;
+  }
+}
+
+.project-nav-label {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-bottom: 24px;
+  grid-column: 1 / -1;
+}
+
+.project-nav-link {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  transition: opacity 0.2s;
+}
+
+.project-nav-link:hover {
+  opacity: 0.5;
+}
+
+.project-nav-thumb {
+  width: 72px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: 4px;
+  flex-shrink: 0;
+  background: #f0f0f0;
+}
+
+.project-nav-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.project-nav-dir {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.project-nav-name {
+  font-size: var(--fs);
+  font-weight: 400;
+}
+
+
+/* ── FOOTER CTA (PROYECTOS) ──────────────────────────────────────────
+   En los proyectos el footer CTA tiene una estructura diferente:
+   - Columna centrada (sin imagen lateral)
+   - font-size: 17px para título y texto (más pequeño que el estándar 24px)
+   - Usa container queries para adaptación responsiva
+   ─────────────────────────────────────────────────────────────────── */
+
+.footer-cta {
+  width: 100%;
+  container-type: inline-size;
+}
+
+.footer-cta__inner {
+  width: 100%;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding-top: 120px;
+  border-radius: 4px;
+}
+
+.footer-cta__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  padding-bottom: 120px;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-cta__copy {
+  max-width: 520px;
+  text-align: center;
+}
+
+/* font-size: 17px — más pequeño que el estándar (24px) */
+.footer-cta__title,
+.footer-cta__text {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.footer-cta__title {
+  color: #606060;
+}
+
+.footer-cta__text {
+  margin-top: 14px;
+  color: rgba(96, 96, 96, 0.58);
+}
+
+.footer-cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  height: 40px;
+  padding: 0 24px;
+  border-radius: 4px;
+  background: #0F0F0F;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.footer-cta__button:hover {
+  background: #606060;
+  color: #FFFFFF;
+}
+
+.footer-cta__image {
+  width: 100%;
+  height: 370px;
+  justify-self: stretch;
+  align-self: center;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.footer-cta__image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Container query: en contenedores pequeños se adapta */
+@container (max-width: 841px) {
+  .footer-cta__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-cta__content {
+    min-height: auto;
+    gap: 32px;
+  }
+
+  .footer-cta__image {
+    align-self: stretch;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+
+/* ── FOOTER BOTTOM (PROYECTOS) ───────────────────────────────────────
+   Sin borde superior y con breakpoint en 940px.
+   ─────────────────────────────────────────────────────────────────── */
+
+.footer-bottom {
+  padding: 32px 0;
+  display: grid;
+  grid-template-columns: calc(50% - 8px) 1fr auto;
+  gap: 24px 16px;
+  align-items: end;
+  border-top: 0px solid rgba(15, 15, 15, 0.08);
+}
+
+@media (max-width: 940px) {
+  .footer-bottom {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .footer-copyright {
+    text-align: left;
+  }
+}

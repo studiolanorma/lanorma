@@ -1,0 +1,217 @@
+/* ═══════════════════════════════════════════════════════════════════
+   FOOTER.CSS — Studio Lanorma
+
+   Estilos del footer compartidos por todas las páginas:
+   - Footer CTA: sección de llamada a la acción (estilo claro/gris)
+   - Footer bottom: columnas con links, dirección y copyright
+
+   NOTA: La home tiene un footer CTA con fondo oscuro (texto blanco,
+   botón blanco). Ese override está en assets/css/pages/home.css.
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ── FOOTER CTA — SECCIÓN DE LLAMADA A LA ACCIÓN ───────────────────
+   Versión estándar (fondo claro, texto gris, botón oscuro).
+   Usada en: insights, artículos, contacto, proyectos.
+   La home usa una versión diferente (ver pages/home.css).
+   ─────────────────────────────────────────────────────────────────── */
+
+.footer-cta {
+  padding: 120px var(--pad) 88px;
+}
+
+@media (min-width: 1600px) {
+  .footer-cta {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+.footer-cta__inner {
+  width: 100%;
+  min-height: 420px;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 80px;
+  border-radius: 4px;
+}
+
+/* Flexbox vertical: título arriba, botón abajo */
+.footer-cta__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 64px;
+}
+
+.footer-cta__copy {
+  max-width: 520px;
+  text-align: center;
+}
+
+/* Título y texto del CTA — tipografía compartida */
+.footer-cta__title,
+.footer-cta__text {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+/* Versión estándar: título gris */
+.footer-cta__title {
+  color: #606060;
+}
+
+/* Versión estándar: texto más claro */
+.footer-cta__text {
+  margin-top: 14px;
+  color: rgba(96, 96, 96, 0.58);
+}
+
+/* Botón del CTA — versión estándar: fondo oscuro, texto blanco */
+.footer-cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  height: 40px;
+  padding: 0 24px;
+  border-radius: 4px;
+  background: #0F0F0F;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.footer-cta__button:hover {
+  background: #606060;
+  color: #FFFFFF;
+}
+
+/* Imagen decorativa del CTA (opcional, usada en la home) */
+.footer-cta__image {
+  width: min(100%, 494px);
+  max-width: 494px;
+  height: 370px;
+  justify-self: end;
+  align-self: center;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.footer-cta__image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+
+/* ── FOOTER BOTTOM — COLUMNAS INFERIORES ────────────────────────────
+   Grid de 3 columnas: dirección | links legales | copyright.
+   ─────────────────────────────────────────────────────────────────── */
+
+.footer-bottom {
+  padding: 32px var(--pad);
+  display: grid;
+  grid-template-columns: calc(50% - 8px) 1fr auto;
+  gap: 24px 16px;
+  align-items: end;
+  border-top: 1px solid rgba(15, 15, 15, 0.1);
+}
+
+@media (min-width: 1600px) {
+  .footer-bottom {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+/* Links y texto de las columnas del footer */
+.footer-col a,
+.footer-col p {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.8;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.footer-col a:hover {
+  opacity: 0.5;
+}
+
+/* Copyright a la derecha */
+.footer-copyright {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+  align-self: end;
+}
+
+
+/* ── RESPONSIVE DEL FOOTER ──────────────────────────────────────────
+   En móvil el grid se reorganiza en 2 columnas,
+   el copyright pasa a la siguiente línea.
+   ─────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 1100px) {
+  .footer-cta__inner {
+    gap: 48px;
+    padding: 40px;
+  }
+}
+
+@media (max-width: 980px) {
+  .footer-cta__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-cta__image {
+    width: 100%;
+    max-width: none;
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-bottom {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-copyright {
+    text-align: left;
+    grid-column: 1 / -1;
+  }
+
+  .footer-cta {
+    padding: 16px;
+  }
+
+  .footer-cta__inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    min-height: auto;
+    padding: 80px 16px;
+  }
+
+  .footer-cta__content {
+    min-height: auto;
+  }
+
+  .footer-cta__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 494 / 370;
+  }
+}

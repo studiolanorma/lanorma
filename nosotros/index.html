@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <script>(function(){var k='lanorma-page-transition',ck='lanorma-page-transition-color';if(sessionStorage.getItem(k)==='active'){var color=sessionStorage.getItem(ck)||'#0f0f0f';document.documentElement.classList.add('page-transition-pending');document.documentElement.style.setProperty('--page-transition-color',color);}})()</script>
+  <script>(function(){var k='lanorma-page-transition',ck='lanorma-page-transition-color';if(sessionStorage.getItem(k)==='active'){var color=sessionStorage.getItem(ck)||'#0f0f0f';document.documentElement.classList.add('page-transition-pending');document.documentElement.style.setProperty('--page-transition-color',color);document.documentElement.style.backgroundColor=color;}})()</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nosotros — Lanorma, Estudio de Diseño en Cantabria</title>
   <meta name="description" content="Estudio de diseño del norte de España. Identidad visual, diseño web y sistemas de diseño para pymes y startups que no quieren parecerse a nadie.">
@@ -21,602 +21,12 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_ES">
 
-  <style>
-    /* ── FUENTES ── */
-    @font-face {
-      font-family: 'Suisse Intl';
-      src: url('/assets/fonts/SuisseIntl-Book.ttf') format('truetype');
-      font-weight: 300;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Suisse Intl';
-      src: url('/assets/fonts/SuisseIntl-Regular.ttf') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Suisse Intl';
-      src: url('/assets/fonts/SuisseIntl-Medium.ttf') format('truetype');
-      font-weight: 500;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Suisse Intl';
-      src: url('/assets/fonts/SuisseIntl-SemiBold.ttf') format('truetype');
-      font-weight: 600;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Suisse Intl';
-      src: url('/assets/fonts/SuisseIntl-Bold.ttf') format('truetype');
-      font-weight: 700;
-      font-style: normal;
-    }
-  </style>
-
-  <style>
-    /* ── RESET ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* ── TOKENS ── */
-    :root {
-      --bg:     #ffffff;
-      --ink:    #0f0f0f;
-      --ink2:   #606060;
-      --muted:  #999999;
-      --fs:     14px;
-      --nav-h:  64px;
-      --pad:    clamp(40px, 5vw, 220px);
-      --pad-large: 427px;
-    }
-
-    body.theme-dark {
-      --bg:    #0f0f0f;
-      --ink:   #ffffff;
-      --ink2:  #606060;
-      --muted: #939393;
-    }
-
-    html { scroll-behavior: auto; } /* Lenis toma el control; si falla JS, smooth como fallback */
-    @media (prefers-reduced-motion: no-preference) {
-      html:not(.lenis-ready) { scroll-behavior: smooth; }
-    }
-
-    body {
-      font-family: 'Suisse Intl', sans-serif;
-      font-size: var(--fs);
-      font-weight: 400;
-      background: var(--bg);
-      color: var(--ink);
-      -webkit-font-smoothing: antialiased;
-      cursor: none;
-      transition: background 0.8s ease, color 0.8s ease;
-    }
-
-    /* ── Transición global de tema: colores cambian suavemente en todos los elementos ── */
-    *, *::before, *::after {
-      transition-property: background-color, border-color, color, fill, stroke;
-      transition-duration: 0.8s;
-      transition-timing-function: ease;
-    }
-
-    a { color: inherit; text-decoration: none; cursor: none; }
-
-    /* ── CURSOR ── */
-    .cursor {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      top: 0; left: 0;
-    }
-    .cursor-dot {
-      width: 5px; height: 5px;
-      background: var(--ink);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
-    }
-    .cursor-ring {
-      position: absolute;
-      top: 0; left: 0;
-      width: 40px; height: 40px;
-      border: 1px solid var(--ink);
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      opacity: 0;
-      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.45s ease;
-    }
-    body.cursor-hover .cursor-dot  { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-    body.cursor-hover .cursor-ring { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--nav-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 var(--pad);
-      background: transparent;
-      z-index: 100;
-      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: opacity;
-    }
-    nav.nav-hidden { opacity: 0; pointer-events: none; }
-    nav .logo svg { display: block; overflow: visible; }
-
-    /* Logo animado */
-    nav .logo .logo-text {
-      clip-path: inset(0 0 0 0);
-      transition: clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0);
-    }
-    nav .logo .logo-n {
-      transition: transform 0.50s cubic-bezier(0.25, 0, 0.25, 1);
-    }
-    nav .logo .logo-paren-right {
-      transition: transform 0.35s cubic-bezier(0.25, 0, 0.80, 1);
-    }
-    nav .logo svg path { transition: fill 0.55s ease; }
-
-    nav .links { display: flex; gap: 24px; }
-    nav .links a {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--ink2);
-      transition: opacity 0.2s;
-    }
-    nav .links a:hover { opacity: 0.5; }
-
-    /* ── FOTO / VIDEO GRANDE ── */
-    .studio-photo {
-      padding: 0 var(--pad);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: none;
-    }
-    .studio-photo img,
-    .studio-photo video {
-      width: 100%;
-      height: 88vh;
-      object-fit: cover;
-      display: block;
-      border-radius: 4px;
-      border: none;
-      outline: none;
-      box-shadow: none;
-    }
-
-    /* ── SECCIONES INFO ── */
-    .info-section {
-      padding: 80px var(--pad);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px 0;
-    }
-    .info-section-1 {
-      padding: 180px var(--pad) 120px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px 0;
-    }
-    .info-section-method {
-      padding: 0 var(--pad);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px 0;
-    }
-    .info-section-contact {
-      padding: 120px var(--pad);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px 0;
-    }
-
-    /* ── TABLET Y DESKTOP: columna derecha alineada con "Aviso legal" del footer ──
-       Footer: grid-template-columns: calc(50% - 8px) 1fr auto; gap column: 16px
-       → col 2 del footer arranca en calc(50% - 8px + 16px) = calc(50% + 8px)
-       → primera col del contenido = calc(50% + 8px), gap = 0
-    ── */
-    @media (min-width: 745px) {
-      .info-section {
-        grid-template-columns: calc(50% + 8px) 1fr;
-        gap: 0;
-      }
-      .info-section-1,
-      .info-section-method,
-      .info-section-contact {
-        grid-template-columns: calc(50% + 8px) 1fr;
-        gap: 0;
-      }
-      .info-label {
-        position: sticky;
-        top: 80px;
-        transition: top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      body.nav-is-hidden .info-label { top: 24px; }
-    }
-
-    .info-label {
-      font-size: var(--fs);
-      color: var(--muted);
-      position: static;
-      align-self: start;
-    }
-    .info-content {
-      font-size: var(--fs);
-      font-weight: 400;
-      color: var(--ink);
-      line-height: 20px;
-    }
-    .info-content p + p { margin-top: 12px; }
-
-    /* ── SERVICIOS ── */
-    .services-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 40px;
-      padding-bottom: 120px;
-    }
-    .services-col { display: flex; flex-direction: column; }
-    .service-item {
-      padding: 20px 0;
-      border-top: 1px solid rgba(155, 155, 155, 0.144);
-      font-size: var(--fs);
-      font-weight: 400;
-      color: var(--ink);
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
-      cursor: none;
-      position: relative;
-    }
-    .service-item:hover {
-      transform: translateX(6px);
-      opacity: 0.5;
-    }
-    .services-col .service-item:last-of-type {
-      border-bottom: 1px solid rgba(155, 155, 155, 0.144);
-    }
-
-    /* ── BARAJA DE SERVICIOS ── */
-    #service-card-deck {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 120;
-    }
-    .service-card {
-      position: fixed;
-      pointer-events: none;
-      z-index: 120;
-      top: 0;
-      left: 0;
-      width: clamp(92px, 11vw, 150px);
-      aspect-ratio: 4 / 5;
-      border-radius: 4px;
-      overflow: hidden;
-      background: #f2f2f2;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
-      opacity: 0;
-      transform: translate3d(-50%, -50%, 0) scale(0.88) rotate(0deg);
-      transition: opacity 0.18s ease;
-      will-change: transform, opacity;
-      backface-visibility: hidden;
-    }
-    .service-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transform: scale(1.04);
-    }
-    .service-card.visible {
-      opacity: 1;
-    }
-
-    /* ── NOSOTROS ── */
-    .nosotros-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 40px;
-      padding-bottom: 120px;
-    }
-    .nosotros-col { display: flex; flex-direction: column; }
-    .nosotros-item {
-      padding: 16px 0 0;
-      font-size: var(--fs);
-      font-weight: 400;
-      color: var(--ink);
-      line-height: 20px;
-    }
-    .nosotros-role {
-      color: var(--muted);
-    }
-    .about-img {
-      width: 100%;
-      max-width: 280px;
-      height: 320px;
-      overflow: hidden;
-      background: #f0f0f0;
-      border-radius: 4px;
-    }
-    .about-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ── CLIENTES (LOGOS) ── */
-    .logos-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 40px;
-      padding-bottom: 120px;
-    }
-    .logos-col { display: flex; flex-direction: column; }
-    .logos-img {
-      width: 100%;
-      max-width: 280px;
-      aspect-ratio: 280 / 102;
-      overflow: hidden;
-      border-radius: 4px;
-      margin-bottom: 24px;
-    }
-    .logos-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ── CONTACTO ── */
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-top: 16px;
-    }
-    .contact-links a {
-      font-size: var(--fs);
-      font-weight: 400;
-      color: var(--ink);
-      transition: opacity 0.2s;
-    }
-    .contact-links a:hover { opacity: 0.5; }
-
-    /* ── FOOTER ── */
-    footer { padding: 0 var(--pad); }
-    .footer-bottom {
-      padding: 32px 0;
-      display: grid;
-      grid-template-columns: calc(50% - 8px) 1fr auto;
-      gap: 24px 16px;
-      align-items: end;
-      border-top: 0px solid rgba(155, 155, 155, 0.1);
-    }
-    .footer-col a,
-    .footer-col p {
-      font-size: var(--fs);
-      font-weight: 400;
-      color: var(--ink);
-      line-height: 1.8;
-      display: block;
-      transition: opacity 0.2s;
-    }
-    .footer-col a:hover { opacity: 0.5; }
-    .footer-copyright {
-      font-size: var(--fs);
-      font-weight: 400;
-      color: var(--muted);
-      text-align: right;
-      white-space: nowrap;
-    }
-
-    /* ── FOOTER TABLET: evitar que la primera columna ocupe demasiado ── */
-    @media (min-width: 745px) and (max-width: 1023px) {
-      .footer-bottom {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto;
-      }
-      .footer-copyright {
-        grid-column: 1 / -1;
-        text-align: left;
-      }
-      .about-img {
-        max-width: 100%;
-        height: 40vw;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nosotros-list { grid-template-columns: 1fr; gap: 24px; }
-      .nosotros-list .about-img { max-width: 100%; }
-    }
-    @media (min-width: 1640px) {
-      :root { --pad: var(--pad-large); }
-    }
-
-    /* ── RESPONSIVE MÓVIL ── */
-    @media (max-width: 744px) {
-      :root { --pad: 20px; }
-
-      body { cursor: auto; }
-      .cursor { display: none; }
-
-      nav .links { gap: 16px; }
-
-      .info-section-1 { padding: 120px var(--pad) 80px; }
-
-      .studio-photo img,
-      .studio-photo video {
-        height: 55vw;
-        min-height: 220px;
-      }
-
-
-
-      .service-item {
-        transition: none;
-        cursor: auto;
-      }
-      .service-item:hover {
-        transform: none;
-        opacity: 1;
-      }
-
-      .footer-bottom { grid-template-columns: 1fr 1fr; }
-      .footer-copyright {
-        grid-column: 1 / -1;
-        text-align: left;
-      }
-    }
-  
-  /* ── MOBILE MENU SHARED ── */
-  nav { z-index: 130; }
-  html.menu-open,
-  body.menu-open {
-    overflow: hidden;
-    overscroll-behavior: none;
-  }
-  body.menu-open nav,
-  body.menu-open nav.nav-hidden {
-    opacity: 1 !important;
-    pointer-events: auto !important;
-  }
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border: none;
-    background: none;
-    color: var(--ink2, var(--ink));
-    cursor: pointer;
-    z-index: 131;
-  }
-  body:not(.theme-light):not(.dark) .hamburger {
-    color: var(--ink);
-  }
-  body.dark .hamburger {
-    color: #FFFFFF;
-  }
-  .hamburger span {
-    display: block;
-    width: 20px;
-    height: 1.5px;
-    border-radius: 999px;
-    background: currentColor;
-    transform-origin: center;
-    transition: transform 0.35s ease, background 0.35s ease;
-  }
-  .hamburger.open span:nth-child(1) { transform: translateY(3.75px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { transform: translateY(-3.75px) rotate(-45deg); }
-  .mobile-menu {
-    position: fixed;
-    inset: 0;
-    z-index: 110;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-    padding: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: visibility 0.6s ease;
-  }
-  .mobile-menu::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(22, 22, 22, 0);
-    opacity: 0;
-    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                background 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .mobile-menu-panel {
-    position: relative;
-    width: 100vw;
-    height: 100%;
-    height: 100dvh;
-    padding: calc(var(--nav-h) + 24px) 16px 32px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 18px;
-    background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    transform: translate3d(100%, 0, 0);
-    opacity: 1;
-    transition: transform 0.72s cubic-bezier(0.19, 1, 0.22, 1),
-                opacity 0.45s ease,
-                background 0.35s ease;
-    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.08);
-  }
-  .mobile-menu.open {
-    visibility: visible;
-    pointer-events: auto;
-  }
-  .mobile-menu.open::before {
-    background: rgba(22, 22, 22, 0.28);
-    opacity: 1;
-  }
-  .mobile-menu.open .mobile-menu-panel {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  .mobile-menu a {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--ink);
-    opacity: 0;
-    transform: translateX(18px);
-  }
-  .mobile-menu.open a { animation: menuLinkIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .mobile-menu.open a:nth-child(1) { animation-delay: 0.06s; }
-  .mobile-menu.open a:nth-child(2) { animation-delay: 0.12s; }
-  .mobile-menu.open a:nth-child(3) { animation-delay: 0.18s; }
-  .mobile-menu.open a:nth-child(4) { animation-delay: 0.24s; }
-  .mobile-menu.open a:nth-child(5) { animation-delay: 0.3s; }
-  .mobile-menu .menu-social {
-    display: flex;
-    gap: 18px;
-    margin-top: auto;
-    padding-top: 32px;
-  }
-  .mobile-menu .menu-social a {
-    font-size: var(--fs-small, 13px);
-    font-weight: 400;
-  }
-  @keyframes menuLinkIn {
-    from { opacity: 0; transform: translateX(18px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  @media (max-width: 768px) {
-    nav .links { display: none !important; }
-    .hamburger { display: inline-flex !important; }
-    body.dark .hamburger span,
-    body.menu-open[data-menu-dark="true"] .hamburger span { background: #FFFFFF; }
-    body.dark .mobile-menu::before,
-    body.menu-open[data-menu-dark="true"] .mobile-menu::before { background: rgba(0, 0, 0, 0); }
-    body.dark .mobile-menu.open::before,
-    body.menu-open[data-menu-dark="true"] .mobile-menu.open::before { background: rgba(0, 0, 0, 0.34); }
-    body.dark .mobile-menu-panel,
-    body:not(.theme-light):not(.dark) .mobile-menu-panel[data-dark-default="true"],
-    body.menu-open[data-menu-dark="true"] .mobile-menu-panel[data-dark-default="true"] {
-      background: rgba(15, 15, 15, 0.96);
-    }
-    body.dark .mobile-menu a,
-    body.menu-open[data-menu-dark="true"] .mobile-menu-panel[data-dark-default="true"] a { color: #FFFFFF; }
-  }
-
-</style>
+    <!-- CSS externo — reemplaza todos los estilos inline de esta página -->
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/navbar.css">
+  <link rel="stylesheet" href="/assets/css/footer.css">
+  <link rel="stylesheet" href="/assets/css/pages/nosotros.css">
   <link rel="stylesheet" href="/assets/css/page-transition.css">
   <link rel="stylesheet" href="/assets/css/reveal.css">
 </head>
@@ -782,101 +192,76 @@
     <div class="service-card"><img src="/assets/img/home-6.webp" alt=""></div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="/assets/js/navbar.js"></script>
   <script>
-    // ── Smooth scroll ──
-    const lenis = new Lenis({ duration: 1.05, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-    document.documentElement.classList.add('lenis-ready');
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
+    /* Nav: ocultar/mostrar al hacer scroll (umbral 80px) */
+    navSetupHideShow(80);
 
-    // ── Baraja de imágenes en servicios ──
-    const serviceNames = new Set([
-      'Identidad Visual',
-      'Diseño Web',
-      'Sistemas de Diseño',
-      'Dirección de Arte',
-      'Estrategia de Marca',
-      'Branding',
-      'Naming',
-      'Packaging',
-      'Motion Design',
-      'Fotografía',
-      'SEO y posicionamiento',
+    /* Baraja de tarjetas de servicios (lógica exclusiva de esta página) */
+    var serviceNames = new Set([
+      'Identidad Visual','Diseño Web','Sistemas de Diseño',
+      'Dirección de Arte','Estrategia de Marca','Branding',
+      'Naming','Packaging','Motion Design','Fotografía','SEO y posicionamiento',
     ]);
-
-    const serviceCards = [...document.querySelectorAll('.service-card')];
-    const deckLayouts = [
+    var serviceCards = [...document.querySelectorAll('.service-card')];
+    var deckLayouts = [
       { offsetX: 112, offsetY: -64, rotate: -10, scale: 0.92, lag: 0.16 },
       { offsetX: 140, offsetY: -44, rotate:  -4, scale: 0.96, lag: 0.20 },
       { offsetX: 168, offsetY: -22, rotate:   2, scale: 1.00, lag: 0.24 },
       { offsetX: 196, offsetY:   0, rotate:   7, scale: 0.97, lag: 0.28 },
       { offsetX: 224, offsetY:  22, rotate:  12, scale: 0.93, lag: 0.32 },
     ];
-    const deckState = {
-      targetX: window.innerWidth / 2,
-      targetY: window.innerHeight / 2,
-      cards: deckLayouts.map(layout => ({
-        currentX: window.innerWidth / 2,
-        currentY: window.innerHeight / 2,
-        ...layout,
-        targetOffsetX: layout.offsetX,
-        targetOffsetY: layout.offsetY,
-        targetRotate: layout.rotate,
-        targetScale: layout.scale,
-      })),
-      active: false,
-      raf: null,
+    var deckState = {
+      targetX: window.innerWidth / 2, targetY: window.innerHeight / 2,
+      cards: deckLayouts.map(function(layout) {
+        return Object.assign({ currentX: window.innerWidth/2, currentY: window.innerHeight/2 }, layout,
+          { targetOffsetX: layout.offsetX, targetOffsetY: layout.offsetY,
+            targetRotate: layout.rotate, targetScale: layout.scale });
+      }),
+      active: false, raf: null,
     };
-    const servicesList = document.querySelector('.services-list');
-    let activeServiceItem = null;
-    let deckHitTestRaf = null;
-    let serviceDeckShowTimer = null;
+    var servicesList = document.querySelector('.services-list');
+    var activeServiceItem = null, deckHitTestRaf = null, serviceDeckShowTimer = null;
 
-    serviceCards.forEach(card => {
-      const img = card.querySelector('img');
-      if (img?.decode) img.decode().catch(() => {});
+    serviceCards.forEach(function(card) {
+      var img = card.querySelector('img');
+      if (img && img.decode) img.decode().catch(function(){});
     });
 
     function animateServiceDeck() {
-      deckState.cards.forEach((card, i) => {
+      deckState.cards.forEach(function(card, i) {
         card.currentX += (deckState.targetX - card.currentX) * card.lag;
         card.currentY += (deckState.targetY - card.currentY) * card.lag;
-        card.offsetX += (card.targetOffsetX - card.offsetX) * 0.18;
-        card.offsetY += (card.targetOffsetY - card.offsetY) * 0.18;
-        card.rotate += (card.targetRotate - card.rotate) * 0.16;
-        card.scale += (card.targetScale - card.scale) * 0.16;
-        const el = serviceCards[i];
+        card.offsetX  += (card.targetOffsetX - card.offsetX) * 0.18;
+        card.offsetY  += (card.targetOffsetY - card.offsetY) * 0.18;
+        card.rotate   += (card.targetRotate - card.rotate) * 0.16;
+        card.scale    += (card.targetScale  - card.scale)  * 0.16;
+        var el = serviceCards[i];
         if (!el) return;
-        el.style.transform = `translate3d(${card.currentX + card.offsetX}px, ${card.currentY + card.offsetY}px, 0) translate(-50%, -50%) rotate(${card.rotate}deg) scale(${card.scale})`;
+        el.style.transform = 'translate3d(' + (card.currentX + card.offsetX) + 'px, ' + (card.currentY + card.offsetY) + 'px, 0) translate(-50%, -50%) rotate(' + card.rotate + 'deg) scale(' + card.scale + ')';
       });
-
-      if (deckState.active) {
-        deckState.raf = requestAnimationFrame(animateServiceDeck);
-      } else {
-        deckState.raf = null;
-      }
+      if (deckState.active) deckState.raf = requestAnimationFrame(animateServiceDeck);
+      else deckState.raf = null;
     }
 
     function getServiceShuffle(text) {
-      const order = deckLayouts.map((_, i) => i);
-      let seed = [...text].reduce((acc, char) => acc + char.charCodeAt(0), 0);
-      for (let i = order.length - 1; i > 0; i--) {
+      var order = deckLayouts.map(function(_,i){ return i; });
+      var seed = Array.from(text).reduce(function(acc,c){ return acc + c.charCodeAt(0); }, 0);
+      for (var i = order.length - 1; i > 0; i--) {
         seed = (seed * 9301 + 49297) % 233280;
-        const j = seed % (i + 1);
-        [order[i], order[j]] = [order[j], order[i]];
+        var j = seed % (i + 1);
+        var tmp = order[i]; order[i] = order[j]; order[j] = tmp;
       }
       return order;
     }
 
     function reshuffleServiceDeck(item) {
-      const order = getServiceShuffle(item.textContent.trim());
-      deckState.cards.forEach((card, i) => {
-        const layout = deckLayouts[order[i]];
-        card.targetOffsetX = layout.offsetX;
-        card.targetOffsetY = layout.offsetY;
-        card.targetRotate = layout.rotate;
-        card.targetScale = layout.scale;
+      var order = getServiceShuffle(item.textContent.trim());
+      deckState.cards.forEach(function(card, i) {
+        var layout = deckLayouts[order[i]];
+        card.targetOffsetX = layout.offsetX; card.targetOffsetY = layout.offsetY;
+        card.targetRotate  = layout.rotate;  card.targetScale   = layout.scale;
         card.lag = layout.lag;
         serviceCards[i].style.zIndex = 120 + order[i];
       });
@@ -885,24 +270,20 @@
     function showServiceDeck(item) {
       if (!item || item === activeServiceItem) return;
       if (!serviceNames.has(item.textContent.trim())) return;
-
-      const wasInactive = !deckState.active;
+      var wasInactive = !deckState.active;
       activeServiceItem = item;
       clearTimeout(serviceDeckShowTimer);
       reshuffleServiceDeck(item);
       if (wasInactive) {
-        serviceDeckShowTimer = setTimeout(() => {
+        serviceDeckShowTimer = setTimeout(function() {
           if (activeServiceItem !== item) return;
-          deckState.cards.forEach(card => {
-            card.currentX = deckState.targetX;
-            card.currentY = deckState.targetY;
-          });
+          deckState.cards.forEach(function(card){ card.currentX = deckState.targetX; card.currentY = deckState.targetY; });
           deckState.active = true;
-          serviceCards.forEach(card => card.classList.add('visible'));
+          serviceCards.forEach(function(card){ card.classList.add('visible'); });
           if (!deckState.raf) animateServiceDeck();
         }, 180);
       } else {
-        serviceCards.forEach(card => card.classList.add('visible'));
+        serviceCards.forEach(function(card){ card.classList.add('visible'); });
         if (!deckState.raf) animateServiceDeck();
       }
     }
@@ -912,190 +293,39 @@
       activeServiceItem = null;
       clearTimeout(serviceDeckShowTimer);
       deckState.active = false;
-      serviceCards.forEach(card => card.classList.remove('visible'));
+      serviceCards.forEach(function(card){ card.classList.remove('visible'); });
     }
 
     function updateServiceDeckHover() {
       deckHitTestRaf = null;
       if (!servicesList || !serviceCards.length) return;
-
-      const rect = servicesList.getBoundingClientRect();
-      const isInsideServices =
-        deckState.targetX >= rect.left &&
-        deckState.targetX <= rect.right &&
-        deckState.targetY >= rect.top &&
-        deckState.targetY <= rect.bottom;
-
-      if (!isInsideServices) {
-        hideServiceDeck();
-        return;
-      }
-
-      showServiceDeck(document.elementFromPoint(deckState.targetX, deckState.targetY)?.closest('.service-item'));
+      var rect = servicesList.getBoundingClientRect();
+      var inside = deckState.targetX >= rect.left && deckState.targetX <= rect.right &&
+                   deckState.targetY >= rect.top  && deckState.targetY <= rect.bottom;
+      if (!inside) { hideServiceDeck(); return; }
+      var el = document.elementFromPoint(deckState.targetX, deckState.targetY);
+      showServiceDeck(el && el.closest('.service-item'));
     }
 
     function updateServiceDeckTarget(e) {
-      deckState.targetX = e.clientX;
-      deckState.targetY = e.clientY;
+      deckState.targetX = e.clientX; deckState.targetY = e.clientY;
       if (!deckHitTestRaf) deckHitTestRaf = requestAnimationFrame(updateServiceDeckHover);
     }
 
     if (window.innerWidth > 744) {
       document.addEventListener('pointermove', updateServiceDeckTarget, { passive: true });
-      document.addEventListener('mousemove', updateServiceDeckTarget, { passive: true });
+      document.addEventListener('mousemove',   updateServiceDeckTarget, { passive: true });
     }
 
-    // ── Cursor: activar anillo en elementos interactivos ──
-    const interactivos = 'a, button, .service-item, video, .about-img';
-    document.addEventListener('mouseover', e => {
-      if (e.target.closest(interactivos)) {
-        document.body.classList.add('cursor-hover');
-      }
-    });
-    document.addEventListener('mouseout', e => {
-      if (e.target.closest(interactivos)) {
-        document.body.classList.remove('cursor-hover');
-      }
-    });
-
-    // ── Cursor personalizado ──
-    const cursor = document.getElementById('cursor');
-    let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
-    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
-    function animateCursor() {
-      curX += (mouseX - curX) * 0.18;
-      curY += (mouseY - curY) * 0.18;
-      if (cursor) cursor.style.transform = `translate(${curX}px, ${curY}px)`;
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // ── Logo animado ──
-    const logoEl     = document.getElementById('logo-animated');
-    const logoParenR = logoEl.querySelector('.logo-paren-right');
-    const logoN      = logoEl.querySelector('.logo-n');
-    const logoText   = logoEl.querySelector('.logo-text');
-
-    logoEl.addEventListener('mouseenter', () => {
-      logoParenR.style.transform = 'translateX(-38px)';
-      logoN.style.transform      = 'translateX(-6px)';
-      logoText.style.clipPath    = 'inset(0 87% 0 0)';
-      logoText.style.transition  = 'clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0)';
-    });
-    logoEl.addEventListener('mouseleave', () => {
-      logoParenR.style.transform = 'translateX(0)';
-      logoN.style.transform      = 'translateX(0)';
-      logoText.style.clipPath    = 'inset(0 0 0 0)';
-      logoText.style.transition  = 'clip-path 0.40s cubic-bezier(0.65, 0, 0.35, 0)';
-    });
-
-    // ── Nav: ocultar/mostrar con scroll ──
-    const nav = document.getElementById('nav');
-    let lastScrollY = 0, navVisible = true, ticking = false;
-    lenis.on('scroll', ({ scroll }) => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const delta = scroll - lastScrollY;
-        if (scroll > 80 && delta > 6 && navVisible)        { nav.classList.add('nav-hidden');    document.body.classList.add('nav-is-hidden');    navVisible = false; }
-        else if ((delta < -6 || scroll <= 80) && !navVisible) { nav.classList.remove('nav-hidden'); document.body.classList.remove('nav-is-hidden'); navVisible = true;  }
-        lastScrollY = scroll;
-        ticking = false;
-      });
-    });
-
-    // ── Cambio de tema al llegar a Servicios ──
-    const serviciosEl   = document.getElementById('section-servicios');
-    const themeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          document.body.classList.add('theme-light');
-        } else if (entry.boundingClientRect.top > 0) {
-          document.body.classList.remove('theme-light');
-        }
+    /* Cambio de tema al llegar a la sección Servicios */
+    var serviciosEl   = document.getElementById('section-servicios');
+    var themeObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) document.body.classList.add('theme-light');
+        else if (entry.boundingClientRect.top > 0) document.body.classList.remove('theme-light');
       });
     }, { threshold: 0, rootMargin: '0px 0px -20% 0px' });
     if (serviciosEl) themeObserver.observe(serviciosEl);
-  </script>
-
-
-  <script>
-    (function () {
-      const nav = document.getElementById('nav');
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobile-menu');
-      if (!nav || !hamburger || !mobileMenu) return;
-
-      const cleanHamburger = hamburger.cloneNode(true);
-      hamburger.replaceWith(cleanHamburger);
-      const cleanMobileMenu = mobileMenu.cloneNode(true);
-      mobileMenu.replaceWith(cleanMobileMenu);
-
-      const button = document.getElementById('hamburger');
-      const menu = document.getElementById('mobile-menu');
-      const panel = menu.querySelector('.mobile-menu-panel');
-      const menuIsDark = panel.dataset.darkDefault === 'true';
-      const root = document.documentElement;
-
-      function stopSmoothScroll() {
-        if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') lenis.stop();
-      }
-
-      function startSmoothScroll() {
-        if (typeof lenis !== 'undefined' && lenis && typeof lenis.start === 'function') lenis.start();
-      }
-
-      function openMenu() {
-        button.classList.add('open');
-        button.setAttribute('aria-expanded', 'true');
-        button.setAttribute('aria-label', 'Cerrar menú');
-        menu.classList.add('open');
-        document.body.classList.add('menu-open');
-        root.classList.add('menu-open');
-        document.body.dataset.menuDark = menuIsDark ? 'true' : 'false';
-        nav.classList.remove('nav-hidden');
-        document.body.classList.remove('nav-is-hidden');
-        stopSmoothScroll();
-      }
-
-      function closeMenu() {
-        button.classList.remove('open');
-        button.setAttribute('aria-expanded', 'false');
-        button.setAttribute('aria-label', 'Abrir menú');
-        menu.classList.remove('open');
-        document.body.classList.remove('menu-open');
-        root.classList.remove('menu-open');
-        delete document.body.dataset.menuDark;
-        startSmoothScroll();
-      }
-
-      button.addEventListener('click', function () {
-        if (menu.classList.contains('open')) closeMenu();
-        else openMenu();
-      });
-
-      menu.addEventListener('click', function (event) {
-        if (!panel.contains(event.target)) closeMenu();
-      });
-
-      menu.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', closeMenu);
-      });
-
-      document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && menu.classList.contains('open')) closeMenu();
-      });
-
-      ['wheel', 'touchmove'].forEach(function (eventName) {
-        menu.addEventListener(eventName, function (event) {
-          if (document.body.classList.contains('menu-open')) event.preventDefault();
-        }, { passive: false });
-      });
-
-      window.addEventListener('resize', function () {
-        if (window.innerWidth > 768 && menu.classList.contains('open')) closeMenu();
-      });
-    })();
   </script>
   <script src="/assets/js/reveal.js" defer></script>
 </body>

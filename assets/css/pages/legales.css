@@ -1,0 +1,239 @@
+/* ═══════════════════════════════════════════════════════════════════
+   LEGALES.CSS — Studio Lanorma
+
+   Estilos exclusivos de las páginas legales.
+   Compartido entre: legales y privacidad.
+
+   Características únicas:
+   - --ink: #0f0f0f (texto casi negro)
+   - --fs-small: 14px (más grande que el estándar)
+   - Layout en dos columnas: índice izquierda + contenido derecha
+   - footer-bottom sin borde superior (border-top: 0px)
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ── VARIABLES ESPECÍFICAS DE LEGALES ───────────────────────────────
+   Texto casi negro y --fs-small: 14px.
+   ─────────────────────────────────────────────────────────────────── */
+
+:root {
+  --ink: #0f0f0f;
+  --ink2: #606060;
+  --fs-small: 14px;
+}
+
+
+/* ── LINKS DEL NAV ───────────────────────────────────────────────────
+   Sin animación de entrada, color --ink2.
+   ─────────────────────────────────────────────────────────────────── */
+
+nav .links a {
+  color: var(--ink2);
+  opacity: 1;
+  animation: none;
+  transition: opacity 0.2s;
+}
+
+nav .links a:hover {
+  opacity: 0.5;
+}
+
+
+/* ── WRAPPER DE LA PÁGINA ────────────────────────────────────────────
+   .page-wrap contiene todo el contenido y centra la anchura máxima.
+   padding-top compensa la barra de navegación fija.
+   ─────────────────────────────────────────────────────────────────── */
+
+.page-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 80px) var(--pad) 120px;
+}
+
+@media (min-width: 1600px) {
+  .page-wrap {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+
+/* ── GRID LEGAL: ÍNDICE + CONTENIDO ─────────────────────────────────
+   Columna izquierda (200px) con el índice de secciones.
+   Columna derecha (1fr) con el contenido.
+   ─────────────────────────────────────────────────────────────────── */
+
+.legal-body {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px 64px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .legal-body {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+
+/* ── ÍNDICE DE SECCIONES (columna izquierda) ─────────────────────── */
+
+.legal-index {
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .legal-index {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+}
+
+.legal-index-title {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.legal-index a {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--ink);
+  transition: opacity 0.2s;
+  line-height: 1.6;
+}
+
+.legal-index a:hover {
+  opacity: 0.5;
+}
+
+
+/* ── CONTENIDO LEGAL (columna derecha) ───────────────────────────── */
+
+.legal-content {
+  font-size: var(--fs);
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--ink);
+}
+
+/* Título principal de la página */
+.legal-title {
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 40px;
+}
+
+/* Línea divisoria entre secciones */
+.divider {
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.1;
+  margin: 40px 0;
+}
+
+/* Secciones individuales */
+.legal-section {
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+/* Título de cada sección */
+.legal-section-title {
+  font-size: var(--fs);
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 16px;
+  margin-top: 40px;
+}
+
+.legal-section-title:first-child {
+  margin-top: 0;
+}
+
+/* Párrafos del contenido legal */
+.legal-content p {
+  margin-bottom: 16px;
+  line-height: 22px;
+}
+
+.legal-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Listas dentro del contenido legal */
+.legal-content ul,
+.legal-content ol {
+  margin: 16px 0;
+  padding-left: 20px;
+}
+
+.legal-content li {
+  margin-bottom: 8px;
+  line-height: 22px;
+}
+
+
+/* ── FOOTER (LEGALES) ────────────────────────────────────────────────
+   Sin borde superior (igual que nosotros y proyectos).
+   ─────────────────────────────────────────────────────────────────── */
+
+.footer-bottom {
+  padding: 32px var(--pad);
+  display: grid;
+  grid-template-columns: calc(50% - 8px) 1fr auto;
+  gap: 24px 16px;
+  align-items: end;
+  border-top: 0px solid rgba(15, 15, 15, 0.1);
+}
+
+@media (min-width: 1600px) {
+  .footer-bottom {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+.footer-col a,
+.footer-col p {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.8;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.footer-col a:hover {
+  opacity: 0.5;
+}
+
+.footer-copyright {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .footer-bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .footer-copyright {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+}

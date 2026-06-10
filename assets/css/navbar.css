@@ -1,0 +1,391 @@
+/* ═══════════════════════════════════════════════════════════════════
+   NAVBAR.CSS — Studio Lanorma
+
+   Estilos compartidos de la barra de navegación en TODAS las páginas:
+   - La barra de navegación fija (nav)
+   - Animación del logo
+   - Links de navegación
+   - Hamburguesa (solo visible en móvil)
+   - Menú móvil (panel deslizable)
+
+   El comportamiento interactivo está en assets/js/navbar.js
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ── NAVEGACIÓN PRINCIPAL ───────────────────────────────────────────
+   nav está fijo en la parte superior de la pantalla en todo momento.
+   nav-hidden → se oculta suavemente al hacer scroll hacia abajo.
+   nav-compact → cambia el padding lateral en pantallas grandes
+                 (se activa al pasar la sección hero, solo en home
+                 e insights).
+   ─────────────────────────────────────────────────────────────────── */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pad);
+  background: transparent;
+  z-index: 130;
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              padding 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, padding;
+}
+
+/* El nav se oculta (opacidad 0) al hacer scroll hacia abajo.
+   pointer-events: none → no interfiere con los clicks cuando está oculto. */
+nav.nav-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* En pantallas muy grandes (≥1600px), el nav usa padding diferente.
+   nav-compact se activa al pasar el hero (solo home e insights). */
+@media (min-width: 1600px) {
+  nav {
+    padding-left: calc(var(--nav-h) + 4px);
+    padding-right: calc(var(--nav-h) + 4px);
+  }
+
+  nav.nav-compact {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+/* Para las páginas de proyectos (saifai, goodsmatcha) que usan
+   un div .nav-inner como wrapper interno del nav para el padding. */
+.nav-inner {
+  width: 100%;
+  padding: 0 var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 1600px) {
+  .nav-inner {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+
+/* ── LOGO SVG ───────────────────────────────────────────────────────
+   display: block y overflow: visible para que el SVG se muestre
+   correctamente sin recortar las partes animadas.
+   ─────────────────────────────────────────────────────────────────── */
+
+nav .logo svg {
+  display: block;
+  overflow: visible;
+}
+
+/* Transición del color de los paths del SVG (para el modo oscuro) */
+nav .logo svg path {
+  transition: fill 0.55s ease;
+}
+
+
+/* ── ANIMACIÓN DEL LOGO ─────────────────────────────────────────────
+   Al pasar el ratón sobre el logo, el texto "anorma" se oculta
+   y las letras se contraen hacia el centro (efecto acordeón).
+   El JavaScript en navbar.js controla los transforms con JS inline.
+   Las transiciones de CSS hacen el movimiento suave.
+   ─────────────────────────────────────────────────────────────────── */
+
+nav .logo .logo-text {
+  transition: clip-path 0.20s cubic-bezier(0.65, 0, 0.35, 0);
+  clip-path: inset(0 0 0 0);
+}
+
+/* La N y el paréntesis derecho se mueven al hacer hover */
+nav .logo .logo-n,
+nav .logo .logo-paren-right {
+  transition: transform 0.50s cubic-bezier(0.25, 0, 0.25, 1);
+}
+
+nav .logo .logo-paren-right {
+  transition: transform 0.35s cubic-bezier(0.25, 0, 0.80, 1);
+}
+
+
+/* ── LINKS DE NAVEGACIÓN ────────────────────────────────────────────
+   Los links aparecen con una animación de entrada (navLinkIn).
+   Después de la animación, el JS les añade la clase .done
+   para que los :hover funcionen correctamente.
+   ─────────────────────────────────────────────────────────────────── */
+
+nav .links {
+  display: flex;
+  gap: 24px;
+}
+
+nav .links a {
+  font-size: var(--fs);
+  font-weight: 400;
+  letter-spacing: 0em;
+  opacity: 0;
+  animation: navLinkIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Delays por defecto (para páginas sin loader ni animación especial).
+   La home tiene delays mayores (2.2s, 2.3s) definidos en pages/home.css.
+   Los artículos de insights usan 0.2s, 0.3s, 0.4s. */
+nav .links a:nth-child(1) { animation-delay: 0.2s; }
+nav .links a:nth-child(2) { animation-delay: 0.3s; }
+nav .links a:nth-child(3) { animation-delay: 0.4s; }
+
+/* .done: clase que añade el JS después de la animación.
+   Permite que :hover funcione (reducir a 50% de opacidad). */
+nav .links a.done {
+  opacity: 1;
+}
+
+nav .links a.done:hover {
+  opacity: 0.5;
+}
+
+/* .active: indica la página actual en el menú */
+nav .links a.active {
+  opacity: 1;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+/* Animación de entrada de los links del nav */
+@keyframes navLinkIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ── MENÚ HAMBURGUESA ───────────────────────────────────────────────
+   Solo visible en móvil (display: none por defecto).
+   Se muestra vía @media en la parte de abajo.
+   Tiene dos barras que se convierten en una X al abrir el menú.
+   ─────────────────────────────────────────────────────────────────── */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--ink2, var(--ink));
+  cursor: pointer;
+  z-index: 131;
+}
+
+/* Color del hamburger según el estado del body */
+body:not(.theme-light):not(.dark) .hamburger {
+  color: var(--ink);
+}
+
+body.dark .hamburger {
+  color: #FFFFFF;
+}
+
+/* Las dos barras del icono hamburger */
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+  transform-origin: center;
+  transition: transform 0.35s ease, background 0.35s ease;
+}
+
+/* Al abrir el menú, las barras forman una X */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(3.75px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
+
+/* ── MENÚ MÓVIL (PANEL DESLIZABLE) ─────────────────────────────────
+   Panel que aparece desde la derecha en pantallas pequeñas.
+   .mobile-menu        → contenedor invisible que cubre toda la pantalla
+   .mobile-menu::before → fondo oscuro semitransparente detrás del panel
+   .mobile-menu-panel  → el panel blanco deslizable con los links
+
+   El JavaScript en navbar.js añade/quita .open para abrir/cerrar.
+   ─────────────────────────────────────────────────────────────────── */
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0.6s ease;
+}
+
+/* Fondo oscuro semitransparente (backdrop) */
+.mobile-menu::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 22, 22, 0);
+  opacity: 0;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Panel blanco con los links del menú */
+.mobile-menu-panel {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  height: 100dvh;
+  padding: calc(var(--nav-h) + 24px) 16px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transform: translate3d(100%, 0, 0);
+  opacity: 1;
+  transition: transform 0.72s cubic-bezier(0.19, 1, 0.22, 1),
+              opacity 0.45s ease,
+              background 0.35s ease;
+  box-shadow: -24px 0 60px rgba(0, 0, 0, 0.08);
+}
+
+/* Al abrir: el menú se vuelve visible y el panel entra desde la derecha */
+.mobile-menu.open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-menu.open::before {
+  background: rgba(22, 22, 22, 0.28);
+  opacity: 1;
+}
+
+.mobile-menu.open .mobile-menu-panel {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+/* Links dentro del menú móvil */
+.mobile-menu a {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateX(18px);
+}
+
+/* Los links entran uno a uno con retraso al abrir el menú */
+.mobile-menu.open a {
+  animation: menuLinkIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mobile-menu.open a:nth-child(1) { animation-delay: 0.06s; }
+.mobile-menu.open a:nth-child(2) { animation-delay: 0.12s; }
+.mobile-menu.open a:nth-child(3) { animation-delay: 0.18s; }
+.mobile-menu.open a:nth-child(4) { animation-delay: 0.24s; }
+.mobile-menu.open a:nth-child(5) { animation-delay: 0.30s; }
+
+/* Redes sociales en la parte inferior del panel */
+.mobile-menu .menu-social {
+  display: flex;
+  gap: 18px;
+  margin-top: auto;
+  padding-top: 32px;
+}
+
+.mobile-menu .menu-social a {
+  font-size: var(--fs-small, 13px);
+  font-weight: 400;
+}
+
+/* Animación de entrada de los links del menú */
+@keyframes menuLinkIn {
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+
+/* ── ESTADO DEL BODY CON MENÚ ABIERTO ───────────────────────────────
+   Cuando el menú está abierto, se desactiva el scroll de la página
+   y el nav siempre es visible (aunque estuviera oculto).
+   ─────────────────────────────────────────────────────────────────── */
+
+html.menu-open,
+body.menu-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body.menu-open nav,
+body.menu-open nav.nav-hidden {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+
+/* ── MÓVIL: REGLAS DEL MENÚ ─────────────────────────────────────────
+   En pantallas ≤768px:
+   - Los links del nav se ocultan (usa el menú hamburguesa)
+   - El botón hamburguesa se muestra
+   - El menú oscuro adapta su panel al modo dark o dark-default
+   ─────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  nav .links { display: none !important; }
+  .hamburger { display: inline-flex !important; }
+
+  /* Hamburger blanco cuando el body está en modo oscuro */
+  body.dark .hamburger span,
+  body.menu-open[data-menu-dark="true"] .hamburger span {
+    background: #FFFFFF;
+  }
+
+  /* Backdrop transparente en modo oscuro (se adapta al fondo negro) */
+  body.dark .mobile-menu::before,
+  body.menu-open[data-menu-dark="true"] .mobile-menu::before {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  body.dark .mobile-menu.open::before,
+  body.menu-open[data-menu-dark="true"] .mobile-menu.open::before {
+    background: rgba(0, 0, 0, 0.34);
+  }
+
+  /* Panel oscuro cuando el body está en dark o cuando el panel
+     tiene data-dark-default="true" (como en la home) */
+  body.dark .mobile-menu-panel,
+  body:not(.theme-light):not(.dark) .mobile-menu-panel[data-dark-default="true"],
+  body.menu-open[data-menu-dark="true"] .mobile-menu-panel[data-dark-default="true"] {
+    background: rgba(15, 15, 15, 0.96);
+  }
+
+  /* Links en blanco cuando el panel es oscuro */
+  body.dark .mobile-menu a,
+  body.menu-open[data-menu-dark="true"] .mobile-menu-panel[data-dark-default="true"] a {
+    color: #FFFFFF;
+  }
+}

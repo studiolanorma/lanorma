@@ -1,0 +1,561 @@
+/* ═══════════════════════════════════════════════════════════════════
+   INSIGHTS.CSS — Studio Lanorma
+
+   Estilos exclusivos de las páginas de Insights.
+   Se comparten entre dos tipos de página:
+
+   1. LISTADO (/insights) — grid de tarjetas de artículos
+   2. ARTÍCULO (/insights/nombre-del-articulo) — lectura de post
+
+   Características únicas:
+   - body.dark → modo oscuro por scroll (igual que la home)
+   - nav.nav-compact → nav más estrecho al bajar el scroll
+   - .post-col → columna central de lectura (max-width 680px)
+   - Los artículos tienen sus propios estilos tipográficos
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ── LINKS EN EL CONTENIDO DEL ARTÍCULO ────────────────────────────
+   En el body del artículo los links sí llevan subrayado (al contrario
+   que el resto de la web).
+   ─────────────────────────────────────────────────────────────────── */
+
+.post-content a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: none;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   SECCIÓN 1 — LISTADO DE INSIGHTS (/insights)
+   ══════════════════════════════════════════════════════════════════ */
+
+
+/* ── CABECERA DEL LISTADO ────────────────────────────────────────── */
+
+.insights-header {
+  padding: calc(var(--nav-h) + 120px) var(--pad) 64px;
+}
+
+@media (min-width: 1600px) {
+  .insights-header {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+/* Inner: grid de columna izquierda (label + intro) */
+.insights-header-inner {
+  display: grid;
+  grid-template-columns: calc(50% - 8px);
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .insights-header-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.insights-label {
+  font-size: var(--fs);
+  color: var(--muted);
+}
+
+.insights-intro {
+  font-size: var(--fs);
+  font-weight: 400;
+  line-height: 19px;
+  color: var(--ink);
+  max-width: 480px;
+}
+
+
+/* ── GRID DE TARJETAS ────────────────────────────────────────────── */
+
+.insights-section {
+  padding: 0 var(--pad) 80px;
+}
+
+@media (min-width: 1600px) {
+  .insights-section {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+/* Grid de 3 columnas en desktop */
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 64px var(--col-gap);
+}
+
+@media (max-width: 768px) {
+  .insights-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+
+/* ── TARJETA DE INSIGHT ──────────────────────────────────────────── */
+
+.insight-card {
+  display: block;
+  cursor: none;
+  align-self: start;
+  contain: layout style;
+}
+
+/* Imagen: proporción 443/580 en el listado */
+.insight-card .img-wrap {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px;
+  transition: border-radius 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: border-radius;
+  aspect-ratio: 443 / 580;
+  background: #f0f0f0;
+}
+
+.insight-card:hover .img-wrap {
+  border-radius: 16px;
+}
+
+.insight-card .img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.insight-card:hover .img-wrap img {
+  transform: scale(1.03);
+}
+
+.insight-card .card-info {
+  padding: 12px 0 20px;
+  overflow: hidden;
+}
+
+/* Meta row: categoría (pill) + tiempo de lectura */
+.card-meta {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-bottom: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Categoría: pill con fondo gris claro */
+.card-meta span:first-child {
+  background: #f0f0f0;
+  color: var(--ink);
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 12px;
+}
+
+/* Tiempo de lectura: alineado verticalmente */
+.card-meta span:last-child {
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-small);
+}
+
+/* Título de la tarjeta */
+.card-title {
+  font-size: var(--fs);
+  font-weight: 400;
+  margin-top: 6px;
+  margin-bottom: 0;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.card-num {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.card-desc {
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 19px;
+  max-width: 420px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.03s,
+              opacity 0.4s ease 0.03s;
+}
+
+/* Hover: desplazamiento sutil hacia arriba */
+.insight-card:hover .card-title {
+  transform: translateY(-2px);
+}
+
+.insight-card:hover .card-desc {
+  transform: translateY(-2px);
+  opacity: 0.5;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   SECCIÓN 2 — ARTÍCULO DE INSIGHT (/insights/nombre-articulo)
+   ══════════════════════════════════════════════════════════════════ */
+
+
+/* ── COLUMNA CENTRAL DE LECTURA ──────────────────────────────────── */
+
+.post-col {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+
+/* En pantallas muy grandes la columna se ensancha */
+@media (min-width: 1600px) {
+  :root {
+    --pad: 120px;
+  }
+
+  .post-col,
+  .post-hero,
+  .post-image-caption {
+    max-width: 912px;
+  }
+}
+
+
+/* ── CABECERA DEL ARTÍCULO ───────────────────────────────────────── */
+
+.post-header {
+  padding-top: calc(var(--nav-h));
+  padding-bottom: 60px;
+}
+
+/* Breadcrumb + meta en una misma fila horizontal */
+.post-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .post-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* Ruta de navegación: "Insights / Nombre del artículo" */
+.post-breadcrumb {
+  font-size: var(--fs);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.post-breadcrumb a {
+  transition: opacity 0.2s;
+}
+
+.post-breadcrumb a:hover {
+  opacity: 0.5;
+}
+
+.post-breadcrumb-sep {
+  color: var(--muted);
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+/* Fecha y tiempo de lectura */
+.post-meta {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  display: flex;
+  gap: 16px;
+}
+
+/* Metadato inline (fecha del artículo) */
+.article-meta {
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+
+/* ── IMAGEN HERO DEL ARTÍCULO ────────────────────────────────────── */
+
+.post-hero {
+  margin: 0 var(--pad);
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 1360 / 640;
+  background: #f0f0f0;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  width: calc(100% - var(--pad) * 2);
+}
+
+.post-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ── TÍTULO Y TAGS ───────────────────────────────────────────────── */
+
+.post-title-section {
+  padding-top: 60px;
+  padding-bottom: 0;
+}
+
+/* Título principal del artículo */
+.post-title {
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #0F0F0F;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+
+/* Tags del artículo (categorías) */
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .post-tags {
+    justify-content: flex-start;
+  }
+}
+
+.post-tag {
+  background: #f0f0f0;
+  color: var(--ink);
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 12px;
+}
+
+
+/* ── CUERPO DEL ARTÍCULO ─────────────────────────────────────────── */
+
+.post-body {
+  padding-top: 24px;
+  padding-bottom: 0;
+}
+
+/* Texto del artículo: 14px, 22px de line-height, color casi negro */
+.post-content {
+  font-size: var(--fs);
+  font-weight: 400;
+  line-height: 22px;
+  color: #0F0F0F;
+}
+
+.post-content p {
+  margin-bottom: 24px;
+}
+
+.post-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Separación antes de imagen inline */
+.post-content + .post-image-inline {
+  margin-top: 24px;
+}
+
+/* Subtítulos H2 dentro del artículo */
+.post-content h2 {
+  font-size: var(--fs);
+  font-weight: 500;
+  color: #0F0F0F;
+  margin-bottom: 12px;
+  margin-top: 40px;
+}
+
+.post-content h2:first-child {
+  margin-top: 0;
+}
+
+/* Cita destacada */
+.post-content blockquote {
+  border-left: 1px solid var(--muted);
+  padding-left: 20px;
+  margin: 32px 0;
+  color: var(--muted);
+  font-size: var(--fs);
+  line-height: 22px;
+}
+
+/* Lista con guión (–) en lugar del • estándar */
+.post-content ul {
+  margin: 24px 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.post-content ul li {
+  margin-bottom: 16px;
+  padding-left: 20px;
+  position: relative;
+  font-size: var(--fs);
+  line-height: 22px;
+  color: #0F0F0F;
+}
+
+.post-content ul li:before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.post-content ul li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ── IMAGEN INLINE (dentro del artículo) ─────────────────────────── */
+
+.post-image-inline {
+  width: 100%;
+  margin: 24px 0;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.post-image-inline img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.post-image-inline figcaption {
+  margin-top: 12px;
+  font-size: var(--fs-small);
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* Leyenda independiente bajo imagen */
+.post-image-caption {
+  width: calc(100% - var(--pad) * 2);
+  max-width: 680px;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+
+/* ── INSIGHT CARD EN ARTÍCULO (para sección "más artículos") ─────── */
+
+/* Cuando la insight-card aparece en el artículo, la imagen
+   tiene proporción diferente (901/580 en lugar de 443/580). */
+.more-posts-section .insight-card .img-wrap,
+.post-body .insight-card .img-wrap {
+  aspect-ratio: 901 / 580;
+}
+
+.more-posts-section {
+  padding: 80px var(--pad);
+}
+
+@media (min-width: 1600px) {
+  .more-posts-section {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+.more-posts-label {
+  font-size: var(--fs);
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+.more-posts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px var(--col-gap);
+}
+
+@media (max-width: 768px) {
+  .more-posts-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+
+/* ── MODO OSCURO (body.dark) — IGUAL QUE HOME ────────────────────── */
+
+/* Los artículos y el listado usan body.dark (no body.theme-dark)
+   para el modo oscuro, al igual que la home. */
+
+/* El JS del artículo activa body.dark al hacer scroll por el artículo.
+   En el listado, también hay dark mode al entrar en la sección about. */
+
+
+/* ── NAV COMPACT EN ARTÍCULOS ────────────────────────────────────── */
+
+/* En pantallas grandes, cuando el usuario ha scrolleado más de 80px,
+   el nav se compacta (padding lateral mayor).
+   Esto ya está en navbar.css; aquí no se necesita override. */
+
+
+/* ── FOOTER EN INSIGHTS ──────────────────────────────────────────── */
+
+/* El footer CTA en insights usa el estilo estándar de footer.css:
+   font-size: 24px, texto gris, botón negro.
+   No se necesitan overrides. */
+
+/* Footer bottom: padding con var(--pad) (igual que el estándar) */
+.footer-bottom {
+  padding: 32px var(--pad);
+}
+
+@media (min-width: 1600px) {
+  .footer-bottom {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}

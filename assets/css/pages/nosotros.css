@@ -1,0 +1,506 @@
+/* ═══════════════════════════════════════════════════════════════════
+   NOSOTROS.CSS — Studio Lanorma
+
+   Estilos exclusivos de la página Nosotros.
+
+   Características únicas de esta página:
+   - --ink: #0f0f0f (texto casi negro, diferente a la home)
+   - --muted: #999999 (ligeramente más claro que el estándar)
+   - Transición global de todos los elementos (para el cambio de tema)
+   - body.theme-dark / body.theme-light (sistema de tema diferente a home)
+   - Labels fijos (sticky) en tablet/desktop
+   - Baraja de tarjetas de servicios (#service-card-deck)
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ── VARIABLES ESPECÍFICAS DE NOSOTROS ──────────────────────────────
+   Esta página usa texto casi negro y añade --ink2 para links del nav.
+   ─────────────────────────────────────────────────────────────────── */
+
+:root {
+  --ink: #0f0f0f;
+  --ink2: #606060;
+  --muted: #999999;
+}
+
+
+/* ── TRANSICIÓN GLOBAL DEL TEMA ─────────────────────────────────────
+   En esta página TODOS los elementos hacen transición de color
+   suavemente al cambiar entre tema claro y oscuro.
+   Esto es necesario por el IntersectionObserver en la sección
+   de servicios que cambia body entre .theme-light y .theme-dark.
+   ⚠️ Esta regla no existe en otras páginas — es exclusiva de nosotros.
+   ─────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.8s;
+  transition-timing-function: ease;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  transition: background 0.8s ease, color 0.8s ease;
+}
+
+/* El cursor también transiciona con el color del texto */
+.cursor-dot { background: var(--ink); }
+.cursor-ring { border-color: var(--ink); }
+
+
+/* ── MODO OSCURO ESPECÍFICO DE NOSOTROS (body.theme-dark) ───────────
+   Nosotros usa .theme-dark (no .dark como la home).
+   Se activa/desactiva con IntersectionObserver en el JS de la página.
+   ⚠️ No confundir con body.dark de la home — son sistemas diferentes.
+   ─────────────────────────────────────────────────────────────────── */
+
+body.theme-dark {
+  --bg:    #0f0f0f;
+  --ink:   #ffffff;
+  --ink2:  #606060;
+  --muted: #939393;
+}
+
+/* Fallback de scroll suave si Lenis no carga */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.lenis-ready) {
+    scroll-behavior: smooth;
+  }
+}
+
+
+/* ── LINKS DEL NAV EN NOSOTROS ──────────────────────────────────────
+   En nosotros los links del nav son estáticos (sin animación de entrada)
+   y usan --ink2 como color.
+   ─────────────────────────────────────────────────────────────────── */
+
+nav .links a {
+  color: var(--ink2);
+  opacity: 1;
+  animation: none;
+  transition: opacity 0.2s;
+}
+
+nav .links a:hover {
+  opacity: 0.5;
+}
+
+
+/* ── FOTO / VÍDEO GRANDE ────────────────────────────────────────────
+   Imagen o vídeo a todo el ancho de la sección, dentro del padding.
+   ─────────────────────────────────────────────────────────────────── */
+
+.studio-photo {
+  padding: 0 var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.studio-photo img,
+.studio-photo video {
+  width: 100%;
+  height: 88vh;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+
+/* ── SECCIONES INFO ──────────────────────────────────────────────────
+   Layout en grid de 2 columnas: label izquierda, contenido derecha.
+   Las distintas clases tienen diferentes paddings verticales.
+   ─────────────────────────────────────────────────────────────────── */
+
+.info-section {
+  padding: 80px var(--pad);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px 0;
+}
+
+.info-section-1 {
+  padding: 180px var(--pad) 120px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px 0;
+}
+
+.info-section-method {
+  padding: 0 var(--pad);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px 0;
+}
+
+.info-section-contact {
+  padding: 120px var(--pad);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px 0;
+}
+
+/* En tablet y desktop: la primera columna (label) es más estrecha.
+   La segunda columna (contenido) ocupa el resto.
+   El ancho está calculado para que el contenido se alinee con
+   la segunda columna del footer-bottom. */
+@media (min-width: 745px) {
+  .info-section,
+  .info-section-1,
+  .info-section-method,
+  .info-section-contact {
+    grid-template-columns: calc(50% + 8px) 1fr;
+    gap: 0;
+  }
+
+  /* El label se queda fijo (sticky) al hacer scroll por el contenido */
+  .info-label {
+    position: sticky;
+    top: 80px;
+    transition: top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Cuando el nav está oculto, el label sube un poco */
+  body.nav-is-hidden .info-label {
+    top: 24px;
+  }
+}
+
+.info-label {
+  font-size: var(--fs);
+  color: var(--muted);
+  position: static;
+  align-self: start;
+}
+
+.info-content {
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 20px;
+}
+
+.info-content p + p {
+  margin-top: 12px;
+}
+
+
+/* ── LISTA DE SERVICIOS ──────────────────────────────────────────────
+   Grid de 2 columnas con las filas de servicios.
+   Cada servicio tiene un borde superior sutil.
+   Al hacer hover se mueve ligeramente hacia la derecha.
+   ─────────────────────────────────────────────────────────────────── */
+
+.services-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  padding-bottom: 120px;
+}
+
+.services-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-item {
+  padding: 20px 0;
+  border-top: 1px solid rgba(155, 155, 155, 0.144);
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--ink);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+  cursor: none;
+  position: relative;
+}
+
+.service-item:hover {
+  transform: translateX(6px);
+  opacity: 0.5;
+}
+
+/* El último servicio de cada columna tiene también borde inferior */
+.services-col .service-item:last-of-type {
+  border-bottom: 1px solid rgba(155, 155, 155, 0.144);
+}
+
+
+/* ── BARAJA DE TARJETAS DE SERVICIOS ────────────────────────────────
+   Tarjetas flotantes que aparecen al pasar el ratón por los servicios.
+   Son elementos fijos posicionados por el JavaScript del nosotros.
+   El z-index 120 está por encima del contenido pero bajo el nav (130).
+   ─────────────────────────────────────────────────────────────────── */
+
+#service-card-deck {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 120;
+}
+
+.service-card {
+  position: fixed;
+  pointer-events: none;
+  z-index: 120;
+  top: 0;
+  left: 0;
+  width: clamp(92px, 11vw, 150px);
+  aspect-ratio: 4 / 5;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #f2f2f2;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(0.88) rotate(0deg);
+  transition: opacity 0.18s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.service-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.04);
+}
+
+/* .visible → el JS añade esta clase al activar la tarjeta */
+.service-card.visible {
+  opacity: 1;
+}
+
+
+/* ── SECCIÓN NOSOTROS (EQUIPO) ───────────────────────────────────────
+   Grid de 2 columnas con foto y nombre de cada miembro del equipo.
+   ─────────────────────────────────────────────────────────────────── */
+
+.nosotros-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  padding-bottom: 120px;
+}
+
+.nosotros-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.nosotros-item {
+  padding: 16px 0 0;
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 20px;
+}
+
+.nosotros-role {
+  color: var(--muted);
+}
+
+/* Foto de cada miembro del equipo */
+.about-img {
+  width: 100%;
+  max-width: 280px;
+  height: 320px;
+  overflow: hidden;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.about-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ── CLIENTES (LOGOS) ────────────────────────────────────────────────
+   Grid de 2 columnas con las imágenes de los logos de clientes.
+   ─────────────────────────────────────────────────────────────────── */
+
+.logos-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  padding-bottom: 120px;
+}
+
+.logos-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.logos-img {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 280 / 102;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.logos-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ── LINKS DE CONTACTO ───────────────────────────────────────────────
+   Lista vertical de links en la sección de contacto de nosotros.
+   ─────────────────────────────────────────────────────────────────── */
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.contact-links a {
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--ink);
+  transition: opacity 0.2s;
+}
+
+.contact-links a:hover {
+  opacity: 0.5;
+}
+
+
+/* ── FOOTER (NOSOTROS) ───────────────────────────────────────────────
+   En nosotros el footer solo tiene footer-bottom (sin footer-cta).
+   El padding y los font-size difieren ligeramente del estándar.
+   border-top: 0px → sin línea divisoria en este footer.
+   ─────────────────────────────────────────────────────────────────── */
+
+footer {
+  padding: 0 var(--pad);
+}
+
+.footer-bottom {
+  padding: 32px 0;
+  display: grid;
+  grid-template-columns: calc(50% - 8px) 1fr auto;
+  gap: 24px 16px;
+  align-items: end;
+  border-top: 0px solid rgba(155, 155, 155, 0.1);
+}
+
+/* En nosotros los textos del footer usan --fs (14px) no --fs-small */
+.footer-col a,
+.footer-col p {
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.8;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.footer-col a:hover {
+  opacity: 0.5;
+}
+
+.footer-copyright {
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+
+/* ── RESPONSIVE PANTALLAS GRANDES ───────────────────────────────────
+   En pantallas muy anchas, el padding usa --pad-large.
+   ─────────────────────────────────────────────────────────────────── */
+
+@media (min-width: 1640px) {
+  :root { --pad: var(--pad-large); }
+}
+
+
+/* ── RESPONSIVE TABLET (745px – 1023px) ─────────────────────────────
+   El footer-bottom se reorganiza en 2 filas.
+   La foto del equipo se hace más grande.
+   ─────────────────────────────────────────────────────────────────── */
+
+@media (min-width: 745px) and (max-width: 1023px) {
+  .footer-bottom {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .footer-copyright {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .about-img {
+    max-width: 100%;
+    height: 40vw;
+  }
+}
+
+
+/* ── RESPONSIVE MÓVIL (≤744px) ──────────────────────────────────────
+   Nosotros usa 744px como breakpoint (no 768px como las demás páginas).
+   ─────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 744px) {
+  :root { --pad: 20px; }
+
+  body { cursor: auto; }
+  .cursor { display: none; }
+
+  nav .links { gap: 16px; }
+
+  .info-section-1 { padding: 120px var(--pad) 80px; }
+
+  .studio-photo img,
+  .studio-photo video {
+    height: 55vw;
+    min-height: 220px;
+  }
+
+  /* Sin animación hover en los servicios en móvil (no hay ratón) */
+  .service-item {
+    transition: none;
+    cursor: auto;
+  }
+
+  .service-item:hover {
+    transform: none;
+    opacity: 1;
+  }
+
+  .footer-bottom {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-copyright {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .nosotros-list {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .nosotros-list .about-img {
+    max-width: 100%;
+  }
+}

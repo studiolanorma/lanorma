@@ -1,0 +1,297 @@
+/* ═══════════════════════════════════════════════════════════════════
+   CONTACTO.CSS — Studio Lanorma
+
+   Estilos exclusivos de la página de contacto.
+
+   Características únicas:
+   - --ink: #0F0F0F (texto casi negro, igual que nosotros/legales)
+   - --fs-small: 14px (más grande que el estándar 13px)
+   - body con min-height: 100vh + display: flex para que el footer
+     quede pegado al fondo aunque el contenido sea corto
+   - Layout dos columnas: info sticky izquierda + formulario derecha
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ── VARIABLES ESPECÍFICAS DE CONTACTO ──────────────────────────────
+   Texto casi negro y --fs-small: 14px.
+   Sin --col-gap override (usa el estándar de variables.css).
+   ─────────────────────────────────────────────────────────────────── */
+
+:root {
+  --ink: #0F0F0F;
+  --ink2: #606060;
+  --fs-small: 14px;
+}
+
+
+/* ── LINKS DEL NAV ───────────────────────────────────────────────────
+   En contacto los links del nav usan --ink2 como color.
+   ─────────────────────────────────────────────────────────────────── */
+
+nav .links a {
+  color: var(--ink2);
+  opacity: 1;
+  animation: none;
+  transition: opacity 0.2s;
+}
+
+nav .links a:hover {
+  opacity: 0.5;
+}
+
+
+/* ── BODY CON FLEX ───────────────────────────────────────────────────
+   Body en columna para que el footer quede pegado abajo aunque
+   el formulario sea corto. El contenido principal tiene flex: 1.
+   ─────────────────────────────────────────────────────────────────── */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}
+
+
+/* ── PÁGINA DE CONTACTO ──────────────────────────────────────────────
+   Compensa la altura del nav y ocupa todo el espacio disponible.
+   ─────────────────────────────────────────────────────────────────── */
+
+.contact-page {
+  flex: 1;
+  padding-top: var(--nav-h);
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ── ÁREA PRINCIPAL: INFO + FORMULARIO ──────────────────────────────
+   Grid de 2 columnas: info (sticky) + formulario (derecha).
+   La primera columna ocupa la mitad menos el gap para alinearse
+   con la columna derecha del footer-bottom.
+   ─────────────────────────────────────────────────────────────────── */
+
+.contact-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: calc(50% - 8px) 1fr;
+  gap: 16px;
+  padding: 64px var(--pad);
+  align-items: start;
+}
+
+@media (min-width: 1600px) {
+  .contact-main {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+
+/* ── COLUMNA IZQUIERDA (STICKY) ─────────────────────────────────────
+   La info de contacto se queda fija al hacer scroll.
+   ─────────────────────────────────────────────────────────────────── */
+
+.contact-left {
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+  align-self: start;
+}
+
+/* Foto/imagen de contacto */
+.contact-photo {
+  width: 200px;
+  aspect-ratio: 3 / 4;
+  border-radius: 4px;
+  background: #f0f0f0;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.contact-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Grid de metadatos (etiqueta + valor) */
+.contact-meta {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.contact-meta-label {
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.contact-meta-value {
+  font-size: var(--fs-small);
+  font-weight: 400;
+}
+
+.contact-meta-value a {
+  transition: opacity 0.2s;
+}
+
+.contact-meta-value a:hover {
+  opacity: 0.5;
+}
+
+
+/* ── COLUMNA DERECHA (FORMULARIO) ───────────────────────────────────
+   Título grande del contacto + formulario.
+   ─────────────────────────────────────────────────────────────────── */
+
+/* Título principal de la página de contacto */
+.contact-title {
+  font-size: clamp(20px, 3.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 40px;
+}
+
+.contact-form {
+  width: 100%;
+}
+
+/* Separadores entre campos del formulario */
+.form-group {
+  border-top: 1px solid rgba(15, 15, 15, 0.12);
+  padding: 16px 0;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px 16px;
+  align-items: baseline;
+}
+
+.form-group:last-of-type {
+  border-bottom: 1px solid rgba(15, 15, 15, 0.12);
+}
+
+.form-label {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  align-self: start;
+  padding-top: 4px;
+}
+
+.form-input,
+.form-textarea {
+  font-family: 'Suisse Intl', sans-serif;
+  font-size: var(--fs);
+  font-weight: 400;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  width: 100%;
+  resize: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--muted);
+}
+
+.form-textarea {
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+/* Botón de envío del formulario */
+.form-submit {
+  font-family: 'Suisse Intl', sans-serif;
+  font-size: var(--fs-small);
+  font-weight: 400;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 4px;
+  cursor: none;
+  margin-top: 24px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.form-submit:hover {
+  background: #606060;
+}
+
+/* Mensaje de éxito tras enviar el formulario */
+.form-success {
+  display: none;
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+
+/* ── FOOTER EN CONTACTO ──────────────────────────────────────────────
+   El footer usa el estilo estándar de footer.css (con borde superior).
+   Solo necesita el padding con var(--pad).
+   ─────────────────────────────────────────────────────────────────── */
+
+.footer-bottom {
+  padding: 32px var(--pad);
+}
+
+@media (min-width: 1600px) {
+  .footer-bottom {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
+
+/* ── RESPONSIVE MÓVIL ────────────────────────────────────────────────
+   En móvil el layout se convierte en columna única.
+   ─────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .contact-main {
+    grid-template-columns: 1fr;
+    padding: 40px var(--pad) 80px;
+    gap: 40px;
+  }
+
+  .contact-left {
+    position: static;
+  }
+
+  /* La foto pasa a proporción 16:9 en móvil */
+  .contact-photo {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-bottom: 16px;
+  }
+
+  .contact-title {
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .footer-bottom {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-copyright {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+}
