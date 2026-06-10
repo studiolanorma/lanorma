@@ -18,9 +18,9 @@
    ─────────────────────────────────────────────────────────────────── */
 
 :root {
-  --ink: #0F0F0F;
+  --ink: #606060;
   --ink2: #606060;
-  --fs-small: 14px;
+  --fs-small: 13px;
 }
 
 
@@ -118,29 +118,23 @@ footer {
   display: block;
 }
 
-/* Grid de metadatos (etiqueta + valor) */
-.contact-meta {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 16px;
-  margin-top: 32px;
+/* Bloque de enlaces de contacto: mismo estilo que .info-section-contact
+   en nosotros.css (.contact-links), para consistencia visual */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 120px;
 }
 
-.contact-meta-label {
-  font-size: var(--fs-small);
-  color: var(--muted);
-}
-
-.contact-meta-value {
-  font-size: var(--fs-small);
+.contact-links a {
+  font-size: var(--fs);
   font-weight: 400;
-}
-
-.contact-meta-value a {
+  color: var(--ink);
   transition: opacity 0.2s;
 }
 
-.contact-meta-value a:hover {
+.contact-links a:hover {
   opacity: 0.5;
 }
 
@@ -154,7 +148,7 @@ footer {
   font-size: clamp(20px, 3.5vw, 48px);
   font-weight: 400;
   line-height: 1.1;
-  color: var(--ink);
+  color: #0F0F0F;
   margin-bottom: 40px;
 }
 
@@ -165,7 +159,7 @@ footer {
 /* Separadores entre campos del formulario */
 .form-group {
   border-top: 1px solid rgba(15, 15, 15, 0.12);
-  padding: 16px 0;
+  padding: 20px 0;
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 8px 16px;
@@ -180,15 +174,15 @@ footer {
   font-size: var(--fs-small);
   color: var(--muted);
   align-self: start;
-  padding-top: 4px;
+  padding-top: 0px;
 }
 
 .form-input,
 .form-textarea {
   font-family: 'Suisse Intl', sans-serif;
-  font-size: var(--fs);
+  font-size: var(--fs-small);
   font-weight: 400;
-  color: var(--ink);
+  color: #0F0F0F;
   background: transparent;
   border: none;
   outline: none;
@@ -214,7 +208,7 @@ footer {
   font-family: 'Suisse Intl', sans-serif;
   font-size: var(--fs-small);
   font-weight: 400;
-  background: var(--ink);
+  background: #0F0F0F;
   color: var(--bg);
   border: none;
   padding: 12px 28px;

@@ -18,9 +18,9 @@
    ─────────────────────────────────────────────────────────────────── */
 
 :root {
-  --ink: #0f0f0f;
+  --ink: #606060;
   --ink2: #606060;
-  --muted: #999999;
+  --muted: #939393;
 }
 
 
@@ -397,10 +397,10 @@ footer {
   border-top: 0px solid rgba(155, 155, 155, 0.1);
 }
 
-/* En nosotros los textos del footer usan --fs (14px) no --fs-small */
+/* Footer alineado al estándar: usa --fs-small, igual que Insights/Home */
 .footer-col a,
 .footer-col p {
-  font-size: var(--fs);
+  font-size: var(--fs-small);
   font-weight: 400;
   color: var(--ink);
   line-height: 1.8;
