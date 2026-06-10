@@ -185,55 +185,12 @@ nav .links a:hover {
 
 /* ── FOOTER (LEGALES) ────────────────────────────────────────────────
    Sin borde superior (igual que nosotros y proyectos).
+   El footer recupera --ink y --fs-small estándar (igual que en
+   insights, contacto y nosotros), ya que esta página redefine esas
+   variables para su contenido legal.
    ─────────────────────────────────────────────────────────────────── */
 
-.footer-bottom {
-  padding: 32px var(--pad);
-  display: grid;
-  grid-template-columns: calc(50% - 8px) 1fr auto;
-  gap: 24px 16px;
-  align-items: end;
-  border-top: 0px solid rgba(15, 15, 15, 0.1);
-}
-
-@media (min-width: 1600px) {
-  .footer-bottom {
-    padding-left: var(--pad-large);
-    padding-right: var(--pad-large);
-  }
-}
-
-.footer-col a,
-.footer-col p {
-  font-size: var(--fs-small);
-  font-weight: 400;
-  color: var(--ink);
-  line-height: 1.8;
-  display: block;
-  transition: opacity 0.2s;
-}
-
-.footer-col a:hover {
-  opacity: 0.5;
-}
-
-.footer-copyright {
-  font-size: var(--fs-small);
-  font-weight: 400;
-  color: var(--muted);
-  text-align: right;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .footer-bottom {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    align-items: start;
-  }
-
-  .footer-copyright {
-    grid-column: 1 / -1;
-    text-align: left;
-  }
+footer.footer {
+  --ink: #606060;
+  --fs-small: 13px;
 }
