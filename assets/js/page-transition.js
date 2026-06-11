@@ -26,7 +26,6 @@
 
   function setTransitionColor(color) {
     overlay.style.setProperty('--page-transition-color', color);
-    document.documentElement.style.setProperty('--page-transition-color', color);
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -75,7 +74,6 @@
     fallback = window.setTimeout(function () { finish(null); }, exitDuration + 120);
 
     requestAnimationFrame(function () {
-      document.documentElement.style.backgroundColor = '';
       document.documentElement.classList.add('page-transition-revealing');
     });
   }
@@ -90,7 +88,6 @@
 
   if (!prefersReducedMotion && !isMobile && sessionStorage.getItem(transitionKey) === 'active') {
     setTransitionColor(sessionStorage.getItem(colorKey) || colors[0]);
-    document.documentElement.classList.add('page-transition-pending');
     sessionStorage.removeItem(transitionKey);
     sessionStorage.removeItem(colorKey);
     afterPageSettles(revealPendingCover);
