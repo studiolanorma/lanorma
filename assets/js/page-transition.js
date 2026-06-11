@@ -26,6 +26,7 @@
 
   function setTransitionColor(color) {
     overlay.style.setProperty('--page-transition-color', color);
+    document.documentElement.style.setProperty('--page-transition-color', color);
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -89,6 +90,7 @@
 
   if (!prefersReducedMotion && !isMobile && sessionStorage.getItem(transitionKey) === 'active') {
     setTransitionColor(sessionStorage.getItem(colorKey) || colors[0]);
+    document.documentElement.classList.add('page-transition-pending');
     sessionStorage.removeItem(transitionKey);
     sessionStorage.removeItem(colorKey);
     afterPageSettles(revealPendingCover);
