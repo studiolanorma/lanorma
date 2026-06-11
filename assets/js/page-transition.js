@@ -74,6 +74,7 @@
     fallback = window.setTimeout(function () { finish(null); }, exitDuration + 120);
 
     requestAnimationFrame(function () {
+      document.documentElement.style.backgroundColor = '';
       document.documentElement.classList.add('page-transition-revealing');
     });
   }
