@@ -5,6 +5,7 @@
   // ─────────────────────────────────────────────────────────────────────────
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.innerWidth <= 768;
   const transitionKey  = 'lanorma-page-transition';
   const colorKey       = 'lanorma-page-transition-color';
   const colorIndexKey  = 'lanorma-page-transition-color-index';
@@ -85,7 +86,7 @@
     });
   }
 
-  if (!prefersReducedMotion && sessionStorage.getItem(transitionKey) === 'active') {
+  if (!prefersReducedMotion && !isMobile && sessionStorage.getItem(transitionKey) === 'active') {
     setTransitionColor(sessionStorage.getItem(colorKey) || colors[0]);
     sessionStorage.removeItem(transitionKey);
     sessionStorage.removeItem(colorKey);
@@ -113,7 +114,7 @@
 
   document.addEventListener('click', function (event) {
     const link = event.target.closest('a');
-    if (!isInternalPageLink(link) || prefersReducedMotion || isTransitioning) return;
+    if (!isInternalPageLink(link) || prefersReducedMotion || isMobile || isTransitioning) return;
 
     event.preventDefault();
     isTransitioning = true;

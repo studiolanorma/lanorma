@@ -81,3 +81,26 @@ html.page-transition-pending.page-transition-revealing::before {
     visibility: hidden;
   }
 }
+
+/* ── Móvil: desactivar transiciones ──────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  html.page-transition-pending::before,
+  html.page-transition-pending.page-transition-revealing::before,
+  .page-transition,
+  .page-transition.is-active {
+    animation: none !important;
+    visibility: hidden !important;
+    display: none !important;
+  }
+
+  html.page-transition-pending body > * {
+    visibility: visible !important;
+  }
+
+  html.page-transition-pending,
+  html.page-transition-pending:not(.page-transition-revealing),
+  html.page-transition-pending:not(.page-transition-revealing) body {
+    background: unset !important;
+  }
+}
