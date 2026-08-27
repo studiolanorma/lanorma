@@ -38,7 +38,7 @@
   padding: calc(var(--nav-h) + 120px) var(--pad) 64px;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .insights-header {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);
@@ -81,7 +81,7 @@
   padding: 0 var(--pad) 80px;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .insights-section {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);
@@ -499,7 +499,7 @@
   padding: 80px var(--pad);
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .more-posts-section {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);
@@ -553,7 +553,7 @@
   padding: 32px var(--pad);
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .footer-bottom {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);

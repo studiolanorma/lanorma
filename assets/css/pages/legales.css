@@ -50,7 +50,7 @@ nav .links a:hover {
   padding: calc(var(--nav-h) + 80px) var(--pad) 120px;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .page-wrap {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);

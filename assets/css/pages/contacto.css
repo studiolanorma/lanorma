@@ -83,7 +83,7 @@ footer {
   align-items: start;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .contact-main {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);
@@ -241,7 +241,7 @@ footer {
   padding: 32px var(--pad);
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .footer-bottom {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);

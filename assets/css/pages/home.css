@@ -128,7 +128,7 @@ body.no-loader-anim nav .links a:nth-child(2) { animation-delay: 0.3s; }
   gap: 16px;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .hero-text {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);
@@ -171,7 +171,7 @@ body.no-loader-anim nav .links a:nth-child(2) { animation-delay: 0.3s; }
   color: var(--muted);
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .section-label {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);
@@ -191,7 +191,7 @@ body.no-loader-anim nav .links a:nth-child(2) { animation-delay: 0.3s; }
   gap: 80px;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .portfolio {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);
@@ -319,7 +319,7 @@ body.no-loader-anim nav .links a:nth-child(2) { animation-delay: 0.3s; }
   margin: 0 var(--pad);
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .about-wrapper {
     margin-left: var(--pad-large);
     margin-right: var(--pad-large);
@@ -419,7 +419,7 @@ body.no-loader-anim nav .links a:nth-child(2) { animation-delay: 0.3s; }
   padding: 120px var(--pad);
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .footer-cta {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);

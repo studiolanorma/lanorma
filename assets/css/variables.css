@@ -54,14 +54,27 @@
      Es responsivo: empieza en 40px (móvil) y llega a 220px (pantallas
      grandes). Controla los márgenes laterales de toda la web. */
 
-  --pad-large: 427px;
-  /* Padding lateral para pantallas muy grandes (≥1600px o ≥1640px).
-     Entra en acción solo en monitores muy anchos vía @media. */
-
   --col-gap: 24px;
   /* Separación entre columnas en los grids de proyectos e insights.
      También se usa como gap en filas del portfolio. */
 
+}
+
+/* --pad-large: padding lateral para pantallas muy grandes.
+   Escalonado en dos pasos para que el contenido no colapse justo al
+   entrar en el breakpoint grande — cada archivo que lo usa activa su
+   @media (min-width: 1920px) en vez de saltar directo a 427px. */
+
+@media (min-width: 1920px) {
+  :root {
+    --pad-large: 300px;
+  }
+}
+
+@media (min-width: 2400px) {
+  :root {
+    --pad-large: 427px;
+  }
 }
 
 /* ── NOTA PARA EL EDITOR ────────────────────────────────────────────

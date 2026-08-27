@@ -82,7 +82,7 @@ nav .links a:hover {
   padding-right: var(--pad);
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .page-inner {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);

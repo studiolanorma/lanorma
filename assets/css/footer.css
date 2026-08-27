@@ -20,7 +20,7 @@
   padding: 120px var(--pad) 88px;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .footer-cta {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);
@@ -127,7 +127,7 @@
   border-top: 0px solid rgba(15, 15, 15, 0.1);
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1920px) {
   .footer-bottom {
     padding-left: var(--pad-large);
     padding-right: var(--pad-large);

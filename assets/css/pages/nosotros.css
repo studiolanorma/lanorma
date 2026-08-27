@@ -425,7 +425,7 @@ footer {
    En pantallas muy anchas, el padding usa --pad-large.
    ─────────────────────────────────────────────────────────────────── */
 
-@media (min-width: 1640px) {
+@media (min-width: 1920px) {
   :root { --pad: var(--pad-large); }
 }
 
