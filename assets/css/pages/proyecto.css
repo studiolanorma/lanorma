@@ -374,6 +374,11 @@ nav .links a:hover {
   container-type: inline-size;
 }
 
+.gallery-sticky-images .footer-cta {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 @media (min-width: 1600px) {
   .footer-cta__inner {
     min-width: 560px;
@@ -389,6 +394,11 @@ nav .links a:hover {
   gap: 24px;
   padding-top: 48px;
   border-radius: 4px;
+}
+
+.gallery-sticky-images .footer-cta__inner {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .footer-cta__content {
