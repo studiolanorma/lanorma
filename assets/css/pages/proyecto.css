@@ -374,6 +374,12 @@ nav .links a:hover {
   container-type: inline-size;
 }
 
+@media (min-width: 1600px) {
+  .footer-cta__inner {
+    min-width: 560px;
+  }
+}
+
 .footer-cta__inner {
   width: 100%;
   min-height: auto;

@@ -419,6 +419,13 @@ body.no-loader-anim nav .links a:nth-child(2) { animation-delay: 0.3s; }
   padding: 120px var(--pad);
 }
 
+@media (min-width: 1600px) {
+  .footer-cta {
+    padding-left: var(--pad-large);
+    padding-right: var(--pad-large);
+  }
+}
+
 /* Título blanco (sobre fondo oscuro) */
 .footer-cta__title {
   color: #FFFFFF;
