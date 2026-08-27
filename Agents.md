@@ -55,9 +55,9 @@ Web: [www.studiolanorma.com](https://www.studiolanorma.com)
 4. Se abre **Claude Code** en Terminal → se le indica que lea `Agents.md` y `Memory.md`
 5. Se pega el prompt — Claude Code ejecuta los cambios con contexto completo
 6. Se previsualiza en VS Code
-7. Si está bien → se dice **"Push a Git"** y Claude Code hace el deploy a GitHub
-8. Cloudflare se actualiza automáticamente
-9. ⚠️ Si hay cambios en CSS o JS → purgar caché en Cloudflare manualmente
+7. Si está bien → se dice **"Push a Git"**. Antes de hacer commit, Claude Code ejecuta `./scripts/version-assets.sh` si hubo cambios en `assets/css/` o `assets/js/` — actualiza el `?v=hash` de cada `<link>`/`<script>` afectado en los 13 HTML, así el navegador de cualquier visitante detecta el archivo como nuevo sin depender de purgar caché
+8. Claude Code hace el deploy a GitHub → Cloudflare se actualiza automáticamente
+9. Ya no hace falta purgar caché manualmente para CSS/JS (ver `scripts/version-assets.sh`). `purge-cache.sh` queda solo para casos puntuales (HTML u otros cambios que no pasen por el script)
 
 ---
 
