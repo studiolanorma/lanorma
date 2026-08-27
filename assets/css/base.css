@@ -315,3 +315,15 @@ body.cursor-plus .cursor-ring::after {
     display: none;
   }
 }
+
+
+/* ── PROTECCIÓN DE IMÁGENES Y VÍDEOS ────────────────────────────────
+   Evita que se puedan seleccionar/arrastrar imágenes y vídeos.
+   Se complementa con assets/js/protect.js (bloquea el menú contextual
+   y el arrastre para descargar).
+   ─────────────────────────────────────────────────────────────────── */
+
+img, video {
+  user-select: none;
+  -webkit-user-select: none;
+}
